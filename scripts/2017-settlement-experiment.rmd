@@ -1,0 +1,183 @@
+---
+title: "2017 settlement experiment"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+require(tidyverse)
+require(readxl)
+require(car)
+require(lme4)
+require(lmerTest)
+require(nlme)
+setwd("C:/Users/Emily/Desktop/R Work/2017 NIS Experiment")
+ste <- function(x) {
+  if (length(which(is.na(x)))>0){
+  y<-x[-which(is.na(x))]
+  } else {
+    y<-x
+  }
+  sd(y)/sqrt(length(y))
+  }
+```
+
+load data
+```{r}
+dtile<-read_excel("2017 NIS Lab Experiment Data.xlsx", sheet = "Tiles")
+dtile$Tile_Total.l<-log(dtile$Tile_Total+1)
+dtrough<-read_excel("2017 NIS Lab Experiment Data.xlsx", sheet = "FullTrough")
+dtrough$Count_Full_Trough.l<-log(dtrough$Count_Full_Trough+1)
+dtrough$Count_Full_Trough.sqrt<-(dtrough$Count_Full_Trough)^(1/1.5)
+
+sumtile<-dtile%>%
+  group_by(Date, Water_Treatment, Substrate_Treatment, Trough_Treatment)%>%
+  summarise(Count.m=mean(Tile_Total), Count.se=ste(Tile_Total))%>%
+  ungroup()%>%
+  mutate(Water_Treatment=plyr::revalue(Water_Treatment, c("Raw"="Non UV-Irradiated", "UV"="UV-Irradiated")),
+         Time=plyr::revalue(as.character(Date), c("2017-06-09"="3 Months", "2017-08-28"="6 Months")),
+         Substrate_Treatment=plyr::revalue(Substrate_Treatment, c("CCA"="CCA", "Navicula"="No CCA")),
+         Trough_Treatment=plyr::revalue(Trough_Treatment, c("CCA"="CCA", "Control"="No CCA")))
+
+sumtrough<-dtrough%>%
+  group_by(Date, Water_Treatment, Trough_Treatment)%>%
+  summarise(Count.m=mean(Count_Full_Trough), Count.se=ste(Count_Full_Trough))%>%
+  ungroup()%>%
+  mutate(Water_Treatment=plyr::revalue(Water_Treatment, c("Raw"="Non UV-Irradiated", "UV"="UV-Irradiated")),
+         Time=plyr::revalue(as.character(Date), c("2017-08-28"="6 Months", "2017-12-15"="10 Months")),
+         Trough_Treatment=plyr::revalue(Trough_Treatment, c("CCA"="CCA", "Control"="No CCA")))
+```
+
+stats - June 9
+```{r}
+mJune9<-lm(data=filter(dtile, Date==min(dtile$Date)), Tile_Total.l~Water_Treatment*Substrate_Treatment+Trough_Treatment*Water_Treatment)
+#Results
+Anova(mJune9, type="II")
+
+#Normal residuals
+shapiro.test(resid(mJune9))
+
+#equal variances
+mJune9variancestest<-lm(data=filter(dtile, Date==min(dtile$Date)), Tile_Total.l~Water_Treatment*Substrate_Treatment*Trough_Treatment)
+leveneTest(mJune9variancestest)
+
+#Making sure we don't need a random effect for trough
+mJune9er<-lmer(data=filter(dtile, Date==min(dtile$Date)), Tile_Total.l~Water_Treatment*Substrate_Treatment+Trough_Treatment*Water_Treatment+(1|Trough))
+#Simpler model without random effect has equal AIC and better BIC
+
+#Removing Trough treatment because it is insignificant results in better model by AIC
+mJune9.2<-lm(data=filter(dtile, Date==min(dtile$Date)), Tile_Total.l~Water_Treatment*Substrate_Treatment)
+
+#Final results
+Anova(mJune9.2, type="II")
+
+```
+
+On vs off CCA tiles - June 9
+```{r}
+dCCA<-dtile%>%
+  filter(Date==min(dtile$Date) & Substrate_Treatment=="CCA")%>%
+  gather(`Count_On_CCA`, `Count_Off_CCA`, key = "Position", value = "Count")%>%
+  mutate(Count.l=log(Count+1))
+
+mJune9CCA<-lm(data=dCCA, Count.l~Position*Water_Treatment)
+
+#Normality is good
+shapiro.test(resid(mJune9CCA))
+
+#Homoscedasticity is good
+leveneTest(mJune9CCA)
+
+#Results
+Anova(mJune9CCA, type="II")
+```
+
+graph - June 9 and August 28
+```{r}
+ggplot(data=sumtile, aes(x=Trough_Treatment, y=Count.m, fill=Substrate_Treatment))+
+  geom_pointrange(aes(ymin=Count.m-Count.se, ymax=Count.m+Count.se), shape=21, position=position_dodge(width=1))+
+  facet_grid(Time~Water_Treatment)+
+  scale_fill_discrete(name="Tile Substrate\nTreatment")+
+  ylab("Average Abalone Abundance Per Tile")+
+  xlab("Trough Substrate Treatment")+
+  theme_bw()+
+  theme(panel.grid=element_blank(), strip.background=element_blank())
+```
+
+
+August 28 Tile
+```{r}
+mAug28<-lm(data=filter(dtile, Date==max(dtile$Date)), Tile_Total.l~Water_Treatment*Substrate_Treatment+Trough_Treatment*Water_Treatment)
+#Results
+Anova(mAug28, type="II")
+
+#Normal residuals
+shapiro.test(resid(mAug28))
+
+#equal variances
+mAug28variancestest<-lm(data=filter(dtile, Date==max(dtile$Date)), Tile_Total.l~Water_Treatment*Substrate_Treatment*Trough_Treatment)
+leveneTest(mAug28variancestest)
+###Not good, figure out way to fix###
+
+##Use this one instead. It works!
+mAug28.2<-gls(data=filter(dtile, Date==max(dtile$Date)), Tile_Total.l~Water_Treatment*Substrate_Treatment+Trough_Treatment*Water_Treatment, weights = varPower())
+```
+
+Compare tile counts to trough counts
+```{r}
+dcombined<-dtile%>%
+  filter(Date==max(dtile$Date))%>%
+  left_join(filter(dtrough, Date==min(dtrough$Date)), by=c("Date", "Trough", "Water_Treatment", "Trough_Treatment"))
+
+ggplot(data=dcombined, aes(x=Tile_Total, y=Count_Full_Trough, color=Substrate_Treatment))+
+  geom_point()+
+  facet_grid(Water_Treatment~Trough_Treatment)
+
+mTileTrough<-lm(data=dcombined, Count_Full_Trough~Tile_Total*Substrate_Treatment+Tile_Total*Trough_Treatment+Tile_Total*Water_Treatment)
+#Results
+Anova(mTileTrough, type="II")
+
+###Water treatment affected relationship between tile and trough counts
+```
+
+August 28 Trough
+```{r}
+mAug28trough<-lm(data=filter(dtrough, Date==min(dtrough$Date)), Count_Full_Trough.sqrt~Water_Treatment*Trough_Treatment)
+
+#Normal
+shapiro.test(resid(mAug28trough))
+
+#Variances
+leveneTest(mAug28trough)
+
+#Results
+Anova(mAug28trough, type="II")
+```
+
+December 15
+```{r}
+mDec15trough<-lm(data=filter(dtrough, Date==max(dtrough$Date)), Count_Full_Trough.sqrt~Water_Treatment*Trough_Treatment)
+
+#Normal
+shapiro.test(resid(mDec15trough))
+
+#Variances
+leveneTest(mDec15trough)
+
+#Results
+Anova(mDec15trough, type="II")
+```
+
+Full Trough Count Graphs 
+```{r}
+ggplot(data=sumtrough, aes(x=Trough_Treatment, y=Count.m, fill=Trough_Treatment))+
+  geom_pointrange(aes(ymin=Count.m-Count.se, ymax=Count.m+Count.se), shape=21, position=position_dodge(width=1))+
+  facet_grid(Time~Water_Treatment)+
+  ylab("Average Abalone Abundance Per Trough")+
+  xlab("Trough Substrate Treatment")+
+  theme_bw()+
+  theme(panel.grid=element_blank(), strip.background=element_blank(),legend.position = "none")
+
+```
+
