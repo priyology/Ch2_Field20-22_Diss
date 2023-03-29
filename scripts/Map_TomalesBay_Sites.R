@@ -166,7 +166,7 @@ ggsave("fig_output/SDSU_map.png", dpi = 320, bg='transparent')
 
 SDSU_TB_inset_map = ggdraw() +
   draw_plot(SFBay_watercolor) +
-  draw_plot(SDSU_watercolor, x = 0.700, y = 0.700, width = 0.3, height = 0.3)
+  draw_plot(SDSU_watercolor, x = 0.670, y = 0.700, width = 0.3, height = 0.3)
 
 SDSU_TB_inset_map
 
