@@ -9,6 +9,7 @@ library(maps)
 library(mapdata)
 library(maptools) ##scalebar
 library(ggsn) ##scale bar: http://oswaldosantos.github.io/ggsn/ ; 
+library(cowplot)
 
 ## ggmap intro: https://appsilon.com/r-ggmap/
 
@@ -35,12 +36,12 @@ glimpse(landmarks.df)
 landmarks.labels <- data.frame(
   lon = c(-121.761846, -123.071649, -122.894181, -122.267464),
   lat = c(38.538226, 38.317992, 38.161813, 37.814870),
-  site.name = c("UCD", "BML", "HIOC", "Priya"))
+  site.name = c("UCD", "BML", "HIOC", "Home"))
 glimpse(landmarks.labels)
 
 
 #load a googlemap 
-get_googlemap(center = "Tomales Bay", zoom = 12, markers = sites.df, scale = 2,  maptype = "hybrid") %>% ggmap() #not quite working
+get_googlemap(center = "Tomales Bay", zoom = 12, markers = sites.df, scale = 2,  maptype = "hybrid") %>% ggmap()
 
 ## generate high quality maps using geom_point() to generate markers
 
@@ -49,23 +50,23 @@ TB_Map <- get_map("Tomales Bay", zoom =  12, maptype = "satellite")
 
 ggmap(TB_Map) +
   geom_point(data = sites.df, aes(x = lon, y = lat), color = 'purple', alpha = 0.7,  size = 5) +
-  geom_text(data = sites.labels, aes(x = lon, y = lat, label = site.name), nudge_x = 0.05, nudge_y = 0.006, hjust = 1)
+  geom_text(data = sites.labels, aes(x = lon, y = lat, label = site.name), nudge_x = 0.05, nudge_y = 0.006, hjust = 1, size = 4, color = "white")
 
 # Tone-Lite Map
 qmap("Tomales Bay", zoom = 12, scale = 2, source = "stamen", maptype = "toner-lite") +
-  geom_point(data = sites.df, aes(x = lon, y = lat), color = 'black', alpha = 0.5,  size = 4) +
-  geom_text(data = sites.labels, aes(x = lon, y = lat, label = site.name), nudge_x = 0.015, nudge_y = 0.006, hjust = 1)
+  geom_point(data = sites.df, aes(x = lon, y = lat), color = 'purple', alpha = 0.5,  size = 4) +
+  geom_text(data = sites.labels, aes(x = lon, y = lat, label = site.name), nudge_x = 0.012, nudge_y = 0.005, hjust = 1, size = 5, fontface = "bold", color = "purple")
   
 # Watercolor Map
 TB_watercolor <- qmap("Tomales Bay", zoom = 12, scale = 2, source = "stamen", maptype = "watercolor") + ## Tomales Bay - Artistic
   geom_point(data = sites.df, aes(x = lon, y = lat), color = 'black', alpha = 0.5,  size = 4) +
-  geom_text(data = sites.labels, aes(x = lon, y = lat, label = site.name), nudge_x = 0.015, nudge_y = 0.006, hjust = 1)
+  geom_text(data = sites.labels, aes(x = lon, y = lat, label = site.name), nudge_x = 0.015, nudge_y = 0.006, hjust = 1, size = 5, fontface = "bold")
 
 TB_watercolor
 
 SFBay_watercolor <- qmap("San Pablo Bay", zoom = 8, scale = 2, source = "stamen", maptype = "watercolor") + ## Tomales Bay - Artistic
   geom_point(data = landmarks.df, aes(x = lon, y = lat), color = 'black', alpha = 0.5, size = 4) +
-  geom_text(data = landmarks.labels, aes(x = lon, y = lat, label = site.name), nudge_x = -0.07, nudge_y = 0.008, hjust = 1)
+  geom_text(data = landmarks.labels, aes(x = lon, y = lat, label = site.name), nudge_x = -0.07, nudge_y = 0.008, hjust = 1, size = 5)
 
 SFBay_watercolor
 
@@ -81,12 +82,12 @@ CA_watercolor_labels <- qmap("San Francisco", zoom = 7, scale = 2, source = "sta
 
 CA_watercolor_labels
 
-CA_watercolor <- qmap("Fresno", zoom = 6, scale = 2, source = "stamen", maptype = "watercolor") + ## Tomales Bay - Artistic
+CA_watercolor <- qmap("Fresno, CA, USA", zoom = 6, scale = 2, source = "stamen", maptype = "watercolor") + ## Tomales Bay - Artistic
   geom_point(data = sites.df, aes(x = lon, y = lat), color = 'black', alpha = 0.5, size = 4)
 
 CA_watercolor
 
-CA_watercolor_BayArea <- qmap("Fresno", zoom = 6, scale = 2, source = "stamen", maptype = "watercolor") + ## Tomales Bay - Artistic
+CA_watercolor_BayArea <- qmap("Fresno, CA, USA", zoom = 6, scale = 2, source = "stamen", maptype = "watercolor") + ## Tomales Bay - Artistic
   geom_point(data = landmarks.df, aes(x = lon, y = lat), color = 'black', alpha = 0.5, size = 1.5)
 
 CA_watercolor_BayArea
@@ -127,10 +128,50 @@ PointBlue_watercolor
 #run PointBlue_watercolor before running ggsave
 ggsave("fig_output/PointBlue_map.png", dpi = 320, bg='transparent') 
 
-#### end Point Blue Talk figure code =======
+
+##### For SFSU Talk ============
+
+EOS.labels <- data.frame(
+  lon = c(-121.761846, -123.071649, -122.893559, -122.446565),
+  lat = c(38.538226, 38.317992, 38.161959, 37.889047),
+  site.name = c("UCD", "BML", "HIOC", "EOS"))
+glimpse(EOS.labels)
+
+EOS_watercolor <- qmap("San Pablo Bay", zoom = 9, scale = 2, source = "stamen", maptype = "watercolor") + ## Tomales Bay - Artistic
+  geom_point(data = EOS.labels, aes(x = lon, y = lat), color = 'black', alpha = 0.5, size = 4) +
+  geom_text(data = EOS.labels, aes(x = lon, y = lat, label = site.name), nudge_x = -0.040, nudge_y = -0.035, hjust = 1, size = 3.5)
+
+EOS_watercolor
+
+#run PointBlue_watercolor before running ggsave
+ggsave("fig_output/SFSU_EOS_map.png", dpi = 320, bg='transparent')
 
 
+##### For SDSU Talk ============
 
+SDSU.labels <- data.frame(
+  lon = c(-121.761846, -117.071382),
+  lat = c(38.538226, 32.777375),
+  site.name = c("UCD", "SDSU"))
+glimpse(SDSU.labels)
+
+SDSU_watercolor <- qmap("San Luis Obispo, CA, USA", zoom = 6, scale = 2, source = "stamen", maptype = "watercolor") + ## California - Artistic
+  geom_point(data = SDSU.labels, aes(x = lon, y = lat), color = 'black', alpha = 0.5, size = 2) +
+  geom_text(data = SDSU.labels, aes(x = lon, y = lat, label = site.name), nudge_x = -0.155, nudge_y = -0.035, hjust = 1, size = 4)
+
+SDSU_watercolor
+
+#run SDSU_watercolor before running ggsave
+ggsave("fig_output/SDSU_map.png", dpi = 320, bg='transparent')
+
+SDSU_TB_inset_map = ggdraw() +
+  draw_plot(SFBay_watercolor) +
+  draw_plot(SDSU_watercolor, x = 0.670, y = 0.700, width = 0.3, height = 0.3)
+
+SDSU_TB_inset_map
+
+#run SDSU_watercolor before running ggsave
+ggsave("fig_output/SDSU_TB_inset_map.png", dpi = 320, bg='transparent')
   
 
 ######### PUBLICATION-READY MAP ================================
