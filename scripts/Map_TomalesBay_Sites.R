@@ -139,7 +139,7 @@ glimpse(EOS.labels)
 
 EOS_watercolor <- qmap("San Pablo Bay", zoom = 9, scale = 2, source = "stamen", maptype = "watercolor") + ## Tomales Bay - Artistic
   geom_point(data = EOS.labels, aes(x = lon, y = lat), color = 'black', alpha = 0.5, size = 4) +
-  geom_text(data = EOS.labels, aes(x = lon, y = lat, label = site.name), nudge_x = -0.015, nudge_y = -0.035, hjust = 1, size = 6)
+  geom_text(data = EOS.labels, aes(x = lon, y = lat, label = site.name), nudge_x = -0.040, nudge_y = -0.035, hjust = 1, size = 3.5)
 
 EOS_watercolor
 
