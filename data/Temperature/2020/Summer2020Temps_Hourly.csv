@@ -1,4 +1,4 @@
-,Date_Time,site,time_pt,temp_C
+Obs_Numb,Date_Time,Site,Time_Pt,WaterTemp_C
 1,7/8/2020 14:00,HIOC,0,21.652
 2,7/8/2020 15:00,HIOC,0,18.343
 3,7/8/2020 16:00,HIOC,0,17.891
