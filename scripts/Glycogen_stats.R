@@ -23,8 +23,263 @@ View(Gly)
 m_null <- glm(Glycogen ~ 1, family = gaussian(link = "identity"), data = Gly)
 summary(m_null)
 
+# Call:
+#glm(formula = Glycogen ~ 1, family = gaussian(link = "identity"), 
+#    data = Gly)
+#
+#Deviance Residuals: 
+#  Min      1Q  Median      3Q     Max  
+#-7.421  -5.298  -2.474   3.260  44.791  
+#
+#Coefficients:
+#  Estimate Std. Error t value
+#(Intercept)   7.2526     0.3839   18.89
+#Pr(>|t|)    
+#(Intercept)   <2e-16 ***
+#  ---
+#  Signif. codes:  
+#  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’
+#0.1 ‘ ’ 1
+#
+#(Dispersion parameter for gaussian family taken to be 52.91646)
+#
+#Null deviance: 18944  on 358  degrees of freedom
+#Residual deviance: 18944  on 358  degrees of freedom
+#(1 observation deleted due to missingness)
+#AIC: 2446.6
+#
+#Number of Fisher Scoring iterations: 2
 
 #### m1: Glycogen ~ SH_Temp  =====
+m1 <- glm(Glycogen ~ SH_Temp, family = gaussian(link = "identity"), data = Gly)
+summary(m1)
+
+# Call:
+#glm(formula = Glycogen ~ SH_Temp, family = gaussian(link = "identity"), 
+#    data = Gly)
+#
+#Deviance Residuals: 
+#  Min      1Q  Median      3Q     Max  
+#-7.733  -5.219  -2.427   2.953  45.101  
+#
+#Coefficients:
+#  Estimate Std. Error t value Pr(>|t|)    
+#(Intercept)   9.1169     2.3375   3.900 0.000115 ***
+#  SH_Temp      -0.1035     0.1280  -0.809 0.419319    
+#---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#
+#(Dispersion parameter for gaussian family taken to be 52.96769)
+#
+#Null deviance: 18944  on 358  degrees of freedom
+#Residual deviance: 18909  on 357  degrees of freedom
+#(1 observation deleted due to missingness)
+#AIC: 2447.9
+#
+#Number of Fisher Scoring iterations: 2
+
 #### m2: Glycogen ~ SH_Tide  =====
+m2 <- glm(Glycogen ~ SH_Tide, family = gaussian(link = "identity"), data = Gly)
+summary(m2)
+
+#Call:
+#  glm(formula = Glycogen ~ SH_Tide, family = gaussian(link = "identity"), 
+#      data = Gly)
+#
+#Deviance Residuals: 
+#  Min      1Q  Median      3Q     Max  
+#-7.236  -5.278  -2.630   3.081  44.445  
+#
+#Coefficients:
+#  Estimate Std. Error t value Pr(>|t|)    
+#(Intercept)   7.5987     0.5423  14.011   <2e-16 ***
+#  SH_TideTide  -0.6942     0.7681  -0.904    0.367    
+#---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#
+#(Dispersion parameter for gaussian family taken to be 52.94352)
+#
+#Null deviance: 18944  on 358  degrees of freedom
+#Residual deviance: 18901  on 357  degrees of freedom
+#(1 observation deleted due to missingness)
+#AIC: 2447.7
+#
+#Number of Fisher Scoring iterations: 2
+
 #### m3: Glycogen ~ Sampling  =====
+m3 <- glm(Glycogen ~ Sampling, family = gaussian(link = "identity"), data = Gly)
+summary(m3)
+
+#Call:
+#  glm(formula = Glycogen ~ Sampling, family = gaussian(link = "identity"), 
+#      data = Gly)
+#
+#Deviance Residuals: 
+#  Min      1Q  Median      3Q     Max  
+#-8.282  -4.958  -2.815   2.864  45.647  
+#
+#Coefficients:
+#  Estimate Std. Error t value Pr(>|t|)    
+#(Intercept)   5.2530     0.9682   5.426 1.07e-07 ***
+#  Sampling      0.5720     0.2545   2.247   0.0252 *  
+#  ---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#
+#(Dispersion parameter for gaussian family taken to be 52.32442)
+#
+#Null deviance: 18944  on 358  degrees of freedom
+#Residual deviance: 18680  on 357  degrees of freedom
+#(1 observation deleted due to missingness)
+#AIC: 2443.5
+#
+#Number of Fisher Scoring iterations: 2
+
 #### m4: Glycogen ~ Site  =====
+## Reorder levels in Site for data analysis
+Gly$Site <- factor(Gly$Site, levels=c("TBOC - South","BBOC - Middle","HIOC - North"))
+
+m4 <- glm(Glycogen ~ Site, family = gaussian(link = "identity"), data = Gly)
+summary(m4)
+
+#Call:
+#  glm(formula = Glycogen ~ Site, family = gaussian(link = "identity"), 
+#      data = Gly)
+#
+#Deviance Residuals: 
+#  Min      1Q  Median      3Q     Max  
+#-9.637  -4.134  -1.112   1.822  39.814  
+#
+#Coefficients:
+#  Estimate Std. Error t value Pr(>|t|)    
+#(Intercept)         2.8296     0.5666   4.994 9.28e-07 ***
+#  SiteBBOC - Middle   3.8312     0.7996   4.791 2.44e-06 ***
+#  SiteHIOC - North    9.4009     0.7996  11.757  < 2e-16 ***
+#  ---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#
+#(Dispersion parameter for gaussian family taken to be 38.20385)
+#
+#Null deviance: 18944  on 358  degrees of freedom
+#Residual deviance: 13601  on 356  degrees of freedom
+#(1 observation deleted due to missingness)
+#AIC: 2331.6
+#
+#Number of Fisher Scoring iterations: 2
+
+
+#### m5: Glycogen ~ Sampling + Site  =====
+
+m5 <- glm(Glycogen ~ Sampling + Site, family = gaussian(link = "identity"), data = Gly)
+summary(m5)
+
+#Call:
+#  glm(formula = Glycogen ~ Sampling + Site, family = gaussian(link = "identity"), 
+#      data = Gly)
+#
+#Deviance Residuals: 
+#  Min       1Q   Median       3Q      Max  
+#-10.482   -3.860   -0.866    2.095   40.659  
+#
+#Coefficients:
+#  Estimate Std. Error t value Pr(>|t|)    
+#(Intercept)         0.8635     0.9391   0.920  0.35844    
+#Sampling            0.5638     0.2157   2.613  0.00934 ** 
+#  SiteBBOC - Middle   3.8240     0.7932   4.821 2.12e-06 ***
+#  SiteHIOC - North    9.3938     0.7932  11.843  < 2e-16 ***
+#  ---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#
+#(Dispersion parameter for gaussian family taken to be 37.58825)
+##
+#Null deviance: 18944  on 358  degrees of freedom
+#Residual deviance: 13344  on 355  degrees of freedom
+#(1 observation deleted due to missingness)
+#AIC: 2326.8
+#
+#Number of Fisher Scoring iterations: 2
+
+#### m6: Glycogen ~ Sampling + Site + Sampling*Site  =====
+
+#m6 <- glm(Glycogen ~ Sampling + Site + Sampling*Site, family = gaussian(link = "identity"), data = Gly)
+#summary(m6)
+#
+#Call:
+#  glm(formula = Glycogen ~ Sampling + Site + Sampling * Site, family = gaussian(link = "identity"), 
+#      data = Gly)
+#
+#Deviance Residuals: 
+#  Min       1Q   Median       3Q      Max  
+#-11.800   -2.117   -0.705    1.424   37.409  
+#
+#Coefficients:
+#  Estimate Std. Error t value Pr(>|t|)    
+#(Intercept)                  1.3560     1.2734   1.065  0.28768    
+#Sampling                     0.4226     0.3354   1.260  0.20857    
+#SiteBBOC - Middle           -4.7431     1.7998  -2.635  0.00878 ** 
+#  SiteHIOC - North            16.4859     1.7998   9.160  < 2e-16 ***
+#  Sampling:SiteBBOC - Middle   2.4483     0.4734   5.172 3.89e-07 ***
+#  Sampling:SiteHIOC - North   -2.0258     0.4734  -4.280 2.42e-05 ***
+#  ---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#
+#(Dispersion parameter for gaussian family taken to be 30.12321)
+#
+#Null deviance: 18944  on 358  degrees of freedom
+#Residual deviance: 10633  on 353  degrees of freedom
+#(1 observation deleted due to missingness)
+#AIC: 2249.2
+#
+#Number of Fisher Scoring iterations: 2
+
+#### AIC/BIC Scores ===============
+AIC(m_null, m1, m2, m3, m4, m5, m6)
+BIC(m_null, m1, m2, m3, m4, m5, m6)
+
+#### Test Assumptions ===============
+#### Pairwise Plot of Residuals ===============
+plot(fitted(m6), resid(m6))
+abline(0,0)
+
+#### Q-Q plot of Residuals ===============
+qqnorm(resid(m6))
+qqline(resid(m6))
+
+#### Density Plot of Residuals ===============
+plot(density(resid(m6)))
+
+#### Pairwise Comparisons ===============
+## pairwise comparison for m6
+emm_Lm6a <-  emmeans(m6, specs = ~ Site|Sampling)
+emm_Lm6a
+pairwise_Lm6a <- contrast(emm_Lm6a, interaction = "pairwise")
+pairwise_Lm6a
+
+#Sampling = 2:
+#Site_pairwise                    estimate   SE  df t.ratio p.value
+#(TBOC - South) - (BBOC - Middle)   -0.153 1.00 353  -0.153  0.8784
+#(TBOC - South) - (HIOC - North)   -12.434 1.00 353 -12.409  <.0001
+#(BBOC - Middle) - (HIOC - North)  -12.281 1.00 353 -12.256  <.0001
+#
+#Sampling = 5:
+#  Site_pairwise                    estimate   SE  df t.ratio p.value
+#(TBOC - South) - (BBOC - Middle)   -7.498 1.01 353  -7.451  <.0001
+#(TBOC - South) - (HIOC - North)    -6.357 1.01 353  -6.317  <.0001
+#(BBOC - Middle) - (HIOC - North)    1.141 1.00 353   1.139  0.2554
+
+emm_Lm6b <-  emmeans(m6, specs = ~ Sampling|Site)
+emm_Lm6b
+pairwise_Lm6b <- contrast(emm_Lm6b, interaction = "pairwise")
+pairwise_Lm6b
+
+#Site = TBOC - South:
+#Sampling_pairwise estimate   SE  df t.ratio p.value
+#2 - 5                -1.27 1.01 353  -1.260  0.2086
+#
+#Site = BBOC - Middle:
+#  Sampling_pairwise estimate   SE  df t.ratio p.value
+#2 - 5                -8.61 1.00 353  -8.595  <.0001
+#
+#Site = HIOC - North:
+#  Sampling_pairwise estimate   SE  df t.ratio p.value
+#2 - 5                 4.81 1.00 353   4.800  <.0001
+
