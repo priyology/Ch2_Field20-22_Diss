@@ -283,3 +283,54 @@ pairwise_Lm6b
 #  Sampling_pairwise estimate   SE  df t.ratio p.value
 #2 - 5                 4.81 1.00 353   4.800  <.0001
 
+#### Plot Model ========
+## using ggeffects
+## https://strengejacke.github.io/ggeffects/articles/introduction_plotcustomize.html
+
+m6.plot_bySite <- ggpredict(m6, terms = c("Sampling", "Site"))
+plot(m6.plot_bySite) +
+  theme_classic() +
+  #scale_color_brewer(palette = "Paired", direction = -1)  +
+  labs(title = expression(paste(italic("M. gigas"), ": glm(Glycogen ~ Sampling + Site")), 
+       #subtitle = "Gamma distribution: link = 'identity'",
+       x = "Sampling Time Point", 
+       y = "Glycogen (umol glycosyl units/g protein)")
+
+ggsave(filename = "fig_output/model_Mgigas_Gly_Sampling-Site.png", width = 5.10, height = 5.77, dpi = 300)
+
+m6.plot_bySampling <- ggpredict(m6, terms = c("Site", "Sampling"))
+plot(m6.plot_bySampling) +
+  theme_classic() +
+  scale_color_manual(values=c("#4575B4", "#FDAE61")) +
+  labs(title = expression(paste(italic("M. gigas"), ": glm(Glycogen ~ Sampling + Site")), 
+       #subtitle = "Gamma distribution: link = 'identity'",
+       x = "Site", 
+       y = "Glycogen (umol glycosyl units/g protein)")
+
+ggsave(filename = "fig_output/model_Mgigas_Gly_Site_Sampling.png", width = 5.10, height = 5.77, dpi = 300)
+
+##### DARK PLOTS: ggdark / black background =================
+library(ggdark)
+
+m6.DARKplot_bySite <- ggpredict(m6, terms = c("Sampling", "Site"))
+plot(m6.DARKplot_bySite) +
+  dark_theme_classic() +
+  scale_color_brewer(palette = "RdYlBu", direction = -1)  +
+  labs(title = expression(paste(italic("M. gigas"), ": glm(Glycogen ~ Sampling + Site")), 
+       #subtitle = "Gamma distribution: link = 'identity'",
+       x = "Sampling Time Point", 
+       y = "Glycogen (umol glycosyl units/g protein)")
+
+ggsave(filename = "fig_output/DARKmodel_Mgigas_Gly_Sampling-Site.png", width = 5.10, height = 5.77, dpi = 300)
+
+m6.DARKplot_bySampling <- ggpredict(m6, terms = c("Site", "Sampling"))
+plot(m6.DARKplot_bySampling) +
+  dark_theme_classic() +
+  scale_color_manual(values=c("#4575B4", "#FDAE61")) +
+  labs(title = expression(paste(italic("M. gigas"), ": glm(Glycogen ~ Sampling + Site")), 
+       #subtitle = "Gamma distribution: link = 'identity'",
+       x = "Site", 
+       y = "Glycogen (umol glycosyl units/g protein)")
+
+ggsave(filename = "fig_output/DARKmodel_Mgigas_Gly_Site_Sampling.png", width = 5.10, height = 5.77, dpi = 300)
+
