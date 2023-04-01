@@ -24,8 +24,8 @@ is.character(Gly$SH_Temp) ## True
 
 ## omit Notes column which is all NAs / info
 Gly2 <- Gly %>% 
-  filter(!is.na(Glycogen)) # omit the 93 NAs in CI
-colSums(is.na(Gly2)) ## All NAs under CI
+  filter(!is.na(Glycogen)) # omit the 93 NAs in Glycogen
+colSums(is.na(Gly2)) ## All NAs under Glycogen
 
 #histogram of all glycogen
 ggplot(Gly2, aes(Glycogen)) +
