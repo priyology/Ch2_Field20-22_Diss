@@ -121,6 +121,35 @@ qqline(resid(m1))
 #### Density Plot of Residuals ===============
 plot(density(resid(m1)))
 
+
+#### Plot 2020 Model =========
+m1.plot <- ggpredict(m1, terms = c("Sampling_Time"))
+
+plot(m1.plot) +
+  theme_classic() +
+  #scale_color_brewer(palette = "Paired", direction = -1)  +
+  labs(title = expression(paste(italic("M. gigas"), ": glm(Length ~ Sampling_Time")), 
+       #subtitle = "Gamma distribution: link = 'identity'",
+       x = "Sampling Time Point", 
+       y = "Shell Length (cm)")
+
+ggsave(filename = "fig_output/model_MgigasLength_Sampling.png", width = 5.10, height = 5.77, dpi = 300)
+
+##### DARK PLOTS: ggdark / black background =================
+library(ggdark)
+
+m1.DARKplot <- ggpredict(m1, terms = c("Sampling_Time"))
+plot(m1.DARKplot) +
+  dark_theme_classic() +
+  #scale_color_brewer(palette = "RdYlBu", direction = -1)  +
+  labs(title = expression(paste(italic("M. gigas"), ": glm(Length ~ Sampling_Time")), 
+       #subtitle = "Gamma distribution: link = 'identity'",
+       x = "Sampling Time Point", 
+       y = "Shell Length (cm)")
+
+ggsave(filename = "fig_output/DARKmodel_MgigasLength_Sampling.png", width = 5.10, height = 5.77, dpi = 300)
+
+
 #### *** 2021: C. sikamea L/W *** ====
 ### load data sheet
 LW2021.sik <- read_csv("data/Growth/2021/LW2021_sikamea.csv")
@@ -374,6 +403,34 @@ pairwise_Lm8a
 #North - South    0.5482 0.0436 711  12.572  <.0001
 #Middle - South   0.8341 0.0437 711  19.091  <.0001
 
+
+#### Plot 2021 C. Sikamea Model =========
+m8.plot <- ggpredict(m8, terms = c("Sampling_Time", "Site"))
+
+plot(m8.plot) +
+  theme_classic() +
+  #scale_color_brewer(palette = "Paired", direction = -1)  +
+  labs(title = expression(paste(italic("M. gigas"), ": glm(Length ~ Sampling_Time")), 
+       #subtitle = "Gamma distribution: link = 'identity'",
+       x = "Sampling Time Point", 
+       y = "Shell Length (cm)")
+
+ggsave(filename = "fig_output/model_CsikameaLength_Sampling.png", width = 5.10, height = 5.77, dpi = 300)
+
+##### DARK PLOTS: ggdark / black background =================
+library(ggdark)
+
+m8.DARKplot <- ggpredict(m8, terms = c("Sampling_Time", "Site"))
+
+plot(m8.DARKplot) +
+  dark_theme_classic() +
+  #scale_color_brewer(palette = "RdYlBu", direction = -1)  +
+  labs(title = expression(paste(italic("M. gigas"), ": glm(Length ~ Sampling_Time")), 
+       #subtitle = "Gamma distribution: link = 'identity'",
+       x = "Sampling Time Point", 
+       y = "Shell Length (cm)")
+
+ggsave(filename = "fig_output/DARKmodel_CsikameaLength_Sampling.png", width = 5.10, height = 5.77, dpi = 300)
 
 #### *** 2021/2022: M. gigas L/W *** ====
 ### load data sheet
@@ -684,3 +741,32 @@ qqline(resid(m16))
 
 #### Density Plot of Residuals ===============
 plot(density(resid(m16)))
+
+#### Plot 2021/2022 M. gigas Model =========
+m16.plot <- ggpredict(m16, terms = c("Site", "SH_Temp", "SH_Tide"))
+
+plot(m16.plot) +
+  theme_classic() + 
+  #scale_color_brewer(palette = "Paired", direction = -1)  +
+  labs(title = expression(paste(italic("M. gigas"), ": glm(Length ~ Sampling_Time")), 
+       #subtitle = "Gamma distribution: link = 'identity'",
+       x = "SH_Temp", 
+       y = "Shell Length (cm)")
+
+ggsave(filename = "fig_output/model_Mgigas_20-21.png", width = 5.10, height = 5.77, dpi = 300)
+
+##### DARK PLOTS: ggdark / black background =================
+library(ggdark)
+
+m8.DARKplot <- ggpredict(m16, terms = c("Site", "SH_Temp", "SH_Tide"))
+
+plot(m8.DARKplot) +
+  dark_theme_classic() +
+  #scale_color_brewer(palette = "RdYlBu", direction = -1)  +
+  labs(title = expression(paste(italic("M. gigas"), ": glm(Length ~ Sampling_Time")), 
+       #subtitle = "Gamma distribution: link = 'identity'",
+       x = "SH_Temp", 
+       y = "Shell Length (cm)")
+
+ggsave(filename = "fig_output/DARKmodel_Mgigas_20-21.png", width = 5.10, height = 5.77, dpi = 300)
+
