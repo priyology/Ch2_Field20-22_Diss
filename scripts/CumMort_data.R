@@ -94,8 +94,8 @@ View(Morts2022)
 Morts2022$Temp_Hardening <- as.character(Morts2022$Temp_Hardening)
 is.character(Morts2022$Temp_Hardening)
 
-TotalMort2022_perBag <- Morts2021 %>% 
-  group_by(Site, Bag_Numb, Temp_Hardening, Tide_Hardening) %>% 
+TotalMort2022_perBag <- Morts2022 %>% 
+  group_by(Site, Temp_Hardening, Tide_Hardening, Bag_Numb) %>% 
   summarize(TotalMort = sum(Mortality_Total))
 
 print(TotalMort2022_perBag, n = 54)
