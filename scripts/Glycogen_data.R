@@ -14,6 +14,12 @@ View(Gly)
 #### now remove NAs from data sheet
 colSums(is.na(Gly)) ## Glycogen content: 1
 
+## omit Notes column which is all NAs / info
+Gly2 <- Gly %>% 
+  filter(!is.na(Glycogen)) # omit the 1 NA in Glycogen
+colSums(is.na(Gly2)) ## All NAs under Glycogen
+
+
 ### Change data type
 Gly$Sampling <- as.character(Gly$Sampling) ## make Sampling a character
 is.character(Gly$Sampling) ## True
@@ -22,10 +28,7 @@ Gly$SH_Temp <- as.character(Gly$SH_Temp) ## make Sampling a character
 is.character(Gly$SH_Temp) ## True
 
 
-## omit Notes column which is all NAs / info
-Gly2 <- Gly %>% 
-  filter(!is.na(Glycogen)) # omit the 93 NAs in Glycogen
-colSums(is.na(Gly2)) ## All NAs under Glycogen
+
 
 #histogram of all glycogen
 ggplot(Gly2, aes(Glycogen)) +
