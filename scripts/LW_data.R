@@ -358,6 +358,7 @@ LW2022_og <- read_csv("data/Growth/2022/LW_2022_T1_T6.csv")
 glimpse(LW2022_og)
 
 ## clean data
+
 ### order Site
 LW2022_og$Site <-factor(LW2022_og$Site, c("North", "Middle", "South"))
 
@@ -368,3 +369,135 @@ is.character(LW2022_og$Sampling_Time)
 ### SH_Temp as character
 LW2022_og$SH_Temp <- as.character(LW2022_og$SH_Temp)
 is.character(LW2022_og$SH_Temp)
+
+#### now remove NAs from data sheet
+colSums(is.na(LW2022_og)) ## Size_cm: 2 NAs
+
+LW2022_og.na <- LW2022_og %>% 
+  filter(!is.na(Size_cm)) # omit all NAs
+
+colSums(is.na(LW2022_og.na))
+
+## to resolve "Values from `Size_cm` 
+# are not uniquely identified; output will contain list-cols.
+LW2022.col <- LW2022_og.na %>%
+  group_by(L_W) %>% 
+  mutate(row = row_number()) %>% 
+  pivot_wider(names_from = L_W, values_from = Size_cm) %>% 
+  select(-row)
+
+glimpse(LW2022.col)
+
+### remove NAs
+colSums(is.na(LW2022.col))
+
+LW2022 <- LW2022.col%>% 
+  filter(!is.na(L),
+         !is.na(W)) # omit all NAs
+
+colSums(is.na(LW2022))
+
+#### Figures, Mean, SD, SE =====
+
+#### No Grouping ====
+
+AllStats.2022 <- LW2022 %>%
+  summarize(
+    Mean_Length = mean(L),
+    SD_Length = sd(L),
+    SE_Length = SD_Length/sqrt(n()))
+
+AllStats.2022
+
+#### By SH_Temp ====
+
+SHTemp_Stats.2022 <- LW2022 %>%
+  group_by(SH_Temp) %>% 
+  summarize(
+    Mean_Length = mean(L),
+    SD_Length = sd(L),
+    SE_Length = SD_Length/sqrt(n()))
+
+SHTemp_Stats.2022
+
+## plot
+ggplot(LW2022, aes(x = SH_Temp, y = L, fill = SH_Temp)) +
+  geom_boxplot()
+
+#### By SH_Tide ====
+
+SHTide_Stats.LW2022 <- LW2022 %>%
+  group_by(SH_Tide) %>% 
+  summarize(
+    Mean_Length = mean(L),
+    SD_Length = sd(L),
+    SE_Length = SD_Length/sqrt(n()))
+
+SHTide_Stats.LW2022
+
+## plot
+ggplot(LW2022, aes(x = SH_Tide, y = L, fill = SH_Tide)) +
+  geom_boxplot()
+
+#### By Sampling_Time ====
+
+SamplingTime_Stats.LW2022 <- LW2022 %>%
+  group_by(Sampling_Time) %>% 
+  summarize(
+    Mean_Length = mean(L),
+    SD_Length = sd(L),
+    SE_Length = SD_Length/sqrt(n()))
+
+SamplingTime_Stats.LW2022
+
+## plot
+ggplot(LW2022, aes(x = Sampling_Time, y = L, fill = Sampling_Time)) +
+  geom_boxplot()
+
+#### By SH_Temp + Site ====
+
+SHTempSite_Stats.LW2022 <- LW2022 %>%
+  group_by(SH_Temp, Site) %>% 
+  summarize(
+    Mean_Length = mean(L),
+    SD_Length = sd(L),
+    SE_Length = SD_Length/sqrt(n()))
+
+SHTempSite_Stats.LW2022
+
+## plot
+ggplot(LW2022, aes(x = SH_Temp, y = L, fill = SH_Temp)) +
+  facet_wrap(~Site) +
+  geom_boxplot()
+
+#### By SH_Temp + Sampling_Time ====
+
+SHTempSampling_Stats.LW2022 <- LW2022 %>%
+  group_by(SH_Temp, Sampling_Time) %>% 
+  summarize(
+    Mean_Length = mean(L),
+    SD_Length = sd(L),
+    SE_Length = SD_Length/sqrt(n()))
+
+SHTempSampling_Stats.LW2022
+
+## plot
+ggplot(LW2022, aes(x = SH_Temp, y = L, fill = SH_Temp)) +
+  facet_wrap(~Sampling_Time) +
+  geom_boxplot()
+
+#### By SH_Temp + Sampling_Time + Site ====
+
+SHTempSamplingSite_Stats.LW2022 <- LW2022 %>%
+  group_by(SH_Temp, Sampling_Time, Site) %>% 
+  summarize(
+    Mean_Length = mean(L),
+    SD_Length = sd(L),
+    SE_Length = SD_Length/sqrt(n()))
+
+SHTempSamplingSite_Stats.LW2022 
+
+## plot
+ggplot(LW2022, aes(x = Site, y = L, color = SH_Temp)) +
+  facet_wrap(~Sampling_Time) +
+  geom_boxplot()
