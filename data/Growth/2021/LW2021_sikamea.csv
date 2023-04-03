@@ -1,0 +1,718 @@
+Sampling_Time,Site,Location,Species,SH_Tide,SH_Temp,Bag,Rep,L,W
+1,Middle,BBOC,C. sikamea,Tide,21,13,1,2.97,2.149
+1,Middle,BBOC,C. sikamea,Tide,21,13,2,2.849,2.001
+1,Middle,BBOC,C. sikamea,Tide,21,13,3,2.48,2.14
+1,Middle,BBOC,C. sikamea,Tide,21,13,4,2.922,2.331
+1,Middle,BBOC,C. sikamea,Tide,21,13,5,2.248,1.851
+1,Middle,BBOC,C. sikamea,Tide,21,13,6,2.405,1.735
+1,Middle,BBOC,C. sikamea,Tide,21,13,7,3.036,2.063
+1,Middle,BBOC,C. sikamea,Tide,21,13,8,2.216,1.784
+1,Middle,BBOC,C. sikamea,Tide,21,13,9,2.405,2.545
+1,Middle,BBOC,C. sikamea,Tide,21,13,10,2.822,2.104
+1,Middle,BBOC,C. sikamea,Tide,21,14,1,2.157,2.05
+1,Middle,BBOC,C. sikamea,Tide,21,14,2,2.762,2.071
+1,Middle,BBOC,C. sikamea,Tide,21,14,3,2.644,2.077
+1,Middle,BBOC,C. sikamea,Tide,21,14,4,3.075,1.97
+1,Middle,BBOC,C. sikamea,Tide,21,14,5,2.658,2.243
+1,Middle,BBOC,C. sikamea,Tide,21,14,6,2.827,2.007
+1,Middle,BBOC,C. sikamea,Tide,21,14,7,2.867,1.747
+1,Middle,BBOC,C. sikamea,Tide,21,14,8,2.657,1.913
+1,Middle,BBOC,C. sikamea,Tide,21,14,9,2.946,2.258
+1,Middle,BBOC,C. sikamea,Tide,21,14,10,2.926,1.898
+1,Middle,BBOC,C. sikamea,Tide,21,15,1,2.639,2.142
+1,Middle,BBOC,C. sikamea,Tide,21,15,2,2.534,2.108
+1,Middle,BBOC,C. sikamea,Tide,21,15,3,3.751,2.405
+1,Middle,BBOC,C. sikamea,Tide,21,15,4,2.493,1.777
+1,Middle,BBOC,C. sikamea,Tide,21,15,5,2.97,2.24
+1,Middle,BBOC,C. sikamea,Tide,21,15,6,3.183,2.443
+1,Middle,BBOC,C. sikamea,Tide,21,15,7,2.716,2.03
+1,Middle,BBOC,C. sikamea,Tide,21,15,8,2.612,1.989
+1,Middle,BBOC,C. sikamea,Tide,21,15,9,2.557,2.106
+1,Middle,BBOC,C. sikamea,Tide,21,15,10,2.755,1.946
+1,Middle,BBOC,C. sikamea,Tide,16,16,1,3.05,1.934
+1,Middle,BBOC,C. sikamea,Tide,16,16,2,2.549,1.719
+1,Middle,BBOC,C. sikamea,Tide,16,16,3,2.868,2.294
+1,Middle,BBOC,C. sikamea,Tide,16,16,4,2.25,1.945
+1,Middle,BBOC,C. sikamea,Tide,16,16,5,2.391,1.933
+1,Middle,BBOC,C. sikamea,Tide,16,16,6,3.327,2.546
+1,Middle,BBOC,C. sikamea,Tide,16,16,7,2.973,2.521
+1,Middle,BBOC,C. sikamea,Tide,16,16,8,2.267,1.917
+1,Middle,BBOC,C. sikamea,Tide,16,16,9,2.731,2.458
+1,Middle,BBOC,C. sikamea,Tide,16,16,10,2.318,1.988
+1,Middle,BBOC,C. sikamea,Tide,16,17,1,2.5,2
+1,Middle,BBOC,C. sikamea,Tide,16,17,2,2.726,2.201
+1,Middle,BBOC,C. sikamea,Tide,16,17,3,2.578,2.422
+1,Middle,BBOC,C. sikamea,Tide,16,17,4,2.191,2.191
+1,Middle,BBOC,C. sikamea,Tide,16,17,5,2.73,2.19
+1,Middle,BBOC,C. sikamea,Tide,16,17,6,2.86,2.207
+1,Middle,BBOC,C. sikamea,Tide,16,17,7,2.592,2.057
+1,Middle,BBOC,C. sikamea,Tide,16,17,8,2.612,2.06
+1,Middle,BBOC,C. sikamea,Tide,16,17,9,2.941,2.42
+1,Middle,BBOC,C. sikamea,Tide,16,17,10,2.291,1.833
+1,Middle,BBOC,C. sikamea,Tide,16,18,1,2.653,2.203
+1,Middle,BBOC,C. sikamea,Tide,16,18,2,3.225,2.246
+1,Middle,BBOC,C. sikamea,Tide,16,18,3,2.378,1.515
+1,Middle,BBOC,C. sikamea,Tide,16,18,4,3.066,2.321
+1,Middle,BBOC,C. sikamea,Tide,16,18,5,2.667,1.927
+1,Middle,BBOC,C. sikamea,Tide,16,18,6,2.468,2.193
+1,Middle,BBOC,C. sikamea,Tide,16,18,7,2.508,2.109
+1,Middle,BBOC,C. sikamea,Tide,16,18,8,3.075,2.416
+1,Middle,BBOC,C. sikamea,Tide,16,18,9,3.163,2.516
+1,Middle,BBOC,C. sikamea,Tide,16,18,10,3.102,2.572
+1,Middle,BBOC,C. sikamea,No Tide,21,19,1,2.545,2.086
+1,Middle,BBOC,C. sikamea,No Tide,21,19,2,2.552,2.148
+1,Middle,BBOC,C. sikamea,No Tide,21,19,3,2.417,2.336
+1,Middle,BBOC,C. sikamea,No Tide,21,19,4,2.75,2.106
+1,Middle,BBOC,C. sikamea,No Tide,21,19,5,2.372,2.011
+1,Middle,BBOC,C. sikamea,No Tide,21,19,6,2.778,1.817
+1,Middle,BBOC,C. sikamea,No Tide,21,19,7,3.394,2.311
+1,Middle,BBOC,C. sikamea,No Tide,21,19,8,2.458,2.174
+1,Middle,BBOC,C. sikamea,No Tide,21,19,9,2.581,2.103
+1,Middle,BBOC,C. sikamea,No Tide,21,19,10,3.038,1.614
+1,Middle,BBOC,C. sikamea,No Tide,21,20,1,2.565,1.804
+1,Middle,BBOC,C. sikamea,No Tide,21,20,2,2.804,2.14
+1,Middle,BBOC,C. sikamea,No Tide,21,20,3,2.509,2.209
+1,Middle,BBOC,C. sikamea,No Tide,21,20,4,2.387,1.889
+1,Middle,BBOC,C. sikamea,No Tide,21,20,5,2.984,2.375
+1,Middle,BBOC,C. sikamea,No Tide,21,20,6,2.835,2.067
+1,Middle,BBOC,C. sikamea,No Tide,21,20,7,2.942,1.999
+1,Middle,BBOC,C. sikamea,No Tide,21,20,8,2.272,2.151
+1,Middle,BBOC,C. sikamea,No Tide,21,20,9,3.065,2.375
+1,Middle,BBOC,C. sikamea,No Tide,21,20,10,3.087,2.407
+1,Middle,BBOC,C. sikamea,No Tide,21,21,1,2.721,1.863
+1,Middle,BBOC,C. sikamea,No Tide,21,21,2,2.306,2.026
+1,Middle,BBOC,C. sikamea,No Tide,21,21,3,2.833,1.814
+1,Middle,BBOC,C. sikamea,No Tide,21,21,4,2.543,2.312
+1,Middle,BBOC,C. sikamea,No Tide,21,21,5,2.575,2.092
+1,Middle,BBOC,C. sikamea,No Tide,21,21,6,2.583,1.769
+1,Middle,BBOC,C. sikamea,No Tide,21,21,7,3.01,2.131
+1,Middle,BBOC,C. sikamea,No Tide,21,21,8,2.629,1.864
+1,Middle,BBOC,C. sikamea,No Tide,21,21,9,2.806,2.238
+1,Middle,BBOC,C. sikamea,No Tide,21,21,10,2.721,2.107
+1,Middle,BBOC,C. sikamea,No Tide,16,22,1,3.095,2.129
+1,Middle,BBOC,C. sikamea,No Tide,16,22,2,2.588,1.913
+1,Middle,BBOC,C. sikamea,No Tide,16,22,3,1.927,1.927
+1,Middle,BBOC,C. sikamea,No Tide,16,22,4,2.739,1.956
+1,Middle,BBOC,C. sikamea,No Tide,16,22,5,2.59,2.047
+1,Middle,BBOC,C. sikamea,No Tide,16,22,6,2.744,2.375
+1,Middle,BBOC,C. sikamea,No Tide,16,22,7,2.016,1.697
+1,Middle,BBOC,C. sikamea,No Tide,16,22,8,2.028,1.683
+1,Middle,BBOC,C. sikamea,No Tide,16,22,9,2.777,2.388
+1,Middle,BBOC,C. sikamea,No Tide,16,22,10,2.909,2.201
+1,Middle,BBOC,C. sikamea,No Tide,16,23,1,2.693,1.657
+1,Middle,BBOC,C. sikamea,No Tide,16,23,2,2.965,2.116
+1,Middle,BBOC,C. sikamea,No Tide,16,23,3,2.54,2.044
+1,Middle,BBOC,C. sikamea,No Tide,16,23,4,2.922,2.23
+1,Middle,BBOC,C. sikamea,No Tide,16,23,5,2.508,2.387
+1,Middle,BBOC,C. sikamea,No Tide,16,23,6,2.231,2.666
+1,Middle,BBOC,C. sikamea,No Tide,16,23,7,2.056,2.72
+1,Middle,BBOC,C. sikamea,No Tide,16,23,8,2.532,2.432
+1,Middle,BBOC,C. sikamea,No Tide,16,23,9,2.705,2.373
+1,Middle,BBOC,C. sikamea,No Tide,16,23,10,2.143,2.13
+1,Middle,BBOC,C. sikamea,No Tide,16,24,1,2.96,1.916
+1,Middle,BBOC,C. sikamea,No Tide,16,24,2,2.97,2.05
+1,Middle,BBOC,C. sikamea,No Tide,16,24,3,2.603,1.958
+1,Middle,BBOC,C. sikamea,No Tide,16,24,4,3.172,2.152
+1,Middle,BBOC,C. sikamea,No Tide,16,24,5,2.765,2.068
+1,Middle,BBOC,C. sikamea,No Tide,16,24,6,2.898,2.438
+1,Middle,BBOC,C. sikamea,No Tide,16,24,7,3.006,1.963
+1,Middle,BBOC,C. sikamea,No Tide,16,24,8,2.725,2.003
+1,Middle,BBOC,C. sikamea,No Tide,16,24,9,2.891,2.099
+1,Middle,BBOC,C. sikamea,No Tide,16,24,10,2.452,1.826
+4,Middle,BBOC,C. sikamea,Tide,21,13,1,4.403,3.406
+4,Middle,BBOC,C. sikamea,Tide,21,13,2,4.1,2.813
+4,Middle,BBOC,C. sikamea,Tide,21,13,3,3.662,2.419
+4,Middle,BBOC,C. sikamea,Tide,21,13,4,4.063,2.685
+4,Middle,BBOC,C. sikamea,Tide,21,13,5,4.03,3.191
+4,Middle,BBOC,C. sikamea,Tide,21,13,6,4.34,2.766
+4,Middle,BBOC,C. sikamea,Tide,21,13,7,4.378,3.153
+4,Middle,BBOC,C. sikamea,Tide,21,13,8,3.369,2.577
+4,Middle,BBOC,C. sikamea,Tide,21,13,9,4.104,2.584
+4,Middle,BBOC,C. sikamea,Tide,21,13,10,3.574,3.006
+4,Middle,BBOC,C. sikamea,Tide,21,14,1,4.388,3.205
+4,Middle,BBOC,C. sikamea,Tide,21,14,2,4.217,2.553
+4,Middle,BBOC,C. sikamea,Tide,21,14,3,3.246,2.918
+4,Middle,BBOC,C. sikamea,Tide,21,14,4,4.037,3.051
+4,Middle,BBOC,C. sikamea,Tide,21,14,5,3.669,2.256
+4,Middle,BBOC,C. sikamea,Tide,21,14,6,3.125,2.743
+4,Middle,BBOC,C. sikamea,Tide,21,14,7,3.84,2.87
+4,Middle,BBOC,C. sikamea,Tide,21,14,8,3.52,2.657
+4,Middle,BBOC,C. sikamea,Tide,21,14,9,4.119,3.4
+4,Middle,BBOC,C. sikamea,Tide,21,14,10,3.328,2.678
+4,Middle,BBOC,C. sikamea,Tide,21,15,1,4.835,3.303
+4,Middle,BBOC,C. sikamea,Tide,21,15,2,3.883,3.11
+4,Middle,BBOC,C. sikamea,Tide,21,15,3,4.755,3.043
+4,Middle,BBOC,C. sikamea,Tide,21,15,4,3.669,2.645
+4,Middle,BBOC,C. sikamea,Tide,21,15,5,4.214,2.958
+4,Middle,BBOC,C. sikamea,Tide,21,15,6,3.778,2.574
+4,Middle,BBOC,C. sikamea,Tide,21,15,7,4.094,3.009
+4,Middle,BBOC,C. sikamea,Tide,21,15,8,3.548,3.308
+4,Middle,BBOC,C. sikamea,Tide,21,15,9,3.585,3.086
+4,Middle,BBOC,C. sikamea,Tide,21,15,10,3.416,2.773
+4,Middle,BBOC,C. sikamea,Tide,16,16,1,3.946,3.071
+4,Middle,BBOC,C. sikamea,Tide,16,16,2,3.451,2.454
+4,Middle,BBOC,C. sikamea,Tide,16,16,3,3.801,3.269
+4,Middle,BBOC,C. sikamea,Tide,16,16,4,3.136,2.646
+4,Middle,BBOC,C. sikamea,Tide,16,16,5,3.816,3.406
+4,Middle,BBOC,C. sikamea,Tide,16,16,6,3.82,3.393
+4,Middle,BBOC,C. sikamea,Tide,16,16,7,3.881,3.154
+4,Middle,BBOC,C. sikamea,Tide,16,16,8,3.625,3.189
+4,Middle,BBOC,C. sikamea,Tide,16,16,9,3.813,3.526
+4,Middle,BBOC,C. sikamea,Tide,16,16,10,4.039,3.384
+4,Middle,BBOC,C. sikamea,Tide,16,17,1,3.355,2.509
+4,Middle,BBOC,C. sikamea,Tide,16,17,2,3.157,2.661
+4,Middle,BBOC,C. sikamea,Tide,16,17,3,3.52,2.84
+4,Middle,BBOC,C. sikamea,Tide,16,17,4,3.487,2.986
+4,Middle,BBOC,C. sikamea,Tide,16,17,5,3.484,2.292
+4,Middle,BBOC,C. sikamea,Tide,16,17,6,3.888,2.845
+4,Middle,BBOC,C. sikamea,Tide,16,17,7,3.76,2.888
+4,Middle,BBOC,C. sikamea,Tide,16,17,8,3.821,3.133
+4,Middle,BBOC,C. sikamea,Tide,16,17,9,3.58,3.072
+4,Middle,BBOC,C. sikamea,Tide,16,17,10,3.959,2.963
+4,Middle,BBOC,C. sikamea,Tide,16,18,1,3.361,2.464
+4,Middle,BBOC,C. sikamea,Tide,16,18,2,3.941,2.592
+4,Middle,BBOC,C. sikamea,Tide,16,18,3,3.302,2.848
+4,Middle,BBOC,C. sikamea,Tide,16,18,4,4.326,3.308
+4,Middle,BBOC,C. sikamea,Tide,16,18,5,3.623,2.642
+4,Middle,BBOC,C. sikamea,Tide,16,18,6,3.898,3.216
+4,Middle,BBOC,C. sikamea,Tide,16,18,7,3.738,3.016
+4,Middle,BBOC,C. sikamea,Tide,16,18,8,3.895,2.909
+4,Middle,BBOC,C. sikamea,Tide,16,18,9,3.863,3.121
+4,Middle,BBOC,C. sikamea,Tide,16,18,10,3.784,2.922
+4,Middle,BBOC,C. sikamea,No Tide,21,19,1,3.705,2.912
+4,Middle,BBOC,C. sikamea,No Tide,21,19,2,4.483,3.111
+4,Middle,BBOC,C. sikamea,No Tide,21,19,3,4.248,3.093
+4,Middle,BBOC,C. sikamea,No Tide,21,19,4,4.408,3.027
+4,Middle,BBOC,C. sikamea,No Tide,21,19,5,4.512,3.365
+4,Middle,BBOC,C. sikamea,No Tide,21,19,6,4.026,2.938
+4,Middle,BBOC,C. sikamea,No Tide,21,19,7,3.718,2.581
+4,Middle,BBOC,C. sikamea,No Tide,21,19,8,4.352,2.871
+4,Middle,BBOC,C. sikamea,No Tide,21,19,9,3.926,3.027
+4,Middle,BBOC,C. sikamea,No Tide,21,19,10,3.778,3.171
+4,Middle,BBOC,C. sikamea,No Tide,21,20,1,4.006,2.667
+4,Middle,BBOC,C. sikamea,No Tide,21,20,2,4.122,3.284
+4,Middle,BBOC,C. sikamea,No Tide,21,20,3,3.181,2.327
+4,Middle,BBOC,C. sikamea,No Tide,21,20,4,3.629,2.814
+4,Middle,BBOC,C. sikamea,No Tide,21,20,5,3.217,2.69
+4,Middle,BBOC,C. sikamea,No Tide,21,20,6,4.21,2.985
+4,Middle,BBOC,C. sikamea,No Tide,21,20,7,3.553,2.992
+4,Middle,BBOC,C. sikamea,No Tide,21,20,8,3.566,2.457
+4,Middle,BBOC,C. sikamea,No Tide,21,20,9,4.28,3.386
+4,Middle,BBOC,C. sikamea,No Tide,21,20,10,3.69,2.834
+4,Middle,BBOC,C. sikamea,No Tide,21,21,1,4.801,3.938
+4,Middle,BBOC,C. sikamea,No Tide,21,21,2,4.124,3.713
+4,Middle,BBOC,C. sikamea,No Tide,21,21,3,3.457,2.342
+4,Middle,BBOC,C. sikamea,No Tide,21,21,4,3.983,2.53
+4,Middle,BBOC,C. sikamea,No Tide,21,21,5,4.384,3.072
+4,Middle,BBOC,C. sikamea,No Tide,21,21,6,3.331,2.941
+4,Middle,BBOC,C. sikamea,No Tide,21,21,7,3.559,2.481
+4,Middle,BBOC,C. sikamea,No Tide,21,21,8,3.555,2.911
+4,Middle,BBOC,C. sikamea,No Tide,21,21,9,3.677,3.148
+4,Middle,BBOC,C. sikamea,No Tide,21,21,10,2.885,3.028
+4,Middle,BBOC,C. sikamea,No Tide,16,22,1,3.343,2.589
+4,Middle,BBOC,C. sikamea,No Tide,16,22,2,3.824,2.953
+4,Middle,BBOC,C. sikamea,No Tide,16,22,3,3.661,2.88
+4,Middle,BBOC,C. sikamea,No Tide,16,22,4,3.103,2.703
+4,Middle,BBOC,C. sikamea,No Tide,16,22,5,3.486,2.976
+4,Middle,BBOC,C. sikamea,No Tide,16,22,6,3.274,3.202
+4,Middle,BBOC,C. sikamea,No Tide,16,22,7,4.26,3.086
+4,Middle,BBOC,C. sikamea,No Tide,16,22,8,4.275,3.198
+4,Middle,BBOC,C. sikamea,No Tide,16,22,9,3.367,2.106
+4,Middle,BBOC,C. sikamea,No Tide,16,22,10,3.634,2.945
+4,Middle,BBOC,C. sikamea,No Tide,16,23,1,3.825,2.482
+4,Middle,BBOC,C. sikamea,No Tide,16,23,2,4.016,2.985
+4,Middle,BBOC,C. sikamea,No Tide,16,23,3,3.513,3.339
+4,Middle,BBOC,C. sikamea,No Tide,16,23,4,3.76,3.051
+4,Middle,BBOC,C. sikamea,No Tide,16,23,5,3.025,2.661
+4,Middle,BBOC,C. sikamea,No Tide,16,23,6,3.481,2.583
+4,Middle,BBOC,C. sikamea,No Tide,16,23,7,3.992,3.269
+4,Middle,BBOC,C. sikamea,No Tide,16,23,8,4.31,2.927
+4,Middle,BBOC,C. sikamea,No Tide,16,23,9,3.23,2.971
+4,Middle,BBOC,C. sikamea,No Tide,16,23,10,3.201,3.238
+4,Middle,BBOC,C. sikamea,No Tide,16,24,2,4.911,3.701
+4,Middle,BBOC,C. sikamea,No Tide,16,24,3,4.471,3.294
+4,Middle,BBOC,C. sikamea,No Tide,16,24,4,3.926,3.151
+4,Middle,BBOC,C. sikamea,No Tide,16,24,5,4.131,3.251
+4,Middle,BBOC,C. sikamea,No Tide,16,24,6,3.727,3.122
+4,Middle,BBOC,C. sikamea,No Tide,16,24,7,3.536,2.904
+4,Middle,BBOC,C. sikamea,No Tide,16,24,8,4.04,2.638
+4,Middle,BBOC,C. sikamea,No Tide,16,24,9,3.611,3.118
+4,Middle,BBOC,C. sikamea,No Tide,16,24,10,4.072,3.374
+1,North,HIOC,C. sikamea,Tide,21,1,1,2.744,1.907
+1,North,HIOC,C. sikamea,Tide,21,1,2,2.886,1.869
+1,North,HIOC,C. sikamea,Tide,21,1,3,2.199,2.083
+1,North,HIOC,C. sikamea,Tide,21,1,4,2.184,2.291
+1,North,HIOC,C. sikamea,Tide,21,1,5,2.615,2.338
+1,North,HIOC,C. sikamea,Tide,21,1,6,2.421,1.694
+1,North,HIOC,C. sikamea,Tide,21,1,7,2.911,2.266
+1,North,HIOC,C. sikamea,Tide,21,1,8,2.751,2.311
+1,North,HIOC,C. sikamea,Tide,21,1,9,2.758,1.878
+1,North,HIOC,C. sikamea,Tide,21,1,10,2.084,2.277
+1,North,HIOC,C. sikamea,Tide,21,2,1,2.64,2.383
+1,North,HIOC,C. sikamea,Tide,21,2,2,2.395,2.542
+1,North,HIOC,C. sikamea,Tide,21,2,3,2.305,2.335
+1,North,HIOC,C. sikamea,Tide,21,2,4,2.649,2.378
+1,North,HIOC,C. sikamea,Tide,21,2,5,2.376,1.806
+1,North,HIOC,C. sikamea,Tide,21,2,6,2.581,1.618
+1,North,HIOC,C. sikamea,Tide,21,2,7,2.716,2.112
+1,North,HIOC,C. sikamea,Tide,21,2,8,2.662,1.731
+1,North,HIOC,C. sikamea,Tide,21,2,9,2.819,2.303
+1,North,HIOC,C. sikamea,Tide,21,2,10,2.853,2.216
+1,North,HIOC,C. sikamea,Tide,21,3,1,2.957,2.262
+1,North,HIOC,C. sikamea,Tide,21,3,2,2.294,1.557
+1,North,HIOC,C. sikamea,Tide,21,3,3,2.95,1.966
+1,North,HIOC,C. sikamea,Tide,21,3,4,2.936,2.024
+1,North,HIOC,C. sikamea,Tide,21,3,5,2.672,2.244
+1,North,HIOC,C. sikamea,Tide,21,3,6,2.201,1.848
+1,North,HIOC,C. sikamea,Tide,21,3,7,2.479,1.842
+1,North,HIOC,C. sikamea,Tide,21,3,8,3.229,2.524
+1,North,HIOC,C. sikamea,Tide,21,3,9,3.008,1.97
+1,North,HIOC,C. sikamea,Tide,21,3,10,2.819,2.289
+1,North,HIOC,C. sikamea,Tide,16,4,1,2.415,2.191
+1,North,HIOC,C. sikamea,Tide,16,4,2,2.711,2.155
+1,North,HIOC,C. sikamea,Tide,16,4,3,2.445,2.162
+1,North,HIOC,C. sikamea,Tide,16,4,4,2.325,1.984
+1,North,HIOC,C. sikamea,Tide,16,4,5,2.217,2.364
+1,North,HIOC,C. sikamea,Tide,16,4,6,3.049,2.458
+1,North,HIOC,C. sikamea,Tide,16,4,7,2.44,2.108
+1,North,HIOC,C. sikamea,Tide,16,4,8,2.485,2.238
+1,North,HIOC,C. sikamea,Tide,16,4,9,2.201,1.868
+1,North,HIOC,C. sikamea,Tide,16,4,10,2.684,2.147
+1,North,HIOC,C. sikamea,Tide,16,5,1,2.816,2.498
+1,North,HIOC,C. sikamea,Tide,16,5,2,3.262,1.965
+1,North,HIOC,C. sikamea,Tide,16,5,3,2.963,2.154
+1,North,HIOC,C. sikamea,Tide,16,5,4,2.752,1.892
+1,North,HIOC,C. sikamea,Tide,16,5,5,2.932,1.848
+1,North,HIOC,C. sikamea,Tide,16,5,6,2.858,2.176
+1,North,HIOC,C. sikamea,Tide,16,5,7,3.037,2.115
+1,North,HIOC,C. sikamea,Tide,16,5,8,2.618,1.935
+1,North,HIOC,C. sikamea,Tide,16,5,9,3.081,2.196
+1,North,HIOC,C. sikamea,Tide,16,5,10,2.536,1.672
+1,North,HIOC,C. sikamea,Tide,16,6,1,2.602,1.971
+1,North,HIOC,C. sikamea,Tide,16,6,2,3.394,2.505
+1,North,HIOC,C. sikamea,Tide,16,6,3,3.324,2.14
+1,North,HIOC,C. sikamea,Tide,16,6,4,2.719,2.17
+1,North,HIOC,C. sikamea,Tide,16,6,5,2.74,2.558
+1,North,HIOC,C. sikamea,Tide,16,6,6,2.892,1.759
+1,North,HIOC,C. sikamea,Tide,16,6,7,2.667,2.549
+1,North,HIOC,C. sikamea,Tide,16,6,8,2.826,2.165
+1,North,HIOC,C. sikamea,Tide,16,6,9,2.629,2.473
+1,North,HIOC,C. sikamea,Tide,16,6,10,2.796,1.88
+1,North,HIOC,C. sikamea,No Tide,21,7,1,2.465,1.969
+1,North,HIOC,C. sikamea,No Tide,21,7,2,2.116,2.346
+1,North,HIOC,C. sikamea,No Tide,21,7,3,2.789,1.781
+1,North,HIOC,C. sikamea,No Tide,21,7,4,2.136,1.625
+1,North,HIOC,C. sikamea,No Tide,21,7,5,2.529,2.018
+1,North,HIOC,C. sikamea,No Tide,21,7,6,2.938,1.997
+1,North,HIOC,C. sikamea,No Tide,21,7,7,2.982,1.686
+1,North,HIOC,C. sikamea,No Tide,21,7,8,2.346,2.343
+1,North,HIOC,C. sikamea,No Tide,21,7,9,2.747,2.299
+1,North,HIOC,C. sikamea,No Tide,21,7,10,2.279,2.235
+1,North,HIOC,C. sikamea,No Tide,21,8,1,2.889,2.211
+1,North,HIOC,C. sikamea,No Tide,21,8,2,2.719,2.096
+1,North,HIOC,C. sikamea,No Tide,21,8,3,3.03,2.448
+1,North,HIOC,C. sikamea,No Tide,21,8,4,2.601,2.095
+1,North,HIOC,C. sikamea,No Tide,21,8,5,2.68,1.851
+1,North,HIOC,C. sikamea,No Tide,21,8,6,2.762,2.153
+1,North,HIOC,C. sikamea,No Tide,21,8,7,2.771,1.927
+1,North,HIOC,C. sikamea,No Tide,21,8,8,3.22,2.345
+1,North,HIOC,C. sikamea,No Tide,21,8,9,3.179,2.214
+1,North,HIOC,C. sikamea,No Tide,21,8,10,2.519,1.915
+1,North,HIOC,C. sikamea,No Tide,21,9,1,3.577,2.471
+1,North,HIOC,C. sikamea,No Tide,21,9,2,2.573,2.192
+1,North,HIOC,C. sikamea,No Tide,21,9,3,2.438,2.506
+1,North,HIOC,C. sikamea,No Tide,21,9,4,2.64,1.658
+1,North,HIOC,C. sikamea,No Tide,21,9,5,2.54,2.185
+1,North,HIOC,C. sikamea,No Tide,21,9,6,2.995,1.836
+1,North,HIOC,C. sikamea,No Tide,21,9,7,3.023,2.052
+1,North,HIOC,C. sikamea,No Tide,21,9,8,2.866,2.116
+1,North,HIOC,C. sikamea,No Tide,21,9,9,2.837,2.271
+1,North,HIOC,C. sikamea,No Tide,21,9,10,2.766,1.859
+1,North,HIOC,C. sikamea,No Tide,16,10,1,2.191,1.853
+1,North,HIOC,C. sikamea,No Tide,16,10,2,2.764,1.814
+1,North,HIOC,C. sikamea,No Tide,16,10,3,2.324,2.072
+1,North,HIOC,C. sikamea,No Tide,16,10,4,2.334,1.942
+1,North,HIOC,C. sikamea,No Tide,16,10,5,2.747,1.943
+1,North,HIOC,C. sikamea,No Tide,16,10,6,2.78,1.977
+1,North,HIOC,C. sikamea,No Tide,16,10,7,2.569,2.139
+1,North,HIOC,C. sikamea,No Tide,16,10,8,2.691,1.954
+1,North,HIOC,C. sikamea,No Tide,16,10,9,2.878,1.911
+1,North,HIOC,C. sikamea,No Tide,16,10,10,2.521,2.016
+1,North,HIOC,C. sikamea,No Tide,16,11,1,2.618,2.147
+1,North,HIOC,C. sikamea,No Tide,16,11,2,2.704,2.149
+1,North,HIOC,C. sikamea,No Tide,16,11,3,2.549,1.999
+1,North,HIOC,C. sikamea,No Tide,16,11,4,2.662,2
+1,North,HIOC,C. sikamea,No Tide,16,11,5,2.545,2.028
+1,North,HIOC,C. sikamea,No Tide,16,11,6,2.703,2.366
+1,North,HIOC,C. sikamea,No Tide,16,11,7,2.743,2.253
+1,North,HIOC,C. sikamea,No Tide,16,11,8,3.223,2.25
+1,North,HIOC,C. sikamea,No Tide,16,11,9,2.859,2.081
+1,North,HIOC,C. sikamea,No Tide,16,11,10,2.384,2.033
+1,North,HIOC,C. sikamea,No Tide,16,12,1,3.152,1.633
+1,North,HIOC,C. sikamea,No Tide,16,12,2,2.812,2.31
+1,North,HIOC,C. sikamea,No Tide,16,12,3,3.116,2.205
+1,North,HIOC,C. sikamea,No Tide,16,12,4,2.72,2.19
+1,North,HIOC,C. sikamea,No Tide,16,12,5,3.028,2.014
+1,North,HIOC,C. sikamea,No Tide,16,12,6,2.69,2.042
+1,North,HIOC,C. sikamea,No Tide,16,12,7,2.956,2.121
+1,North,HIOC,C. sikamea,No Tide,16,12,8,3,2.083
+1,North,HIOC,C. sikamea,No Tide,16,12,9,2.788,2.276
+1,North,HIOC,C. sikamea,No Tide,16,12,10,2.859,2.08
+4,North,HIOC,C. sikamea,Tide,21,1,1,3.643,3.192
+4,North,HIOC,C. sikamea,Tide,21,1,2,3.835,2.917
+4,North,HIOC,C. sikamea,Tide,21,1,3,3.154,2.89
+4,North,HIOC,C. sikamea,Tide,21,1,4,3.281,2.858
+4,North,HIOC,C. sikamea,Tide,21,1,5,3.479,2.652
+4,North,HIOC,C. sikamea,Tide,21,1,6,3.65,2.906
+4,North,HIOC,C. sikamea,Tide,21,1,7,3.822,2.991
+4,North,HIOC,C. sikamea,Tide,21,1,8,3.746,2.798
+4,North,HIOC,C. sikamea,Tide,21,1,9,3.294,3.08
+4,North,HIOC,C. sikamea,Tide,21,1,10,3.168,2.927
+4,North,HIOC,C. sikamea,Tide,21,2,1,3.922,3.07
+4,North,HIOC,C. sikamea,Tide,21,2,2,3.391,2.553
+4,North,HIOC,C. sikamea,Tide,21,2,3,3.3,2.534
+4,North,HIOC,C. sikamea,Tide,21,2,4,3.768,2.962
+4,North,HIOC,C. sikamea,Tide,21,2,5,3.734,2.551
+4,North,HIOC,C. sikamea,Tide,21,2,6,3.968,3.361
+4,North,HIOC,C. sikamea,Tide,21,2,7,3.415,2.836
+4,North,HIOC,C. sikamea,Tide,21,2,8,3.746,3.012
+4,North,HIOC,C. sikamea,Tide,21,2,9,3.009,2.487
+4,North,HIOC,C. sikamea,Tide,21,2,10,3.079,3.158
+4,North,HIOC,C. sikamea,Tide,21,3,1,3.288,2.819
+4,North,HIOC,C. sikamea,Tide,21,3,2,3.487,3.258
+4,North,HIOC,C. sikamea,Tide,21,3,3,3.084,2.766
+4,North,HIOC,C. sikamea,Tide,21,3,4,3.548,2.458
+4,North,HIOC,C. sikamea,Tide,21,3,5,4.183,3.679
+4,North,HIOC,C. sikamea,Tide,21,3,6,3.673,2.25
+4,North,HIOC,C. sikamea,Tide,21,3,7,3.024,2.21
+4,North,HIOC,C. sikamea,Tide,21,3,8,3.416,2.862
+4,North,HIOC,C. sikamea,Tide,21,3,9,3.667,2.889
+4,North,HIOC,C. sikamea,Tide,21,3,10,3.734,3.509
+4,North,HIOC,C. sikamea,Tide,16,4,1,3.837,3.032
+4,North,HIOC,C. sikamea,Tide,16,4,2,3.462,3.141
+4,North,HIOC,C. sikamea,Tide,16,4,3,3.535,2.8
+4,North,HIOC,C. sikamea,Tide,16,4,4,3.368,3.387
+4,North,HIOC,C. sikamea,Tide,16,4,5,3.276,2.838
+4,North,HIOC,C. sikamea,Tide,16,4,6,3.314,2.565
+4,North,HIOC,C. sikamea,Tide,16,4,7,3.315,2.726
+4,North,HIOC,C. sikamea,Tide,16,4,8,3.602,3.319
+4,North,HIOC,C. sikamea,Tide,16,4,9,2.884,2.599
+4,North,HIOC,C. sikamea,Tide,16,4,10,4.007,3.111
+4,North,HIOC,C. sikamea,Tide,16,5,1,3.538,2.708
+4,North,HIOC,C. sikamea,Tide,16,5,2,3.003,1.931
+4,North,HIOC,C. sikamea,Tide,16,5,3,3.861,2.969
+4,North,HIOC,C. sikamea,Tide,16,5,4,3.702,3.085
+4,North,HIOC,C. sikamea,Tide,16,5,5,3.444,3.056
+4,North,HIOC,C. sikamea,Tide,16,5,6,3.303,2.645
+4,North,HIOC,C. sikamea,Tide,16,5,7,3.023,2.475
+4,North,HIOC,C. sikamea,Tide,16,5,8,3.861,3.198
+4,North,HIOC,C. sikamea,Tide,16,5,9,3.369,3.034
+4,North,HIOC,C. sikamea,Tide,16,5,10,3.775,2.639
+4,North,HIOC,C. sikamea,Tide,16,6,1,3.984,2.527
+4,North,HIOC,C. sikamea,Tide,16,6,2,3.982,2.958
+4,North,HIOC,C. sikamea,Tide,16,6,3,3.562,3.201
+4,North,HIOC,C. sikamea,Tide,16,6,4,3.44,2.944
+4,North,HIOC,C. sikamea,Tide,16,6,5,3.355,3.011
+4,North,HIOC,C. sikamea,Tide,16,6,6,3.315,3.145
+4,North,HIOC,C. sikamea,Tide,16,6,7,3.266,2.222
+4,North,HIOC,C. sikamea,Tide,16,6,8,3.691,3.242
+4,North,HIOC,C. sikamea,Tide,16,6,9,3.096,2.579
+4,North,HIOC,C. sikamea,Tide,16,6,10,3.331,2.737
+4,North,HIOC,C. sikamea,No Tide,21,7,1,4.31,3.401
+4,North,HIOC,C. sikamea,No Tide,21,7,2,3.748,3.355
+4,North,HIOC,C. sikamea,No Tide,21,7,3,3.981,2.847
+4,North,HIOC,C. sikamea,No Tide,21,7,4,3.758,3.918
+4,North,HIOC,C. sikamea,No Tide,21,7,5,3.352,2.61
+4,North,HIOC,C. sikamea,No Tide,21,7,6,3.355,3.421
+4,North,HIOC,C. sikamea,No Tide,21,7,7,3.071,2.047
+4,North,HIOC,C. sikamea,No Tide,21,7,8,3.489,2.687
+4,North,HIOC,C. sikamea,No Tide,21,7,9,3.204,2.27
+4,North,HIOC,C. sikamea,No Tide,21,7,10,3.089,1.945
+4,North,HIOC,C. sikamea,No Tide,21,8,1,3.876,2.941
+4,North,HIOC,C. sikamea,No Tide,21,8,2,3.359,2.877
+4,North,HIOC,C. sikamea,No Tide,21,8,3,3.367,2.427
+4,North,HIOC,C. sikamea,No Tide,21,8,4,3.441,2.641
+4,North,HIOC,C. sikamea,No Tide,21,8,5,3.845,2.789
+4,North,HIOC,C. sikamea,No Tide,21,8,6,3.639,2.91
+4,North,HIOC,C. sikamea,No Tide,21,8,7,3.19,2.15
+4,North,HIOC,C. sikamea,No Tide,21,8,8,3.263,2.966
+4,North,HIOC,C. sikamea,No Tide,21,8,9,2.983,2.462
+4,North,HIOC,C. sikamea,No Tide,21,8,10,3.911,3.447
+4,North,HIOC,C. sikamea,No Tide,21,9,1,3.165,3.219
+4,North,HIOC,C. sikamea,No Tide,21,9,2,3.64,3.194
+4,North,HIOC,C. sikamea,No Tide,21,9,3,3.656,2.585
+4,North,HIOC,C. sikamea,No Tide,21,9,4,3.611,2.938
+4,North,HIOC,C. sikamea,No Tide,21,9,5,3.504,2.862
+4,North,HIOC,C. sikamea,No Tide,21,9,6,3.384,3.116
+4,North,HIOC,C. sikamea,No Tide,21,9,7,3.708,3.087
+4,North,HIOC,C. sikamea,No Tide,21,9,8,3.605,3.279
+4,North,HIOC,C. sikamea,No Tide,21,9,9,3.456,2.936
+4,North,HIOC,C. sikamea,No Tide,21,9,10,2.43,2.35
+4,North,HIOC,C. sikamea,No Tide,16,10,1,3.798,2.746
+4,North,HIOC,C. sikamea,No Tide,16,10,2,3.941,3.037
+4,North,HIOC,C. sikamea,No Tide,16,10,3,3.96,2.949
+4,North,HIOC,C. sikamea,No Tide,16,10,4,4.115,2.661
+4,North,HIOC,C. sikamea,No Tide,16,10,5,3.882,2.978
+4,North,HIOC,C. sikamea,No Tide,16,10,6,3.616,2.81
+4,North,HIOC,C. sikamea,No Tide,16,10,7,3.59,2.926
+4,North,HIOC,C. sikamea,No Tide,16,10,8,4.037,2.593
+4,North,HIOC,C. sikamea,No Tide,16,10,9,3.564,2.709
+4,North,HIOC,C. sikamea,No Tide,16,10,10,3.216,2.738
+4,North,HIOC,C. sikamea,No Tide,16,11,1,3.84,2.798
+4,North,HIOC,C. sikamea,No Tide,16,11,2,3.644,3.769
+4,North,HIOC,C. sikamea,No Tide,16,11,3,4.18,3.061
+4,North,HIOC,C. sikamea,No Tide,16,11,4,3.629,3.796
+4,North,HIOC,C. sikamea,No Tide,16,11,5,3.167,2.422
+4,North,HIOC,C. sikamea,No Tide,16,11,6,3.411,3.162
+4,North,HIOC,C. sikamea,No Tide,16,11,7,3.71,3.602
+4,North,HIOC,C. sikamea,No Tide,16,11,8,3.819,3.129
+4,North,HIOC,C. sikamea,No Tide,16,11,9,3.529,2.969
+4,North,HIOC,C. sikamea,No Tide,16,11,10,3.187,2.861
+4,North,HIOC,C. sikamea,No Tide,16,12,1,3.386,2.965
+4,North,HIOC,C. sikamea,No Tide,16,12,2,4.132,3.243
+4,North,HIOC,C. sikamea,No Tide,16,12,3,3.235,2.46
+4,North,HIOC,C. sikamea,No Tide,16,12,4,3.978,2.75
+4,North,HIOC,C. sikamea,No Tide,16,12,5,2.939,2.203
+4,North,HIOC,C. sikamea,No Tide,16,12,6,3.398,3.505
+4,North,HIOC,C. sikamea,No Tide,16,12,7,3.675,2.941
+4,North,HIOC,C. sikamea,No Tide,16,12,8,2.958,1.725
+4,North,HIOC,C. sikamea,No Tide,16,12,9,3.81,2.796
+4,North,HIOC,C. sikamea,No Tide,16,12,10,3.48,3.105
+1,South,TBOC,C. sikamea,Tide,21,25,1,2.879,1.959
+1,South,TBOC,C. sikamea,Tide,21,25,2,2.86,1.869
+1,South,TBOC,C. sikamea,Tide,21,25,3,2.601,1.736
+1,South,TBOC,C. sikamea,Tide,21,25,4,3.196,2.464
+1,South,TBOC,C. sikamea,Tide,21,25,5,2.873,2.36
+1,South,TBOC,C. sikamea,Tide,21,25,6,2.882,2.272
+1,South,TBOC,C. sikamea,Tide,21,25,7,2.795,1.985
+1,South,TBOC,C. sikamea,Tide,21,25,8,2.794,1.91
+1,South,TBOC,C. sikamea,Tide,21,25,9,3.283,1.941
+1,South,TBOC,C. sikamea,Tide,21,25,10,2.329,2.418
+1,South,TBOC,C. sikamea,Tide,21,26,1,3.278,2.09
+1,South,TBOC,C. sikamea,Tide,21,26,2,2.672,2.265
+1,South,TBOC,C. sikamea,Tide,21,26,3,2.925,2.383
+1,South,TBOC,C. sikamea,Tide,21,26,4,2.822,2.344
+1,South,TBOC,C. sikamea,Tide,21,26,5,2.642,1.824
+1,South,TBOC,C. sikamea,Tide,21,26,6,2.955,2.081
+1,South,TBOC,C. sikamea,Tide,21,26,7,2.464,2.076
+1,South,TBOC,C. sikamea,Tide,21,26,8,2.817,2.543
+1,South,TBOC,C. sikamea,Tide,21,26,9,3.06,2.255
+1,South,TBOC,C. sikamea,Tide,16,27,1,3,2.015
+1,South,TBOC,C. sikamea,Tide,16,27,2,3.233,2.212
+1,South,TBOC,C. sikamea,Tide,16,27,3,2.692,2.356
+1,South,TBOC,C. sikamea,Tide,16,27,4,2.842,2.008
+1,South,TBOC,C. sikamea,Tide,16,27,5,2.575,2.045
+1,South,TBOC,C. sikamea,Tide,16,27,6,2.434,2.209
+1,South,TBOC,C. sikamea,Tide,16,27,7,2.827,2.03
+1,South,TBOC,C. sikamea,Tide,16,27,8,2.97,2.238
+1,South,TBOC,C. sikamea,Tide,16,27,9,3.352,2.052
+1,South,TBOC,C. sikamea,Tide,16,27,10,3.01,1.948
+1,South,TBOC,C. sikamea,Tide,16,28,1,3.227,2.103
+1,South,TBOC,C. sikamea,Tide,16,28,2,3.11,2.393
+1,South,TBOC,C. sikamea,Tide,16,28,3,2.811,2.13
+1,South,TBOC,C. sikamea,Tide,16,28,4,3.203,2.48
+1,South,TBOC,C. sikamea,Tide,16,28,5,2.828,2.205
+1,South,TBOC,C. sikamea,Tide,16,28,6,2.662,2.06
+1,South,TBOC,C. sikamea,Tide,16,28,7,2.923,2.017
+1,South,TBOC,C. sikamea,Tide,16,28,8,3.029,2.218
+1,South,TBOC,C. sikamea,Tide,16,28,9,2.225,2.131
+1,South,TBOC,C. sikamea,Tide,16,28,10,2.544,1.942
+1,South,TBOC,C. sikamea,Tide,16,29,1,2.943,2.45
+1,South,TBOC,C. sikamea,Tide,16,29,2,2.238,1.885
+1,South,TBOC,C. sikamea,Tide,16,29,3,2.552,1.87
+1,South,TBOC,C. sikamea,Tide,16,29,4,3.079,2.321
+1,South,TBOC,C. sikamea,Tide,16,29,5,2.396,2.134
+1,South,TBOC,C. sikamea,Tide,16,29,6,2.497,1.764
+1,South,TBOC,C. sikamea,Tide,16,29,7,3.42,2.421
+1,South,TBOC,C. sikamea,Tide,16,29,8,2.899,2.203
+1,South,TBOC,C. sikamea,Tide,16,29,9,2.915,2.464
+1,South,TBOC,C. sikamea,Tide,16,29,10,2.768,2.175
+1,South,TBOC,C. sikamea,No Tide,21,30,1,2.609,2.233
+1,South,TBOC,C. sikamea,No Tide,21,30,2,2.812,2.101
+1,South,TBOC,C. sikamea,No Tide,21,30,3,2.588,1.987
+1,South,TBOC,C. sikamea,No Tide,21,30,4,2.787,2.003
+1,South,TBOC,C. sikamea,No Tide,21,30,5,2.594,1.705
+1,South,TBOC,C. sikamea,No Tide,21,30,6,2.873,1.812
+1,South,TBOC,C. sikamea,No Tide,21,30,7,2.701,2.088
+1,South,TBOC,C. sikamea,No Tide,21,30,8,2.894,1.826
+1,South,TBOC,C. sikamea,No Tide,21,30,9,2.424,1.74
+1,South,TBOC,C. sikamea,No Tide,21,30,10,2.285,2.088
+1,South,TBOC,C. sikamea,No Tide,21,31,1,2.972,2.15
+1,South,TBOC,C. sikamea,No Tide,21,31,2,2.745,2.419
+1,South,TBOC,C. sikamea,No Tide,21,31,3,2.557,2.563
+1,South,TBOC,C. sikamea,No Tide,21,31,4,3.081,2.677
+1,South,TBOC,C. sikamea,No Tide,21,31,5,2.417,1.755
+1,South,TBOC,C. sikamea,No Tide,21,31,6,2.385,1.885
+1,South,TBOC,C. sikamea,No Tide,21,31,7,3.027,2.417
+1,South,TBOC,C. sikamea,No Tide,21,31,8,2.344,1.661
+1,South,TBOC,C. sikamea,No Tide,21,31,9,2.613,2.141
+1,South,TBOC,C. sikamea,No Tide,21,31,10,2.275,2.018
+1,South,TBOC,C. sikamea,No Tide,21,32,1,2.966,2.03
+1,South,TBOC,C. sikamea,No Tide,21,32,2,2.551,2.121
+1,South,TBOC,C. sikamea,No Tide,21,32,3,2.406,1.704
+1,South,TBOC,C. sikamea,No Tide,21,32,4,2.472,2.022
+1,South,TBOC,C. sikamea,No Tide,21,32,5,2.525,2.109
+1,South,TBOC,C. sikamea,No Tide,21,32,6,2.983,1.957
+1,South,TBOC,C. sikamea,No Tide,21,32,7,3.049,2.106
+1,South,TBOC,C. sikamea,No Tide,21,32,8,2.892,2.373
+1,South,TBOC,C. sikamea,No Tide,21,32,9,2.171,1.78
+1,South,TBOC,C. sikamea,No Tide,21,32,10,2.584,2.062
+1,South,TBOC,C. sikamea,No Tide,16,33,1,2.928,2.18
+1,South,TBOC,C. sikamea,No Tide,16,33,2,2.912,1.919
+1,South,TBOC,C. sikamea,No Tide,16,33,3,2.709,2.036
+1,South,TBOC,C. sikamea,No Tide,16,33,4,2.418,1.887
+1,South,TBOC,C. sikamea,No Tide,16,33,5,2.548,2.237
+1,South,TBOC,C. sikamea,No Tide,16,33,6,2.748,2.261
+1,South,TBOC,C. sikamea,No Tide,16,33,7,2.432,2.092
+1,South,TBOC,C. sikamea,No Tide,16,33,8,3.072,2.181
+1,South,TBOC,C. sikamea,No Tide,16,33,9,3.007,2.643
+1,South,TBOC,C. sikamea,No Tide,16,33,10,3.176,2.171
+1,South,TBOC,C. sikamea,No Tide,16,34,1,3.23,2.159
+1,South,TBOC,C. sikamea,No Tide,16,34,2,3.089,2.248
+1,South,TBOC,C. sikamea,No Tide,16,34,3,2.113,1.951
+1,South,TBOC,C. sikamea,No Tide,16,34,4,2.593,2.177
+1,South,TBOC,C. sikamea,No Tide,16,34,5,2.337,2.071
+1,South,TBOC,C. sikamea,No Tide,16,34,6,2.535,2.021
+1,South,TBOC,C. sikamea,No Tide,16,34,7,2.775,1.964
+1,South,TBOC,C. sikamea,No Tide,16,34,8,3.359,2.712
+1,South,TBOC,C. sikamea,No Tide,16,34,9,2.796,2.735
+1,South,TBOC,C. sikamea,No Tide,16,34,10,2.441,1.824
+1,South,TBOC,C. sikamea,No Tide,16,35,1,2.412,1.912
+1,South,TBOC,C. sikamea,No Tide,16,35,2,2.926,2.07
+1,South,TBOC,C. sikamea,No Tide,16,35,3,2.936,2.219
+1,South,TBOC,C. sikamea,No Tide,16,35,4,2.611,2.174
+1,South,TBOC,C. sikamea,No Tide,16,35,5,2.861,2.547
+1,South,TBOC,C. sikamea,No Tide,16,35,6,3.26,2.189
+1,South,TBOC,C. sikamea,No Tide,16,35,7,3.16,1.932
+1,South,TBOC,C. sikamea,No Tide,16,35,8,2.939,2.223
+1,South,TBOC,C. sikamea,No Tide,16,35,9,2.533,2.155
+1,South,TBOC,C. sikamea,No Tide,16,35,10,2.834,2.172
+1,South,TBOC,C. sikamea,No Tide,21,36,1,3.241,2.466
+1,South,TBOC,C. sikamea,No Tide,21,36,2,2.951,2.217
+1,South,TBOC,C. sikamea,No Tide,21,36,3,2.638,2.189
+1,South,TBOC,C. sikamea,No Tide,21,36,4,3.026,2.083
+1,South,TBOC,C. sikamea,No Tide,21,36,5,2.533,1.83
+1,South,TBOC,C. sikamea,No Tide,21,36,6,3.139,1.874
+1,South,TBOC,C. sikamea,No Tide,21,36,7,2.638,1.753
+1,South,TBOC,C. sikamea,No Tide,21,36,8,2.532,1.948
+1,South,TBOC,C. sikamea,No Tide,21,36,9,2.414,1.992
+1,South,TBOC,C. sikamea,No Tide,21,36,10,2.532,1.992
+4,South,TBOC,C. sikamea,Tide,21,25,1,3.189,2.281
+4,South,TBOC,C. sikamea,Tide,21,25,2,3.193,2.327
+4,South,TBOC,C. sikamea,Tide,21,25,3,2.844,2.146
+4,South,TBOC,C. sikamea,Tide,21,25,4,2.466,1.979
+4,South,TBOC,C. sikamea,Tide,21,25,5,3.261,2.817
+4,South,TBOC,C. sikamea,Tide,21,25,6,2.702,2.38
+4,South,TBOC,C. sikamea,Tide,21,25,7,3.791,2.36
+4,South,TBOC,C. sikamea,Tide,21,25,8,3.533,2.492
+4,South,TBOC,C. sikamea,Tide,21,25,9,2.86,1.898
+4,South,TBOC,C. sikamea,Tide,21,25,10,2.446,2.454
+4,South,TBOC,C. sikamea,Tide,21,26,1,2.835,2.262
+4,South,TBOC,C. sikamea,Tide,21,26,2,3.129,2.642
+4,South,TBOC,C. sikamea,Tide,21,26,3,3.401,2.248
+4,South,TBOC,C. sikamea,Tide,21,26,4,3.14,2.148
+4,South,TBOC,C. sikamea,Tide,21,26,5,2.72,2.033
+4,South,TBOC,C. sikamea,Tide,21,26,6,2.91,2.123
+4,South,TBOC,C. sikamea,Tide,21,26,7,2.864,2.054
+4,South,TBOC,C. sikamea,Tide,21,26,8,3.068,2.174
+4,South,TBOC,C. sikamea,Tide,21,26,9,2.766,2.379
+4,South,TBOC,C. sikamea,Tide,16,27,1,3.011,1.928
+4,South,TBOC,C. sikamea,Tide,16,27,2,2.626,1.833
+4,South,TBOC,C. sikamea,Tide,16,27,3,3.387,2.175
+4,South,TBOC,C. sikamea,Tide,16,27,4,2.764,2.248
+4,South,TBOC,C. sikamea,Tide,16,27,5,2.656,2.393
+4,South,TBOC,C. sikamea,Tide,16,27,6,3.269,2.438
+4,South,TBOC,C. sikamea,Tide,16,27,7,2.875,2.061
+4,South,TBOC,C. sikamea,Tide,16,27,8,3.035,2.276
+4,South,TBOC,C. sikamea,Tide,16,27,9,3.312,2.262
+4,South,TBOC,C. sikamea,Tide,16,27,10,2.723,2.134
+4,South,TBOC,C. sikamea,Tide,16,28,1,3.42,2.526
+4,South,TBOC,C. sikamea,Tide,16,28,2,3.318,2.651
+4,South,TBOC,C. sikamea,Tide,16,28,3,3.179,2.279
+4,South,TBOC,C. sikamea,Tide,16,28,4,2.879,2.763
+4,South,TBOC,C. sikamea,Tide,16,28,5,3.814,2.937
+4,South,TBOC,C. sikamea,Tide,16,28,6,3.507,2.672
+4,South,TBOC,C. sikamea,Tide,16,28,7,3.093,1.987
+4,South,TBOC,C. sikamea,Tide,16,28,8,2.597,2.017
+4,South,TBOC,C. sikamea,Tide,16,28,9,2.794,1.971
+4,South,TBOC,C. sikamea,Tide,16,28,10,2.769,2.302
+4,South,TBOC,C. sikamea,Tide,16,29,1,3.181,2.488
+4,South,TBOC,C. sikamea,Tide,16,29,2,3.199,2.088
+4,South,TBOC,C. sikamea,Tide,16,29,3,2.95,2.167
+4,South,TBOC,C. sikamea,Tide,16,29,4,2.668,1.914
+4,South,TBOC,C. sikamea,Tide,16,29,5,3.691,2.847
+4,South,TBOC,C. sikamea,Tide,16,29,6,2.589,2.229
+4,South,TBOC,C. sikamea,Tide,16,29,7,2.58,2.332
+4,South,TBOC,C. sikamea,Tide,16,29,8,2.999,2.407
+4,South,TBOC,C. sikamea,Tide,16,29,9,2.891,2.201
+4,South,TBOC,C. sikamea,Tide,16,29,10,3.189,2.257
+4,South,TBOC,C. sikamea,No Tide,21,30,1,2.503,2.074
+4,South,TBOC,C. sikamea,No Tide,21,30,2,3.139,1.814
+4,South,TBOC,C. sikamea,No Tide,21,30,3,2.678,2.059
+4,South,TBOC,C. sikamea,No Tide,21,30,4,2.747,1.665
+4,South,TBOC,C. sikamea,No Tide,21,30,5,3.083,2.339
+4,South,TBOC,C. sikamea,No Tide,21,30,6,2.651,2.108
+4,South,TBOC,C. sikamea,No Tide,21,30,7,2.978,2.216
+4,South,TBOC,C. sikamea,No Tide,21,30,8,2.618,2.072
+4,South,TBOC,C. sikamea,No Tide,21,30,9,2.592,1.598
+4,South,TBOC,C. sikamea,No Tide,21,30,10,2.55,2.115
+4,South,TBOC,C. sikamea,No Tide,21,31,1,3.098,2.127
+4,South,TBOC,C. sikamea,No Tide,21,31,2,2.895,2.135
+4,South,TBOC,C. sikamea,No Tide,21,31,3,2.395,2.001
+4,South,TBOC,C. sikamea,No Tide,21,31,4,2.599,2.2
+4,South,TBOC,C. sikamea,No Tide,21,31,5,2.828,1.9
+4,South,TBOC,C. sikamea,No Tide,21,31,6,3.453,2.633
+4,South,TBOC,C. sikamea,No Tide,21,31,7,3.295,2.258
+4,South,TBOC,C. sikamea,No Tide,21,31,8,2.731,1.849
+4,South,TBOC,C. sikamea,No Tide,21,31,9,2.62,2.091
+4,South,TBOC,C. sikamea,No Tide,21,31,10,2.35,1.808
+4,South,TBOC,C. sikamea,No Tide,21,32,1,2.679,2.063
+4,South,TBOC,C. sikamea,No Tide,21,32,2,2.854,2.476
+4,South,TBOC,C. sikamea,No Tide,21,32,3,2.872,2.76
+4,South,TBOC,C. sikamea,No Tide,21,32,4,3.074,2.397
+4,South,TBOC,C. sikamea,No Tide,21,32,5,2.749,1.94
+4,South,TBOC,C. sikamea,No Tide,21,32,6,3.001,1.91
+4,South,TBOC,C. sikamea,No Tide,21,32,7,3.08,2.026
+4,South,TBOC,C. sikamea,No Tide,21,32,8,2.669,1.809
+4,South,TBOC,C. sikamea,No Tide,21,32,9,2.243,2.472
+4,South,TBOC,C. sikamea,No Tide,21,32,10,3.019,2.199
+4,South,TBOC,C. sikamea,No Tide,16,33,1,2.908,2.591
+4,South,TBOC,C. sikamea,No Tide,16,33,2,2.681,1.926
+4,South,TBOC,C. sikamea,No Tide,16,33,3,3.101,1.999
+4,South,TBOC,C. sikamea,No Tide,16,33,4,2.562,1.737
+4,South,TBOC,C. sikamea,No Tide,16,33,5,3.169,2.449
+4,South,TBOC,C. sikamea,No Tide,16,33,6,3.123,2.711
+4,South,TBOC,C. sikamea,No Tide,16,33,7,3.183,2.191
+4,South,TBOC,C. sikamea,No Tide,16,33,8,3.681,2.705
+4,South,TBOC,C. sikamea,No Tide,16,33,9,3.389,2.706
+4,South,TBOC,C. sikamea,No Tide,16,33,10,2.672,2.611
+4,South,TBOC,C. sikamea,No Tide,16,34,1,3.427,2.382
+4,South,TBOC,C. sikamea,No Tide,16,34,2,4.157,3.028
+4,South,TBOC,C. sikamea,No Tide,16,34,3,3.045,2.681
+4,South,TBOC,C. sikamea,No Tide,16,34,4,2.654,2.322
+4,South,TBOC,C. sikamea,No Tide,16,34,5,3.416,3.016
+4,South,TBOC,C. sikamea,No Tide,16,34,6,3.163,1.964
+4,South,TBOC,C. sikamea,No Tide,16,34,7,2.907,2.304
+4,South,TBOC,C. sikamea,No Tide,16,34,8,2.74,2.452
+4,South,TBOC,C. sikamea,No Tide,16,34,9,3.714,2.665
+4,South,TBOC,C. sikamea,No Tide,16,34,10,2.622,1.816
+4,South,TBOC,C. sikamea,No Tide,16,35,1,3.209,2.37
+4,South,TBOC,C. sikamea,No Tide,16,35,2,2.466,2.179
+4,South,TBOC,C. sikamea,No Tide,16,35,3,3.13,2.193
+4,South,TBOC,C. sikamea,No Tide,16,35,4,3.216,2.203
+4,South,TBOC,C. sikamea,No Tide,16,35,5,3.137,2.042
+4,South,TBOC,C. sikamea,No Tide,16,35,6,3.277,2.394
+4,South,TBOC,C. sikamea,No Tide,16,35,7,2.717,2.49
+4,South,TBOC,C. sikamea,No Tide,16,35,8,2.634,1.973
+4,South,TBOC,C. sikamea,No Tide,16,35,9,2.874,1.761
+4,South,TBOC,C. sikamea,No Tide,16,35,10,2.845,2.24
+4,South,TBOC,C. sikamea,No Tide,21,36,1,2.792,2.13
+4,South,TBOC,C. sikamea,No Tide,21,36,2,2.936,2.032
+4,South,TBOC,C. sikamea,No Tide,21,36,3,2.455,1.807
+4,South,TBOC,C. sikamea,No Tide,21,36,4,2.902,2.023
+4,South,TBOC,C. sikamea,No Tide,21,36,5,3.071,1.878
+4,South,TBOC,C. sikamea,No Tide,21,36,6,2.637,2.022
+4,South,TBOC,C. sikamea,No Tide,21,36,7,3.858,2.497
+4,South,TBOC,C. sikamea,No Tide,21,36,8,3.875,2.742
+4,South,TBOC,C. sikamea,No Tide,21,36,9,3.62,2.739
+4,South,TBOC,C. sikamea,No Tide,21,36,10,2.376,1.708

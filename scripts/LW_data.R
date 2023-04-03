@@ -26,6 +26,8 @@ LW2020$Sampling_Time <- as.character(LW2020$Sampling_Time)
 
 is.character(LW2020$Sampling_Time)
 
+write_csv(LW2020, file = "data/Growth/2020/LW2020.csv")
+
 #### Figures, Mean, SD, SE =====
 
 #### No Grouping ====
@@ -126,6 +128,8 @@ LW2021.gigas.na <- LW2021.gigas %>%
   filter(!is.na(L)) # omit all NAs
 
 colSums(is.na(LW2021.gigas.na)) 
+
+write_csv(LW2021.gigas.na, file = "data/Growth/2021/LW2021_gigas.csv")
 
 #### Figures, Mean, SD, SE =====
 
@@ -245,6 +249,8 @@ LW2021.sikamea.na <- LW2021.sikamea %>%
          !is.na(W)) # omit all NAs
 
 colSums(is.na(LW2021.sikamea.na))
+
+write_csv(LW2021.sikamea.na, file = "data/Growth/2021/LW2021_sikamea.csv")
 
 #### Figures, Mean, SD, SE =====
 
@@ -396,6 +402,10 @@ LW2022 <- LW2022.col%>%
          !is.na(W)) # omit all NAs
 
 colSums(is.na(LW2022))
+
+write_csv(LW2022, file = "data/Growth/2022/LW2022.csv")
+
+
 
 #### Figures, Mean, SD, SE =====
 
