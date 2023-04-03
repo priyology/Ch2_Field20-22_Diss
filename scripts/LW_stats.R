@@ -750,7 +750,7 @@ plot(m16.plot) +
   #scale_color_brewer(palette = "Paired", direction = -1)  +
   labs(title = expression(paste(italic("M. gigas"), ": glm(Length ~ Sampling_Time")), 
        #subtitle = "Gamma distribution: link = 'identity'",
-       x = "SH_Temp", 
+       x = "Site", 
        y = "Shell Length (cm)")
 
 ggsave(filename = "fig_output/model_Mgigas_20-21.png", width = 5.10, height = 5.77, dpi = 300)
@@ -765,7 +765,7 @@ plot(m8.DARKplot) +
   #scale_color_brewer(palette = "RdYlBu", direction = -1)  +
   labs(title = expression(paste(italic("M. gigas"), ": glm(Length ~ Sampling_Time")), 
        #subtitle = "Gamma distribution: link = 'identity'",
-       x = "SH_Temp", 
+       x = "Site", 
        y = "Shell Length (cm)")
 
 ggsave(filename = "fig_output/DARKmodel_Mgigas_20-21.png", width = 5.10, height = 5.77, dpi = 300)
