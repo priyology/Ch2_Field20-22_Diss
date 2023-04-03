@@ -158,17 +158,6 @@ Plot.B2022SamplingStats <- ggplot(BChl2022, aes(x = Sampling_Period, y = Chl_a))
 
 Plot.B2022SamplingStats 
 
-#### No Grouping ====
-
-AllStats.B2022 <- BChl2022 %>%
-  summarize(
-    MeanChla = mean(Chl_a),
-    SD_Chla = sd(Chl_a),
-    SE_Chla = SD_Chla/sqrt(n()))
-
-AllStats.B2022
-
-
 #### By Site ====
 
 SiteB2022.Stats <- BChl2022 %>%
@@ -240,90 +229,80 @@ is.character(WChl2022_2$Sampling_Period)
 
 #### No Grouping ====
 
-AllStats.B2022 <- BChl2022 %>%
+AllStats.W2022 <- WChl2022_2 %>%
   summarize(
     MeanChla = mean(Chl_a),
     SD_Chla = sd(Chl_a),
     SE_Chla = SD_Chla/sqrt(n()))
 
-AllStats.B2022
+AllStats.W2022
 
 
 #### By Sampling ====
 
-SamplingB2022.Stats <- BChl2022 %>%
+SamplingW2022.Stats <- WChl2022_2 %>%
   group_by(Sampling_Period) %>% 
   summarize(
     Mean_Chla = mean(Chl_a),
     SD_Chla = sd(Chl_a),
     SE_Chla = SD_Chla/sqrt(n()))
 
-SamplingB2022.Stats
+SamplingW2022.Stats
 
 ## plot
-Plot.B2022SamplingStats <- ggplot(BChl2022, aes(x = Sampling_Period, y = Chl_a)) +
+Plot.W2022SamplingStats <- ggplot(WChl2022_2, aes(x = Sampling_Period, y = Chl_a)) +
   geom_boxplot() +
   theme_classic() +
   #scale_fill_manual(values=c("#4575B4", "#FDAE61")) +
-  labs(title=expression(paste("Benthic Chl ", italic("a"), " in Tomales Bay (2022)")), 
+  labs(title=expression(paste("Seawater Chl ", italic("a"), " in Tomales Bay (2022)")), 
        x = "Sampling_Period", 
        y = expression(paste("Chlorophyll ", italic("a"), " (mg/m"^3,")")))
 
-Plot.B2022SamplingStats 
-
-#### No Grouping ====
-
-AllStats.B2022 <- BChl2022 %>%
-  summarize(
-    MeanChla = mean(Chl_a),
-    SD_Chla = sd(Chl_a),
-    SE_Chla = SD_Chla/sqrt(n()))
-
-AllStats.B2022
+Plot.W2022SamplingStats 
 
 
 #### By Site ====
 
-SiteB2022.Stats <- BChl2022 %>%
+SiteW2022.Stats <- WChl2022_2 %>%
   group_by(Lease) %>% 
   summarize(
     Mean_Chla = mean(Chl_a),
     SD_Chla = sd(Chl_a),
     SE_Chla = SD_Chla/sqrt(n()))
 
-SiteB2022.Stats
+SiteW2022.Stats
 
 ## plot
-Plot.B2022SiteStats <- ggplot(BChl2022, aes(x = factor(Lease, c("HIOC", "BBOC", "TBOC")), y = Chl_a)) +
+Plot.W2022SiteStats <- ggplot(WChl2022_2, aes(x = factor(Lease, c("HIOC", "BBOC", "TBOC")), y = Chl_a)) +
   geom_boxplot() +
   theme_classic() +
   #scale_fill_manual(values=c("#4575B4", "#FDAE61")) +
-  labs(title=expression(paste("Benthic Chl ", italic("a"), " in Tomales Bay (2022)")), 
+  labs(title=expression(paste("Seawater Chl ", italic("a"), " in Tomales Bay (2022)")), 
        x = "Sampling_Period", 
        y = expression(paste("Chlorophyll ", italic("a"), " (mg/m"^3,")")))
 
-Plot.B2022SiteStats 
+Plot.W2022SiteStats 
 
 #### By Sampling Period & Site ====
 
-B2022SamplingSite.Stats <- BChl2022 %>%
+W2022SamplingSite.Stats <- WChl2022_2 %>%
   group_by(Lease, Sampling_Period) %>% 
   summarize(
     Mean_Chla = mean(Chl_a),
     SD_Chla = sd(Chl_a),
     SE_Chla = SD_Chla/sqrt(n()))
 
-B2022SamplingSite.Stats
+W2022SamplingSite.Stats
 
 ## plot
 
-Plot.B2022SiteStats <- ggplot(BChl2022, aes(x = Sampling_Period, y = Chl_a)) +
+Plot.W2022SiteStats <- ggplot(WChl2022_2, aes(x = Sampling_Period, y = Chl_a)) +
   geom_boxplot() +
   facet_wrap(~factor(Lease, c("HIOC", "BBOC", "TBOC"))) +
   theme_classic() +
   #scale_fill_manual(values=c("#4575B4", "#FDAE61")) +
-  labs(title=expression(paste("Benthic Chl ", italic("a"), " in Tomales Bay (2022)")), 
+  labs(title=expression(paste("Seawater Chl ", italic("a"), " in Tomales Bay (2022)")), 
        x = "Lease", 
        y = expression(paste("Chlorophyll ", italic("a"), " (mg/m"^3,")")))
 
-Plot.B2022SiteStats 
+Plot.W2022SiteStats 
