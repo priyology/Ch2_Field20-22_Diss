@@ -38,11 +38,10 @@ tail(Morts2021)
 View(Morts2021)
 
 TotalMort2021_perBag <- Morts2021 %>% 
-  group_by(Site, Species, Bag_Numb, Temp_Hardening, Tide_Hardening) %>% 
+  group_by(Site, Species, Temp_Hardening, Tide_Hardening, Bag_Numb) %>% 
   summarize(TotalMort = sum(Mortality_Total))
 
-TotalMort2021_perBag
-
+print(TotalMort2021_perBag, n = 54)
 
 TotalMort2021_perSite <- Morts2021 %>% 
   group_by(Site, Species, Temp_Hardening, Tide_Hardening) %>% 
@@ -99,7 +98,7 @@ TotalMort2022_perBag <- Morts2021 %>%
   group_by(Site, Bag_Numb, Temp_Hardening, Tide_Hardening) %>% 
   summarize(TotalMort = sum(Mortality_Total))
 
-TotalMort2022_perBag
+print(TotalMort2022_perBag, n = 54)
 
 TotalMort2022_perSite <- Morts2022 %>% 
   group_by(Site, Species, Temp_Hardening, Tide_Hardening) %>% 
