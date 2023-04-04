@@ -1,0 +1,46 @@
+#### ~ M. GIGAS 2020 qPCR DATA ~ =====
+
+## load libraries
+library(tidyverse)
+library(scales)
+install.packages("scales") # to access break formatting functions
+
+########## 2020 Cohort OsHV-1 Data ==============
+OsHV1 <- read_csv("data/qPCR/qPCR_runs.csv")
+glimpse(OsHV1)
+summary(OsHV1)
+tail(OsHV1)
+View(OsHV1)
+
+#### now remove NAs from data sheet
+colSums(is.na(OsHV1))
+
+### Year_Sampled as character
+OsHV1$Year_Sampled <- as.character(OsHV1$Year_Sampled)
+is.character(OsHV1$Year_Sampled)
+
+### Cohort as character
+OsHV1$Cohort <- as.character(OsHV1$Cohort)
+is.character(OsHV1$Cohort)
+
+#### 2020 Cohort Stats by Year ===== 
+OsHV1 %>%
+  filter(Cohort == "2020") %>% 
+  group_by(Year_Sampled, Site) %>%
+  summarize(Mean_Copies = mean(log_transform),
+            SD_Copies = sd(log_transform),
+            SE_Copies = SD_Copies/sqrt(n()))
+
+ggplot(OsHV1, aes(x = Site, y = log_transform, color = Year_Sampled)) +
+  geom_point() +
+  scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x),
+                labels = trans_format("log10", math_format(10^.x))) +
+  theme_classic()
+  
+
+#### 2020 Cohort Stats by Year ===== 
+OsHV1 %>%
+  group_by(Year_Sampled, Site) %>% 
+  summarize(Mean_Copies = mean(log_transform),
+            SD_Copies = sd(log_transform),
+            SE_Copies = SD_Copies/sqrt(n()))
