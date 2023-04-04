@@ -32,8 +32,9 @@ OsHV1 %>%
 
 OsHV1 %>%
 filter(Cohort == "2020" ) %>% 
-ggplot(aes(x = Site, y = log_transform, color = Year_Sampled)) +
-  geom_point() +
+ggplot(aes(x = Site, y = log_transform, color = Site)) +
+  geom_jitter(size = 5, alpha = 0.5) +
+  facet_wrap(~Year_Sampled) +
   scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x),
                 labels = trans_format("log10", math_format(10^.x))) +
   theme_classic()
@@ -42,8 +43,15 @@ ggplot(aes(x = Site, y = log_transform, color = Year_Sampled)) +
 #### 2020 v 2022 Cohort Stats by Year =====
 OsHV1 %>%
   filter(Sample_Date == "27-Aug-22") %>% 
+  group_by(Cohort) %>%
+  summarize(Mean_Copies = mean(log_transform),
+            SD_Copies = sd(log_transform),
+            SE_Copies = SD_Copies/sqrt(n()))
+
+OsHV1 %>%
+  filter(Sample_Date == "27-Aug-22") %>% 
   ggplot(aes(x = Bag, y = log_transform, color = Bag)) +
-  geom_point() +
+  geom_jitter(size = 5, alpha = 0.5) +
   scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x),
                 labels = trans_format("log10", math_format(10^.x))) +
   theme_classic()
