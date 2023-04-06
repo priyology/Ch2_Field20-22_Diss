@@ -22,11 +22,17 @@ sites.df <- data.frame(
   lat = c(38.218050, 38.205616, 38.120200))
 glimpse(sites.df)
 
-sites.labels <- data.frame(
+sites.labelsA <- data.frame(
   lon = c(-122.947833, -122.927504, -122.865700),
   lat = c(38.218050, 38.205616, 38.120200),
-  site.name = c("HI", "BB", "TB"))
-glimpse(sites.labels)
+  site.name = c("Hog Island Oyster Co.", "Bodega Bay Oyster Co.", "Tomales Bay Oyster Co."))
+glimpse(sites.labelsA)
+
+sites.labelsB <- data.frame(
+  lon = c(-122.947833, -122.927504, -122.865700),
+  lat = c(38.218050, 38.205616, 38.120200),
+  site.name = c("North", "Middle", "South"))
+glimpse(sites.labelsB)
 
 landmarks.df <- data.frame(
   lon = c(-121.761846, -123.071649, -122.894181, -122.267464),
@@ -39,6 +45,11 @@ landmarks.labels <- data.frame(
   site.name = c("UCD", "BML", "HIOC", "Home"))
 glimpse(landmarks.labels)
 
+BML_TB.labels <- data.frame(
+  lon = c(-123.071649, -122.894181),
+  lat = c(38.317992, 38.161813),
+  site.name = c("Bodega Marine Lab", "Hog Island Oyster Co."))
+glimpse(BML_TB.labels)
 
 #load a googlemap 
 get_googlemap(center = "Tomales Bay", zoom = 12, markers = sites.df, scale = 2,  maptype = "hybrid") %>% ggmap()
@@ -58,11 +69,39 @@ qmap("Tomales Bay", zoom = 12, scale = 2, source = "stamen", maptype = "toner-li
   geom_text(data = sites.labels, aes(x = lon, y = lat, label = site.name), nudge_x = 0.012, nudge_y = 0.005, hjust = 1, size = 5, fontface = "bold", color = "purple")
   
 # Watercolor Map
-TB_watercolor <- qmap("Tomales Bay", zoom = 12, scale = 2, source = "stamen", maptype = "watercolor") + ## Tomales Bay - Artistic
-  geom_point(data = sites.df, aes(x = lon, y = lat), color = 'black', alpha = 0.5,  size = 4) +
-  geom_text(data = sites.labels, aes(x = lon, y = lat, label = site.name), nudge_x = 0.015, nudge_y = 0.006, hjust = 1, size = 5, fontface = "bold")
+World_watercolor <- qmap("Atlantic Ocean", zoom = 1, scale = 2, source = "stamen", maptype = "watercolor") ## World - Artistic
+
+World_watercolor
+
+TB_watercolor <- qmap("Tomales Bay", zoom = 12, scale = 2, source = "stamen", maptype = "watercolor") ## Tomales Bay - Artistic
 
 TB_watercolor
+
+
+TB_watercolorA <- qmap("Tomales Bay", zoom = 12, scale = 2, source = "stamen", maptype = "watercolor") + ## Tomales Bay - Artistic
+  geom_point(data = sites.df, aes(x = lon, y = lat), color = 'black', alpha = 0.5,  size = 4) +
+  geom_text(data = sites.labelsA, aes(x = lon, y = lat, label = site.name), nudge_x = -0.004, nudge_y = 0.001, hjust = 1, size = 3, fontface = "bold")
+
+TB_watercolorA
+
+ggsave("fig_output/WatercolorMap_OysterCoNames.png", dpi = 320, bg='transparent') 
+
+TB_watercolorB <- qmap("Tomales Bay", zoom = 11, scale = 2, source = "stamen", maptype = "watercolor") + ## Tomales Bay - Artistic
+  geom_point(data = BML_TB.labels, aes(x = lon, y = lat), color = 'black', alpha = 0.5,  size = 5) +
+  geom_text(data = BML_TB.labels, aes(x = lon, y = lat, label = site.name), nudge_x = 0.150, nudge_y = -0.015, hjust = 1, size = 4, fontface = "bold")
+
+TB_watercolorB
+
+ggsave("fig_output/WatercolorMap_TB_BML.png", dpi = 320, bg='transparent')
+
+TB_watercolorC <- qmap("Tomales Bay", zoom = 12, scale = 2, source = "stamen", maptype = "watercolor") + ## Tomales Bay - Artistic
+  geom_point(data = sites.df, aes(x = lon, y = lat), color = 'black', alpha = 0.5,  size = 4) +
+  geom_text(data = sites.labelsB, aes(x = lon, y = lat, label = site.name), nudge_x = 0.035, nudge_y = 0.001, hjust = 1, size = 5, fontface = "bold")
+
+TB_watercolorC
+
+ggsave("fig_output/WatercolorMap_N_M_S.png", dpi = 320, bg='transparent') 
+
 
 SFBay_watercolor <- qmap("San Pablo Bay", zoom = 8, scale = 2, source = "stamen", maptype = "watercolor") + ## Tomales Bay - Artistic
   geom_point(data = landmarks.df, aes(x = lon, y = lat), color = 'black', alpha = 0.5, size = 4) +
@@ -131,15 +170,21 @@ ggsave("fig_output/PointBlue_map.png", dpi = 320, bg='transparent')
 
 ##### For SFSU Talk ============
 
-EOS.labels <- data.frame(
-  lon = c(-121.761846, -123.071649, -122.893559, -122.446565),
-  lat = c(38.538226, 38.317992, 38.161959, 37.889047),
-  site.name = c("UCD", "BML", "HIOC", "EOS"))
+HIOC.label <- data.frame(
+  lon = c(-122.893559),
+  lat = c( 38.161959),
+  site.name = c("HIOC"))
+glimpse(HIOC.label)
+
+Base.labels <- data.frame(
+  lon = c(-121.761846, -123.071649, -122.446565),
+  lat = c(38.538226, 38.317992, 37.889047),
+  site.name = c("UCD", "BML", "EOS"))
 glimpse(EOS.labels)
 
 EOS_watercolor <- qmap("San Pablo Bay", zoom = 9, scale = 2, source = "stamen", maptype = "watercolor") + ## Tomales Bay - Artistic
-  geom_point(data = EOS.labels, aes(x = lon, y = lat), color = 'black', alpha = 0.5, size = 4) +
-  geom_text(data = EOS.labels, aes(x = lon, y = lat, label = site.name), nudge_x = -0.040, nudge_y = -0.035, hjust = 1, size = 3.5)
+  geom_point(data = Base.labels, aes(x = lon, y = lat), color = 'black', alpha = 0.5, size = 4) +
+  geom_text(data = Base.labels, aes(x = lon, y = lat, label = site.name), nudge_x = -0.040, nudge_y = -0.035, hjust = 1, size = 4)
 
 EOS_watercolor
 
