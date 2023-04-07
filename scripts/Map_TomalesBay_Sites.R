@@ -51,6 +51,12 @@ BML_TB.labels <- data.frame(
   site.name = c("Bodega Marine Lab", "Hog Island Oyster Co."))
 glimpse(BML_TB.labels)
 
+SacLanding_TB.labels <- data.frame(
+  lon = c(-123.071649, -122.905595),
+  lat = c(38.317992, 38.149892),
+  site.name = c("Bodega Marine Lab","Sacramento Landing"))
+glimpse(SacLanding_TB.labels)
+
 #load a googlemap 
 get_googlemap(center = "Tomales Bay", zoom = 12, markers = sites.df, scale = 2,  maptype = "hybrid") %>% ggmap()
 
@@ -77,6 +83,20 @@ TB_watercolor <- qmap("Tomales Bay", zoom = 12, scale = 2, source = "stamen", ma
 
 TB_watercolor
 
+TB_SacLanding <- qmap("Tomales Bay", zoom = 11, scale = 2, source = "stamen", maptype = "watercolor") + ## Tomales Bay - Artistic
+  geom_point(data = SacLanding_TB.labels, aes(x = lon, y = lat), color = 'black', alpha = 0.5,  size = 5) +
+  geom_text(data = SacLanding_TB.labels, aes(x = lon, y = lat, label = site.name), nudge_x = 0.160, nudge_y = 0.005, hjust = 1, size = 4, fontface = "bold")
+
+TB_SacLanding
+
+ggsave("fig_output/WatercolorMap_SacLanding.png", dpi = 320, bg='transparent') 
+
+
+TB_watercolorA <- qmap("Tomales Bay", zoom = 12, scale = 2, source = "stamen", maptype = "watercolor") + ## Tomales Bay - Artistic
+  geom_point(data = sites.df, aes(x = lon, y = lat), color = 'black', alpha = 0.5,  size = 4) +
+  geom_text(data = sites.labelsA, aes(x = lon, y = lat, label = site.name), nudge_x = -0.004, nudge_y = 0.001, hjust = 1, size = 3, fontface = "bold")
+
+TB_watercolor
 
 TB_watercolorA <- qmap("Tomales Bay", zoom = 12, scale = 2, source = "stamen", maptype = "watercolor") + ## Tomales Bay - Artistic
   geom_point(data = sites.df, aes(x = lon, y = lat), color = 'black', alpha = 0.5,  size = 4) +
