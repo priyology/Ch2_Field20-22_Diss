@@ -25,7 +25,7 @@ TotalMort2020_perSite <- Morts2020 %>%
 TotalMort2020_perSite
 
 #Plot.TotalMort2020_perSite <- 
-ggplot(data = Morts2020, aes(x = mort_numb, y = site, fill = site)) +
+TotalMort2020_perSite <-  ggplot(data = Morts2020, aes(x = mort_numb, y = site, fill = site)) +
   geom_bar(stat="identity") +
   dark_theme_classic()
 
@@ -49,6 +49,13 @@ TotalMort2021_perSite <- Morts2021 %>%
 
 TotalMort2021_perSite
 
+TotalMort2021_JustSite <- Morts2021 %>% 
+  group_by(Species, Site) %>% 
+  summarize(TotalMort = sum(Mortality_Total))
+
+TotalMort2021_JustSite
+
+
 TotalMort2021_perSpecies <- Morts2021 %>% 
   group_by(Species, Temp_Hardening, Tide_Hardening) %>% 
   summarize(TotalMort = sum(Mortality_Total))
@@ -68,6 +75,19 @@ TotalMort2021_perSHtide <- Morts2021 %>%
 TotalMort2021_perSHtide
 
 ## Plot
+
+SiteMorts2021.sik <- Morts2021 %>% 
+  filter(Species == "C_sikamea") %>% 
+  ggplot(aes(x = factor(Site, c("South", "Middle", "North")), y = Mortality_Total, fill = Site)) +
+  #facet_grid(Tide_Hardening ~ Temp_Hardening) +
+  geom_bar(stat="identity", position=position_dodge()) +
+  scale_fill_manual(values=c("#FDAE61", "#ABD9E9", "#D53E4F"),
+                    guide = "none") +
+  coord_flip() +
+  dark_theme_classic()
+
+SiteMorts2021.sik
+
 Morts2021 %>% 
   filter(Species == "C_sikamea") %>% 
   ggplot(aes(x = factor(Site, c("North", "Middle", "South")), y = Mortality_Total, fill = Site)) +
@@ -82,6 +102,62 @@ Morts2021 %>%
   geom_bar(stat="identity", position=position_dodge()) +
   dark_theme_classic()
 
+SiteMorts2021.gigas <- Morts2021 %>% 
+  filter(Species == "C_gigas") %>% 
+  ggplot(aes(x = factor(Site, c("South", "Middle", "North")), y = Mortality_Total, fill = Site)) +
+  #facet_grid(Tide_Hardening ~ Temp_Hardening) +
+  geom_bar(stat="identity", position=position_dodge()) +
+  scale_fill_manual(values=c("#FDAE61", "#ABD9E9", "#D53E4F"),
+                    guide = "none") +
+  coord_flip() +
+  dark_theme_classic()
+
+SiteMorts2021.gigas
+
+SiteMorts2021 <- Morts2021 %>% 
+  group_by(Site, Species) %>%
+  summarize(TotalMorts2021 = sum(Mortality_Total)) %>% 
+  ggplot(aes(x = factor(Site, c("South", "Middle", "North")), y = TotalMorts2021, fill = Site, group = factor(Species, c("C_gigas", "C_sikamea")))) +
+  #facet_grid(Species~.) +
+  geom_bar(stat="identity", position=position_dodge()) +
+  scale_fill_manual(values=c("#FDAE61", "#ABD9E9", "#D53E4F"),
+                    guide = "none") +
+  coord_flip() +
+  dark_theme_classic()
+
+SiteMorts2021
+
+#### ** PPT: Site Morts 2021 ==============
+
+#### officeR directly exports the plot to your desired file into a powerpoint slide-shaped image ===== 
+library(officer)
+## initialize R object representing .pptx file. 
+SiteMorts2021plot_fig <- read_pptx()
+SiteMorts2021plot_fig <- add_slide(SiteMorts2021plot_fig , layout = "Title and Content", master = "Office Theme")
+SiteMorts2021plot_fig <-  ph_with(x = SiteMorts2021plot_fig, value = SiteMorts2021, location = ph_location_fullsize() )
+SiteMorts2021plot_fig  <- ph_with(x = SiteMorts2021plot_fig, "Plot", location = ph_location_type(type = "title") )
+print(SiteMorts2021plot_fig, target = "presentations/plot.pptx")
+
+#### R2PPT / RDCOMClient =====
+
+#install.packages("devtools", dependencies = TRUE)
+
+library(RDCOMClient)
+library(R2PPT)
+
+## Step 1: Save as a temporary file
+TEMP_FILE <- paste(tempfile(), ".wmf", sep="")
+ggsave(TEMP_FILE, plot = SiteMorts2021) # Saving the plot to the temporary file
+
+
+## Step 2: Open a blank PPT slide
+mkppt <- PPT.Init (method = "RDCOMClient")
+mkppt <- PPT.AddBlankSlide(mkppt)
+
+## Step 3: Export graph to PPT slide
+mkppt <- PPT.AddGraphicstoSlide(mkppt, file = TEMP_FILE)
+
+unlink(TEMP_FILE)
 
 ########## 2022 Mortality ==============
 
@@ -105,6 +181,13 @@ TotalMort2022_perSite <- Morts2022 %>%
   summarize(TotalMort = sum(Mortality_Total))
 
 TotalMort2022_perSite
+
+TotalMort2022_JustSite <- Morts2022 %>% 
+  group_by(Species, Site) %>% 
+  summarize(TotalMort = sum(Mortality_Total))
+
+TotalMort2022_JustSite
+
 
 TotalMort2022_perSHtemp <- Morts2022 %>% 
   group_by(Species, Temp_Hardening) %>% 
@@ -131,10 +214,139 @@ Morts2022 %>%
   dark_theme_classic()
 
 
-########## Cumulative Mortality ==============
+########## Cumulative Mortality: Site ==============
+SiteMorts20_22 <- read_csv("data/Mortality/Cumulative/Mort_Site_Mgigas_Csikamea.csv")
+glimpse(SiteMorts20_22)
+SiteMorts20_22
 
-Morts2022 <- read_csv("data/Mortality/2022/Mortality2022.csv")
-glimpse(Morts2022)
-summary(Morts2022)
-tail(Morts2022)
-View(Morts2022)
+SiteMorts20_22.plot <- SiteMorts20_22 %>% 
+  filter(Species == "M. gigas") %>% 
+  ggplot(aes(x = factor(Site, c("South", "Middle", "North")), y = TotalMort, fill = Site, group = factor(Year, c("2022", "2021", "2020")))) +
+  #facet_grid(Species~.) +
+  geom_bar(stat="identity", position=position_dodge()) +
+  scale_fill_manual(values=c("#FDAE61", "#ABD9E9", "#D53E4F"),
+                    guide = "none") +
+  coord_flip() +
+  dark_theme_classic()
+
+SiteMorts20_22.plot
+
+
+#### ** PPT: Prop Morts 2021 ==============
+
+#### officeR directly exports the plot to your desired file into a powerpoint slide-shaped image ===== 
+library(officer)
+## initialize R object representing .pptx file. 
+SiteMorts20_22.plot_fig <- read_pptx()
+SiteMorts20_22.plot_fig <- add_slide(SiteMorts20_22.plot_fig , layout = "Title and Content", master = "Office Theme")
+SiteMorts20_22.plot_fig <-  ph_with(x = SiteMorts20_22.plot_fig, value = SiteMorts20_22.plot, location = ph_location_fullsize() )
+SiteMorts20_22.plot_fig  <- ph_with(x = SiteMorts20_22.plot_fig, "Plot", location = ph_location_type(type = "title") )
+print(SiteMorts20_22.plot_fig, target = "presentations/plot.pptx")
+
+#### R2PPT / RDCOMClient =====
+
+#install.packages("devtools", dependencies = TRUE)
+
+library(RDCOMClient)
+library(R2PPT)
+
+## Step 1: Save as a temporary file
+TEMP_FILE <- paste(tempfile(), ".wmf", sep="")
+ggsave(TEMP_FILE, plot = SiteMorts20_22.plot) # Saving the plot to the temporary file
+
+
+## Step 2: Open a blank PPT slide
+mkppt <- PPT.Init (method = "RDCOMClient")
+mkppt <- PPT.AddBlankSlide(mkppt)
+
+## Step 3: Export graph to PPT slide
+mkppt <- PPT.AddGraphicstoSlide(mkppt, file = TEMP_FILE)
+
+unlink(TEMP_FILE)
+
+
+########## Cumulative Mortality: Stress Hardening ==============
+SHMorts21_22 <- read_csv("data/Mortality/Cumulative/SH_21-22_Morts.csv")
+glimpse(SHMorts21_22)
+SHMorts21_22
+
+SHMorts21_22_sik <- SHMorts21_22 %>% 
+  filter(Species == "C. sikamea") %>% 
+  group_by(SH_TempQ, SH_Tide) %>% 
+  summarize(SHmorts = sum(TotalMorts))
+
+SHMorts21_22_sik 
+
+SHMorts21_22_sik.plot <- ggplot(SHMorts21_22_sik, aes(x = SH_TempQ, y = SHmorts, fill = SH_Tide, group = SH_Tide)) +
+  geom_bar(stat="identity", position=position_dodge()) +
+  scale_color_manual(values=c("#ABD9E9", "#D53E4F"),
+                    guide = "none") +
+  coord_flip() +
+  dark_theme_classic()
+  
+SHMorts21_22_sik.plot
+
+
+
+
+SHMorts21_22_gigas <- SHMorts21_22 %>% 
+  filter(Species == "M. gigas",
+         Site == c("North", "Middle")) %>% 
+  group_by(Site,SH_Temp, SH_Tide) %>% 
+  summarize(SHmorts = sum(TotalMorts))
+
+SHMorts21_22_gigas
+
+SHMorts21_22_gigas.plot <- ggplot(SHMorts21_22_gigas, aes(x = Site, y = SHmorts, fill = SH_TempQ, group = SH_Tide)) +
+  geom_bar(stat="identity", position=position_dodge()) +
+  scale_color_manual(values=c("#ABD9E9", "#D53E4F")) + #,
+                     #guide = "none") +
+  coord_flip() +
+  dark_theme_classic()
+
+SHMorts21_22_gigas.plot
+  
+  
+  ####  
+  ggplot(aes(x = factor(Site, c("South", "Middle", "North")), y = TotalMorts, fill = Site,)) +
+  #facet_grid(Species~.) +
+  geom_bar(stat="identity", position=position_dodge()) +
+  scale_fill_manual(values=c("#FDAE61", "#ABD9E9", "#D53E4F"),
+                    guide = "none") +
+  coord_flip() +
+  dark_theme_classic()
+
+SiteMorts20_22.plot
+
+
+#### ** PPT: Stress Hardening Morts ==============
+
+#### officeR directly exports the plot to your desired file into a powerpoint slide-shaped image ===== 
+library(officer)
+## initialize R object representing .pptx file. 
+SiteMorts20_22.plot_fig <- read_pptx()
+SiteMorts20_22.plot_fig <- add_slide(SiteMorts20_22.plot_fig , layout = "Title and Content", master = "Office Theme")
+SiteMorts20_22.plot_fig <-  ph_with(x = SiteMorts20_22.plot_fig, value = SiteMorts20_22.plot, location = ph_location_fullsize() )
+SiteMorts20_22.plot_fig  <- ph_with(x = SiteMorts20_22.plot_fig, "Plot", location = ph_location_type(type = "title") )
+print(SiteMorts20_22.plot_fig, target = "presentations/plot.pptx")
+
+#### R2PPT / RDCOMClient =====
+
+#install.packages("devtools", dependencies = TRUE)
+
+library(RDCOMClient)
+library(R2PPT)
+
+## Step 1: Save as a temporary file
+TEMP_FILE <- paste(tempfile(), ".wmf", sep="")
+ggsave(TEMP_FILE, plot = SiteMorts20_22.plot) # Saving the plot to the temporary file
+
+
+## Step 2: Open a blank PPT slide
+mkppt <- PPT.Init (method = "RDCOMClient")
+mkppt <- PPT.AddBlankSlide(mkppt)
+
+## Step 3: Export graph to PPT slide
+mkppt <- PPT.AddGraphicstoSlide(mkppt, file = TEMP_FILE)
+
+unlink(TEMP_FILE)

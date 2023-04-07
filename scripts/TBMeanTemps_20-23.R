@@ -189,7 +189,6 @@ ggsave(filename = "fig_output/DARKPlot_prop16.png", width = 5.10, height = 5.77,
 
 #### officeR directly exports the plot to your desired file into a powerpoint slide-shaped image ===== 
 library(officer)
-data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAWElEQVR42mNgGPTAxsZmJsVqQApgmGw1yApwKcQiT7phRBuCzzCSDSHGMKINIeDNmWQlA2IigKJwIssQkHdINgxfmBBtGDEBS3KCxBc7pMQgMYE5c/AXPwAwSX4lV3pTWwAAAABJRU5ErkJggg==
 ## initialize R object representing .pptx file. 
 Hours16.DARKplot_fig <- read_pptx()
 Hours16.DARKplot_fig <- add_slide(Hours16.DARKplot_fig , layout = "Title and Content", master = "Office Theme")

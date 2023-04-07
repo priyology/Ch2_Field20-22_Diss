@@ -89,8 +89,8 @@ summary(m1)
 #pairwise_m6
 
 #### AIC/BIC Scores ===============
-AIC(m_null, m1a, m2a, m3a)
-BIC(m_null, m1a, m2a, m3a)
+#AIC(m_null, m1, m2a, m3a)
+#BIC(m_null, m1, m2a, m3a)
 
 #### Test Assumptions: m9 ===============
 #???
