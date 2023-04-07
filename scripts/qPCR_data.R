@@ -18,6 +18,10 @@ colSums(is.na(OsHV1))
 OsHV1$Year_Sampled <- as.character(OsHV1$Year_Sampled)
 is.character(OsHV1$Year_Sampled)
 
+### Sampling_Period as character
+OsHV1$Sampling_Period <- as.character(OsHV1$Sampling_Period)
+is.character(OsHV1$Sampling_Period)
+
 ### Cohort as character
 OsHV1$Cohort <- as.character(OsHV1$Cohort)
 is.character(OsHV1$Cohort)
