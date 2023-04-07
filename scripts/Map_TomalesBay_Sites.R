@@ -22,6 +22,12 @@ sites.df <- data.frame(
   lat = c(38.218050, 38.205616, 38.120200))
 glimpse(sites.df)
 
+sites.labels_HITB <- data.frame(
+  lon = c(-122.947833, -122.865700),
+  lat = c(38.218050,38.120200),
+  site.name = c("Hog Island Oyster Co.", "Tomales Bay Oyster Co."))
+glimpse(sites.labelsHITB)
+
 sites.labelsA <- data.frame(
   lon = c(-122.947833, -122.927504, -122.865700),
   lat = c(38.218050, 38.205616, 38.120200),
@@ -90,6 +96,14 @@ TB_SacLanding <- qmap("Tomales Bay", zoom = 11, scale = 2, source = "stamen", ma
 TB_SacLanding
 
 ggsave("fig_output/WatercolorMap_SacLanding.png", dpi = 320, bg='transparent') 
+
+TB_HITB <- qmap("Tomales Bay", zoom = 11, scale = 2, source = "stamen", maptype = "watercolor") + ## Tomales Bay - Artistic
+  geom_point(data = sites.labels_HITB, aes(x = lon, y = lat), color = 'black', alpha = 0.5,  size = 5) +
+  geom_text(data = sites.labels_HITB, aes(x = lon, y = lat, label = site.name), nudge_x = -0.010, nudge_y = -0.000, hjust = 1, size = 4, fontface = "bold")
+
+TB_HITB
+
+ggsave("fig_output/WatercolorMap_TB_HITB.png", dpi = 320, bg='transparent') 
 
 
 TB_watercolorA <- qmap("Tomales Bay", zoom = 12, scale = 2, source = "stamen", maptype = "watercolor") + ## Tomales Bay - Artistic

@@ -129,3 +129,12 @@ Morts2022 %>%
   ggplot(aes(x = factor(Temp_Hardening), y = Mortality_Total, fill = Tide_Hardening)) +
   geom_bar(stat="identity", position=position_dodge()) +
   dark_theme_classic()
+
+
+########## Cumulative Mortality ==============
+
+Morts2022 <- read_csv("data/Mortality/2022/Mortality2022.csv")
+glimpse(Morts2022)
+summary(Morts2022)
+tail(Morts2022)
+View(Morts2022)
