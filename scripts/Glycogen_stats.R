@@ -17,6 +17,8 @@ glimpse(Gly)
 summary(Gly)
 View(Gly)
 
+Gly$Site <- fct_relevel(Gly$Site, "HIOC - North", "BBOC - Middle", "TBOC - South")
+
 #### Model selection ====
 #### m_null: Glycogen ~ 1  =====
 
@@ -200,8 +202,8 @@ summary(m5)
 
 #### m6: Glycogen ~ Sampling + Site + Sampling*Site  =====
 
-#m6 <- glm(Glycogen ~ Sampling + Site + Sampling*Site, family = gaussian(link = "identity"), data = Gly)
-#summary(m6)
+m6 <- glm(Glycogen ~ Sampling + Site + Sampling*Site, family = gaussian(link = "identity"), data = Gly)
+summary(m6)
 #
 #Call:
 #  glm(formula = Glycogen ~ Sampling + Site + Sampling * Site, family = gaussian(link = "identity"), 

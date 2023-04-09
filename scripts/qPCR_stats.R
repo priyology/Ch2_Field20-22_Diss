@@ -141,4 +141,4 @@ summary(m_null_20_22)
 #Residual deviance: 3.4294e-10  on 6  degrees of freedom
 #AIC: 4
 
-Number of Fisher Scoring iterations: 23
+#Number of Fisher Scoring iterations: 23

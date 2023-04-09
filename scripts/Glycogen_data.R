@@ -337,7 +337,7 @@ Plot.Sampling_Site_Tide
 #### Sampling, SH_Temp, SH_Tide ====
 
 Sampling_Temp_Tide.Stats <- Gly2 %>%
-  group_by(Sampling, SH_Temp, SH_Tide) %>% 
+  group_by(SiteSampling, SH_Temp, SH_Tide) %>% 
   summarize(
     MeanGly = mean(Glycogen),
     SD_Gly = sd(Glycogen),
@@ -349,6 +349,17 @@ Sampling_Temp_Tide.Stats
 
 Plot.Sampling_Temp_Tide <- ggplot(Gly2, aes(x = SH_Temp, y = Glycogen, color = Sampling)) +
   facet_wrap(~SH_Tide) +
+  geom_boxplot() +
+  theme_classic() +
+  #scale_fill_manual(values=c("#4575B4", "#FDAE61")) +
+  labs(title=expression(paste("Glycogen Content ", italic("M. gigas"))), 
+       x = "SH_Temp", 
+       y = "Glycogen (umol glycosyl units/g protein)")
+
+Plot.Sampling_Temp_Tide
+
+BarPlot.Gly <- ggplot(Gly2, aes(x = factor(Site, c("HIOC - North", "BBOC - Middle", "TBOC - South")), y = Glycogen, fill = SH_Temp)) +
+  facet_grid(Sampling~SH_Tide) +
   geom_boxplot() +
   theme_classic() +
   #scale_fill_manual(values=c("#4575B4", "#FDAE61")) +
@@ -395,6 +406,8 @@ Stats_Samp_Site_Temp_Tide <- Gly2 %>%
 
 Stats_Samp_Site_Temp_Tide
 
+#write_csv(Stats_Samp_Site_Temp_Tide, "data/Glycogen/2022/Gly_SumStats.csv")
+
 ## All Stats Plot
 
 Plot.AllStats <- ggplot(Gly2, aes(x = factor(Site, c("HIOC - North", "BBOC - Middle", "TBOC - South")), y = Glycogen, color = Sampling)) +
@@ -407,4 +420,85 @@ Plot.AllStats <- ggplot(Gly2, aes(x = factor(Site, c("HIOC - North", "BBOC - Mid
        y = "Glycogen (umol glycosyl units/g protein)")
 
 Plot.AllStats
+
+
+#### Glycogen Summary Stats Bar Plot ===========
+library(ggdark)
+
+GlyMean <- read_csv("data/Glycogen/2022/Gly_SumStats.csv")
+glimpse(GlyMean)
+
+GlyMean$SH_Temp <- as.character(GlyMean$SH_Temp)
+GlyMean$Sampling <- as.character(GlyMean$Sampling)
+
+GlyMean_SampSites  <-  Gly2 %>% 
+  group_by(Sampling, Site) %>% 
+  summarize(MeanGly = mean(Glycogen),
+            SDGly = sd(Glycogen),
+            SEGly = SDGly/sqrt(n()))
+
+GlyMean_SampSites
+
+GlyMean_SampSites$Sampling <- as.character(GlyMean_SampSites$Sampling)
+
+BarPlot.Gly <- ggplot(GlyMean_SampSites, aes(x = factor(Site, c("TBOC - South", "BBOC - Middle", "HIOC - North")), y = MeanGly, fill = Sampling, group = factor(Sampling, c("5", "2")))) + #, fill = SH_Temp, group = SH_Temp)) +
+  geom_bar(stat = "identity", position = position_dodge()) +
+  geom_errorbar(aes(ymin = MeanGly-SEGly, ymax = MeanGly + SEGly), width=.2, position=position_dodge(.9)) +
+  #facet_grid(SH_Temp ~ factor(Sampling, c("June", "August"))) +
+  dark_theme_classic() + 
+  coord_flip()
+  
+               
+  #scale_fill_manual(values=c("#4575B4", "#FDAE61")) +
+  #labs(title=expression(paste("Glycogen Content ", italic("M. gigas"))), 
+  #     x = "Site", 
+  #     y = "Glycogen (umol glycosyl units/g protein)")
+
+BarPlot.Gly
+
+#### ** PPT: Glycogen 2022 ==============
+
+#### officeR directly exports the plot to your desired file into a powerpoint slide-shaped image ===== 
+library(officer)
+## initialize R object representing .pptx file. 
+GlyPlot_fig <- read_pptx()
+GlyPlot_fig <- add_slide(GlyPlot_fig , layout = "Title and Content", master = "Office Theme")
+GlyPlot_fig <-  ph_with(x = GlyPlot_fig, value = BarPlot.Gly, location = ph_location_fullsize() )
+GlyPlot_fig  <- ph_with(x = GlyPlot_fig, "Plot", location = ph_location_type(type = "title") )
+print(GlyPlot_fig, target = "presentations/plot.pptx")
+
+#### R2PPT / RDCOMClient =====
+
+#install.packages("devtools", dependencies = TRUE)
+
+library(RDCOMClient)
+library(R2PPT)
+
+## Step 1: Save as a temporary file
+TEMP_FILE <- paste(tempfile(), ".wmf", sep="")
+ggsave(TEMP_FILE, plot = BarPlot.Gly) # Saving the plot to the temporary file
+
+
+## Step 2: Open a blank PPT slide
+mkppt <- PPT.Init (method = "RDCOMClient")
+mkppt <- PPT.AddBlankSlide(mkppt)
+
+## Step 3: Export graph to PPT slide
+mkppt <- PPT.AddGraphicstoSlide(mkppt, file = TEMP_FILE)
+
+unlink(TEMP_FILE)
+
+############################################
+
+## Plot
+Morts2022 %>% 
+  ggplot(aes(x = factor(Site, c("North", "Middle", "South")), y = Mortality_Total, fill = Site)) +
+  facet_grid(Tide_Hardening ~ Temp_Hardening) +
+  geom_bar(stat="identity", position=position_dodge()) +
+  dark_theme_classic()
+
+Morts2022 %>% 
+  ggplot(aes(x = factor(Temp_Hardening), y = Mortality_Total, fill = Tide_Hardening)) +
+  geom_bar(stat="identity", position=position_dodge()) +
+  dark_theme_classic()
 

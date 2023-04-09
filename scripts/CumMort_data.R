@@ -37,6 +37,9 @@ summary(Morts2021)
 tail(Morts2021)
 View(Morts2021)
 
+Morts2021$Temp_Hardening <- as.character(Morts2021$Temp_Hardening)
+is.character(Morts2021$Temp_Hardening)
+
 TotalMort2021_perBag <- Morts2021 %>% 
   group_by(Site, Species, Temp_Hardening, Tide_Hardening, Bag_Numb) %>% 
   summarize(TotalMort = sum(Mortality_Total))
@@ -101,6 +104,99 @@ Morts2021 %>%
   facet_grid(Tide_Hardening ~ Temp_Hardening) +
   geom_bar(stat="identity", position=position_dodge()) +
   dark_theme_classic()
+
+Morts2021
+
+SH_gigasMorts2021.Plot <- Morts2021 %>% 
+  filter(Species == "C_gigas") %>% 
+  group_by(Temp_Hardening, Tide_Hardening) %>% 
+  summarize(SHmorts = sum(Mortality_Total)) %>% 
+  ggplot(aes(x = Temp_Hardening, y = SHmorts, fill = Temp_Hardening, group = Tide_Hardening)) +
+  #facet_grid(Tide_Hardening ~ Temp_Hardening) +
+  geom_bar(stat="identity", position=position_dodge()) +
+  dark_theme_classic()
+
+SH_gigasMorts2021.Plot
+
+#### ** PPT: SH_gigas Morts 2021 ==============
+
+#### officeR directly exports the plot to your desired file into a powerpoint slide-shaped image ===== 
+library(officer)
+## initialize R object representing .pptx file. 
+SH_gigasMorts2021.Plot_fig <- read_pptx()
+SH_gigasMorts2021.Plot_fig <- add_slide(SH_gigasMorts2021.Plot_fig , layout = "Title and Content", master = "Office Theme")
+SH_gigasMorts2021.Plot_fig <-  ph_with(x = SH_gigasMorts2021.Plot_fig, value = SH_gigasMorts2021.Plot, location = ph_location_fullsize() )
+SH_gigasMorts2021.Plot_fig  <- ph_with(x = SH_gigasMorts2021.Plot_fig, "Plot", location = ph_location_type(type = "title") )
+print(SH_gigasMorts2021.Plot_fig, target = "presentations/plot.pptx")
+
+#### R2PPT / RDCOMClient =====
+
+#install.packages("devtools", dependencies = TRUE)
+
+library(RDCOMClient)
+library(R2PPT)
+
+## Step 1: Save as a temporary file
+TEMP_FILE <- paste(tempfile(), ".wmf", sep="")
+ggsave(TEMP_FILE, plot = SH_gigasMorts2021.Plot) # Saving the plot to the temporary file
+
+
+## Step 2: Open a blank PPT slide
+mkppt <- PPT.Init (method = "RDCOMClient")
+mkppt <- PPT.AddBlankSlide(mkppt)
+
+## Step 3: Export graph to PPT slide
+mkppt <- PPT.AddGraphicstoSlide(mkppt, file = TEMP_FILE)
+
+unlink(TEMP_FILE)
+
+######################################################
+
+SH_sikMorts2021.Plot <- Morts2021 %>% 
+  filter(Species == "C_sikamea") %>% 
+  group_by(Temp_Hardening, Tide_Hardening) %>% 
+  summarize(SHmorts = sum(Mortality_Total)) %>% 
+  ggplot(aes(x = Temp_Hardening, y = SHmorts, fill = Tide_Hardening, group = Tide_Hardening)) +
+  #facet_grid(Tide_Hardening ~ Temp_Hardening) +
+  geom_bar(stat="identity", position=position_dodge()) +
+  ylim(0,1000) +
+  dark_theme_classic()
+
+SH_sikMorts2021.Plot
+
+#### ** PPT: SH_sik Morts 2021 ==============
+
+#### officeR directly exports the plot to your desired file into a powerpoint slide-shaped image ===== 
+library(officer)
+## initialize R object representing .pptx file. 
+SH_sikMorts2021.Plot_fig <- read_pptx()
+SH_sikMorts2021.Plot_fig <- add_slide(SH_sikMorts2021.Plot_fig , layout = "Title and Content", master = "Office Theme")
+SH_sikMorts2021.Plot_fig <-  ph_with(x = SH_sikMorts2021.Plot_fig, value = SH_sikMorts2021.Plot, location = ph_location_fullsize() )
+SH_sikMorts2021.Plot_fig  <- ph_with(x = SH_sikMorts2021.Plot_fig, "Plot", location = ph_location_type(type = "title") )
+print(SH_sikMorts2021.Plot_fig, target = "presentations/plot.pptx")
+
+#### R2PPT / RDCOMClient =====
+
+#install.packages("devtools", dependencies = TRUE)
+
+library(RDCOMClient)
+library(R2PPT)
+
+## Step 1: Save as a temporary file
+TEMP_FILE <- paste(tempfile(), ".wmf", sep="")
+ggsave(TEMP_FILE, plot = SH_sikMorts2021.Plot) # Saving the plot to the temporary file
+
+
+## Step 2: Open a blank PPT slide
+mkppt <- PPT.Init (method = "RDCOMClient")
+mkppt <- PPT.AddBlankSlide(mkppt)
+
+## Step 3: Export graph to PPT slide
+mkppt <- PPT.AddGraphicstoSlide(mkppt, file = TEMP_FILE)
+
+unlink(TEMP_FILE)
+
+######################################################
 
 SiteMorts2021.gigas <- Morts2021 %>% 
   filter(Species == "C_gigas") %>% 
@@ -201,6 +297,53 @@ TotalMort2022_perSHtide <- Morts2022 %>%
 
 TotalMort2022_perSHtide
 
+SH_gigasMorts2022.plot <- Morts2022 %>% 
+  filter(Species == "M_gigas") %>% 
+  group_by(Temp_Hardening, Tide_Hardening) %>% 
+  summarize(SHmorts = sum(Mortality_Total)) %>% 
+  ggplot(aes(x = Temp_Hardening, y = SHmorts, fill = Tide_Hardening, group = Tide_Hardening)) +
+  #facet_grid(Tide_Hardening ~ Temp_Hardening) +
+  geom_bar(stat="identity", position=position_dodge()) +
+  ylim(0, 1000) +
+  dark_theme_classic()
+
+SH_gigasMorts2022.plot
+
+
+
+
+#### ** PPT: SH_gigas Morts 2022 ==============
+
+#### officeR directly exports the plot to your desired file into a powerpoint slide-shaped image ===== 
+library(officer)
+## initialize R object representing .pptx file. 
+SH_gigasMorts2022.plot_fig <- read_pptx()
+SH_gigasMorts2022.plot_fig <- add_slide(SH_gigasMorts2022.plot_fig , layout = "Title and Content", master = "Office Theme")
+SH_gigasMorts2022.plot_fig <-  ph_with(x = SH_gigasMorts2022.plot_fig, value = SH_gigasMorts2022.plot, location = ph_location_fullsize() )
+SH_gigasMorts2022.plot_fig  <- ph_with(x = SH_gigasMorts2022.plot_fig, "Plot", location = ph_location_type(type = "title") )
+print(SH_gigasMorts2022.plot_fig, target = "presentations/plot.pptx")
+
+#### R2PPT / RDCOMClient =====
+
+#install.packages("devtools", dependencies = TRUE)
+
+library(RDCOMClient)
+library(R2PPT)
+
+## Step 1: Save as a temporary file
+TEMP_FILE <- paste(tempfile(), ".wmf", sep="")
+ggsave(TEMP_FILE, plot = SH_gigasMorts2022.plot) # Saving the plot to the temporary file
+
+
+## Step 2: Open a blank PPT slide
+mkppt <- PPT.Init (method = "RDCOMClient")
+mkppt <- PPT.AddBlankSlide(mkppt)
+
+## Step 3: Export graph to PPT slide
+mkppt <- PPT.AddGraphicstoSlide(mkppt, file = TEMP_FILE)
+
+unlink(TEMP_FILE)
+
 ## Plot
 Morts2022 %>% 
   ggplot(aes(x = factor(Site, c("North", "Middle", "South")), y = Mortality_Total, fill = Site)) +
@@ -265,88 +408,3 @@ mkppt <- PPT.AddGraphicstoSlide(mkppt, file = TEMP_FILE)
 unlink(TEMP_FILE)
 
 
-########## Cumulative Mortality: Stress Hardening ==============
-SHMorts21_22 <- read_csv("data/Mortality/Cumulative/SH_21-22_Morts.csv")
-glimpse(SHMorts21_22)
-SHMorts21_22
-
-SHMorts21_22_sik <- SHMorts21_22 %>% 
-  filter(Species == "C. sikamea") %>% 
-  group_by(SH_TempQ, SH_Tide) %>% 
-  summarize(SHmorts = sum(TotalMorts))
-
-SHMorts21_22_sik 
-
-SHMorts21_22_sik.plot <- ggplot(SHMorts21_22_sik, aes(x = SH_TempQ, y = SHmorts, fill = SH_Tide, group = SH_Tide)) +
-  geom_bar(stat="identity", position=position_dodge()) +
-  scale_color_manual(values=c("#ABD9E9", "#D53E4F"),
-                    guide = "none") +
-  coord_flip() +
-  dark_theme_classic()
-  
-SHMorts21_22_sik.plot
-
-
-
-
-SHMorts21_22_gigas <- SHMorts21_22 %>% 
-  filter(Species == "M. gigas",
-         Site == c("North", "Middle")) %>% 
-  group_by(Site,SH_Temp, SH_Tide) %>% 
-  summarize(SHmorts = sum(TotalMorts))
-
-SHMorts21_22_gigas
-
-SHMorts21_22_gigas.plot <- ggplot(SHMorts21_22_gigas, aes(x = Site, y = SHmorts, fill = SH_TempQ, group = SH_Tide)) +
-  geom_bar(stat="identity", position=position_dodge()) +
-  scale_color_manual(values=c("#ABD9E9", "#D53E4F")) + #,
-                     #guide = "none") +
-  coord_flip() +
-  dark_theme_classic()
-
-SHMorts21_22_gigas.plot
-  
-  
-  ####  
-  ggplot(aes(x = factor(Site, c("South", "Middle", "North")), y = TotalMorts, fill = Site,)) +
-  #facet_grid(Species~.) +
-  geom_bar(stat="identity", position=position_dodge()) +
-  scale_fill_manual(values=c("#FDAE61", "#ABD9E9", "#D53E4F"),
-                    guide = "none") +
-  coord_flip() +
-  dark_theme_classic()
-
-SiteMorts20_22.plot
-
-
-#### ** PPT: Stress Hardening Morts ==============
-
-#### officeR directly exports the plot to your desired file into a powerpoint slide-shaped image ===== 
-library(officer)
-## initialize R object representing .pptx file. 
-SiteMorts20_22.plot_fig <- read_pptx()
-SiteMorts20_22.plot_fig <- add_slide(SiteMorts20_22.plot_fig , layout = "Title and Content", master = "Office Theme")
-SiteMorts20_22.plot_fig <-  ph_with(x = SiteMorts20_22.plot_fig, value = SiteMorts20_22.plot, location = ph_location_fullsize() )
-SiteMorts20_22.plot_fig  <- ph_with(x = SiteMorts20_22.plot_fig, "Plot", location = ph_location_type(type = "title") )
-print(SiteMorts20_22.plot_fig, target = "presentations/plot.pptx")
-
-#### R2PPT / RDCOMClient =====
-
-#install.packages("devtools", dependencies = TRUE)
-
-library(RDCOMClient)
-library(R2PPT)
-
-## Step 1: Save as a temporary file
-TEMP_FILE <- paste(tempfile(), ".wmf", sep="")
-ggsave(TEMP_FILE, plot = SiteMorts20_22.plot) # Saving the plot to the temporary file
-
-
-## Step 2: Open a blank PPT slide
-mkppt <- PPT.Init (method = "RDCOMClient")
-mkppt <- PPT.AddBlankSlide(mkppt)
-
-## Step 3: Export graph to PPT slide
-mkppt <- PPT.AddGraphicstoSlide(mkppt, file = TEMP_FILE)
-
-unlink(TEMP_FILE)
