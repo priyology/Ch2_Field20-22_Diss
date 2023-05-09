@@ -31,6 +31,8 @@ TotalMort2020_perSite <-  ggplot(data = Morts2020, aes(x = mort_numb, y = site, 
 
 ########## 2021 Mortality ==============
 
+#### Cumulative Mortality 2021 =====
+
 Morts2021 <- read_csv("data/Mortality/2021/Mortality2021.csv")
 glimpse(Morts2021)
 summary(Morts2021)
@@ -57,7 +59,6 @@ TotalMort2021_JustSite <- Morts2021 %>%
   summarize(TotalMort = sum(Mortality_Total))
 
 TotalMort2021_JustSite
-
 
 TotalMort2021_perSpecies <- Morts2021 %>% 
   group_by(Species, Temp_Hardening, Tide_Hardening) %>% 
@@ -117,6 +118,8 @@ SH_gigasMorts2021.Plot <- Morts2021 %>%
   dark_theme_classic()
 
 SH_gigasMorts2021.Plot
+
+
 
 #### ** PPT: SH_gigas Morts 2021 ==============
 
@@ -408,3 +411,148 @@ mkppt <- PPT.AddGraphicstoSlide(mkppt, file = TEMP_FILE)
 unlink(TEMP_FILE)
 
 
+######################################################
+
+
+
+#### Proportional Mortality 2021 + 2022 =====
+PropMort21_22 <- read_csv("data/Mortality/Proportional/21-22_PropMorts_bySH.csv")
+glimpse(PropMort21_22)
+summary(PropMort21_22)
+tail(PropMort21_22)
+View(PropMort21_22)
+
+## make Temp character
+PropMort21_22$SH_Temp <- as.character(PropMort21_22$SH_Temp)
+is.character(PropMort21_22$SH_Temp)
+
+PropMort_2021_sik <- PropMort21_22 %>% 
+  filter(Species == "C. sikamea" & Year == 2021) %>% 
+  ggplot(aes(x = SH_Temp, y = PropMort, fill = SH_Tide, group = SH_Tide)) +
+  geom_bar(stat="identity", position=position_dodge()) +
+  ylim(0, 0.25) +
+  dark_theme_classic()
+
+PropMort_2021_sik
+
+
+#### ** PPT: Prop Sikamea Morts 2021 ==============
+
+#### officeR directly exports the plot to your desired file into a powerpoint slide-shaped image ===== 
+library(officer)
+## initialize R object representing .pptx file. 
+PropMort_2021_sik.fig <- read_pptx()
+PropMort_2021_sik.fig <- add_slide(PropMort_2021_sik.fig, layout = "Title and Content", master = "Office Theme")
+PropMort_2021_sik.fig <-  ph_with(x = PropMort_2021_sik.fig, value = PropMort_2021_sik, location = ph_location_fullsize() )
+PropMort_2021_sik.fig  <- ph_with(x = PropMort_2021_sik.fig, "Plot", location = ph_location_type(type = "title") )
+print(PropMort_2021_sik.fig, target = "presentations/plot.pptx")
+
+#### R2PPT / RDCOMClient =====
+
+#install.packages("devtools", dependencies = TRUE)
+
+library(RDCOMClient)
+library(R2PPT)
+
+## Step 1: Save as a temporary file
+TEMP_FILE <- paste(tempfile(), ".wmf", sep="")
+ggsave(TEMP_FILE, plot = PropMort_2021_sik) # Saving the plot to the temporary file
+
+
+## Step 2: Open a blank PPT slide
+mkppt <- PPT.Init (method = "RDCOMClient")
+mkppt <- PPT.AddBlankSlide(mkppt)
+
+## Step 3: Export graph to PPT slide
+mkppt <- PPT.AddGraphicstoSlide(mkppt, file = TEMP_FILE)
+
+unlink(TEMP_FILE)
+
+######################################################
+
+PropMort_2021_gigas <- PropMort21_22 %>% 
+  filter(Species == "M. gigas" & Year == 2021) %>% 
+  ggplot(aes(x = SH_Temp, y = PropMort, fill = SH_Temp, group = SH_Tide)) +
+  geom_bar(stat="identity", position=position_dodge()) +
+  ylim(0, 0.6) +
+  dark_theme_classic()
+
+PropMort_2021_gigas
+
+
+#### ** PPT: Prop Gigas Morts 2021 ==============
+
+#### officeR directly exports the plot to your desired file into a powerpoint slide-shaped image ===== 
+library(officer)
+## initialize R object representing .pptx file. 
+PropMort_2021_gigas_fig <- read_pptx()
+PropMort_2021_gigas_fig <- add_slide(PropMort_2021_gigas_fig , layout = "Title and Content", master = "Office Theme")
+PropMort_2021_gigas_fig <-  ph_with(x = PropMort_2021_gigas_fig, value = PropMort_2021_gigas, location = ph_location_fullsize() )
+PropMort_2021_gigas_fig  <- ph_with(x = PropMort_2021_gigas_fig, "Plot", location = ph_location_type(type = "title") )
+print(PropMort_2021_gigas_fig, target = "presentations/plot.pptx")
+
+#### R2PPT / RDCOMClient =====
+
+#install.packages("devtools", dependencies = TRUE)
+
+library(RDCOMClient)
+library(R2PPT)
+
+## Step 1: Save as a temporary file
+TEMP_FILE <- paste(tempfile(), ".wmf", sep="")
+ggsave(TEMP_FILE, plot = PropMort_2021_gigas) # Saving the plot to the temporary file
+
+
+## Step 2: Open a blank PPT slide
+mkppt <- PPT.Init (method = "RDCOMClient")
+mkppt <- PPT.AddBlankSlide(mkppt)
+
+## Step 3: Export graph to PPT slide
+mkppt <- PPT.AddGraphicstoSlide(mkppt, file = TEMP_FILE)
+
+unlink(TEMP_FILE)
+
+######################################################
+
+PropMort_2022_gigas <- PropMort21_22 %>% 
+  filter(Species == "M. gigas" & Year == 2022) %>% 
+  ggplot(aes(x = SH_Temp, y = PropMort, fill = SH_Tide, group = SH_Tide)) +
+  geom_bar(stat="identity", position=position_dodge()) +
+  ylim(0, 0.25) +
+  dark_theme_classic()
+
+PropMort_2022_gigas
+
+#### ** PPT: Prop Gigas Morts 2022 ==============
+
+#### officeR directly exports the plot to your desired file into a powerpoint slide-shaped image ===== 
+library(officer)
+## initialize R object representing .pptx file. 
+PropMort_2022_gigas_fig <- read_pptx()
+PropMort_2022_gigas_fig <- add_slide(PropMort_2022_gigas_fig , layout = "Title and Content", master = "Office Theme")
+PropMort_2022_gigas_fig <-  ph_with(x = PropMort_2022_gigas_fig, value = PropMort_2022_gigas, location = ph_location_fullsize() )
+PropMort_2022_gigas_fig  <- ph_with(x = PropMort_2022_gigas_fig, "Plot", location = ph_location_type(type = "title") )
+print(PropMort_2022_gigas_fig, target = "presentations/plot.pptx")
+
+#### R2PPT / RDCOMClient =====
+
+#install.packages("devtools", dependencies = TRUE)
+
+library(RDCOMClient)
+library(R2PPT)
+
+## Step 1: Save as a temporary file
+TEMP_FILE <- paste(tempfile(), ".wmf", sep="")
+ggsave(TEMP_FILE, plot = PropMort_2022_gigas) # Saving the plot to the temporary file
+
+
+## Step 2: Open a blank PPT slide
+mkppt <- PPT.Init (method = "RDCOMClient")
+mkppt <- PPT.AddBlankSlide(mkppt)
+
+## Step 3: Export graph to PPT slide
+mkppt <- PPT.AddGraphicstoSlide(mkppt, file = TEMP_FILE)
+
+unlink(TEMP_FILE)
+
+######################################################

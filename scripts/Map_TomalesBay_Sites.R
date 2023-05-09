@@ -26,7 +26,7 @@ sites.labels_HITB <- data.frame(
   lon = c(-122.947833, -122.865700),
   lat = c(38.218050,38.120200),
   site.name = c("Hog Island Oyster Co.", "Tomales Bay Oyster Co."))
-glimpse(sites.labelsHITB)
+glimpse(sites.labels_HITB)
 
 sites.labelsA <- data.frame(
   lon = c(-122.947833, -122.927504, -122.865700),
