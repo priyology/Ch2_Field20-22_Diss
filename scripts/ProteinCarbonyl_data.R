@@ -24,6 +24,7 @@ PC2 <- PC %>%
   filter(!is.na(CarbPerProtein)) # omit the 3 NAs in PC
 colSums(is.na(PC2)) ## All NAs under PC
 
+write_csv(PC2, file = "data/Protein_Carbonyl/ProteinCarbonyl_Stats.csv")
 
 #histogram of all PC
 ggplot(PC2, aes(CarbPerProtein)) +
@@ -142,76 +143,6 @@ Plot.SH_Tide <- ggplot(PC2, aes(x = SH_Tide, y = CarbPerProtein, color = SH_Tide
 
 Plot.SH_Tide
 
-#### By Sampling, Site ====
-
-Sampling_Site.Stats <- PC2 %>%
-  group_by(Sampling, Site) %>% 
-  summarize(
-    MeanPC = mean(CarbPerProtein),
-    SD_PC = sd(CarbPerProtein),
-    SE_PC = SD_PC/sqrt(n()))
-
-Sampling_Site.Stats
-
-## plot
-
-Plot.Sampling_Site <- ggplot(PC2, aes(x = factor(Site, c("HIOC - North", "BBOC - Middle", "TBOC - South")), y = CarbPerProtein, color = Sampling)) +
-  geom_boxplot() +
-  theme_classic() +
-  #scale_fill_manual(values=c("#4575B4", "#FDAE61")) +
-  labs(title=expression(paste("Protein Carbonyl ", italic("M. gigas"))), 
-       x = "Site", 
-       y = "CarbPerProtein (nmole_carbonyl/mg_protein)")
-
-Plot.Sampling_Site
-
-#### By Sampling, SH_Temp ====
-
-Sampling_Temp.Stats <- PC2 %>%
-  group_by(Sampling, SH_Temp) %>% 
-  summarize(
-    MeanPC = mean(CarbPerProtein),
-    SD_PC = sd(CarbPerProtein),
-    SE_PC = SD_PC/sqrt(n()))
-
-Sampling_Temp.Stats
-
-## plot
-
-Plot.Sampling_Temp <- ggplot(PC2, aes(x = SH_Temp, y = CarbPerProtein, color = Sampling)) +
-  geom_boxplot() +
-  theme_classic() +
-  #scale_fill_manual(values=c("#4575B4", "#FDAE61")) +
-  labs(title=expression(paste("Protein Carbonyl ", italic("M. gigas"))), 
-       x = "SH_Temp", 
-       y = "CarbPerProtein (nmole_carbonyl/mg_protein)")
-
-Plot.Sampling_Temp
-
-
-#### By Sampling, SH_Tide ====
-
-Sampling_Tide.Stats <- PC2 %>%
-  group_by(Sampling, SH_Tide) %>% 
-  summarize(
-    MeanPC = mean(CarbPerProtein),
-    SD_PC = sd(CarbPerProtein),
-    SE_PC = SD_PC/sqrt(n()))
-
-Sampling_Tide.Stats
-
-## plot
-
-Plot.Sampling_Tide <- ggplot(PC2, aes(x = SH_Tide, y = CarbPerProtein, color = Sampling)) +
-  geom_boxplot() +
-  theme_classic() +
-  #scale_fill_manual(values=c("#4575B4", "#FDAE61")) +
-  labs(title=expression(paste("Protein Carbonyl ", italic("M. gigas"))), 
-       x = "SH_Tide", 
-       y = "CarbPerProtein (nmole_carbonyl/mg_protein)")
-
-Plot.Sampling_Tide
-
 #### By Site, SH_Temp ====
 
 Site_Temp.Stats <- PC2 %>%
@@ -281,30 +212,6 @@ Plot.Temp_Tide <- ggplot(PC2, aes(x = SH_Temp, y = CarbPerProtein, color = SH_Ti
 
 Plot.Temp_Tide
 
-#### Sampling, Site, SH_Temp ====
-
-Sampling_Site_Temp.Stats <- PC2 %>%
-  group_by(Sampling, Site, SH_Temp) %>% 
-  summarize(
-    MeanPC = mean(CarbPerProtein),
-    SD_PC = sd(CarbPerProtein),
-    SE_PC = SD_PC/sqrt(n()))
-
-Sampling_Site_Temp.Stats
-
-## plot
-
-Plot.Sampling_Site_Temp <- ggplot(PC2, aes(x = SH_Temp, y = CarbPerProtein, color = factor(Site, c("HIOC - North", "BBOC - Middle", "TBOC - South")))) +
-  facet_wrap(~Sampling) +
-  geom_boxplot() +
-  theme_classic() +
-  #scale_fill_manual(values=c("#4575B4", "#FDAE61")) +
-  labs(title=expression(paste("Protein Carbonyl ", italic("M. gigas"))), 
-       x = "SH_Temp", 
-       y = "CarbPerProtein (nmole_carbonyl/mg_protein)")
-
-Plot.Sampling_Site_Temp
-
 
 #### Site, SH_Temp, SH_Tide ====
 
@@ -331,23 +238,9 @@ Plot.Site_Temp_Tide <- ggplot(PC2, aes(x = SH_Temp, y = CarbPerProtein, color = 
 Plot.Site_Temp_Tide
 
 
-
-#### All Grouping: Sampling, Site, SH_Temp, SH_Tide ====
-
-Stats_Samp_Site_Temp_Tide <- PC2 %>%
-  group_by(Sampling, Site, SH_Temp, SH_Tide) %>% 
-  summarize(
-    MeanPC = mean(CarbPerProtein),
-    SD_PC = sd(CarbPerProtein),
-    SE_PC = SD_PC/sqrt(n()))
-
-Stats_Samp_Site_Temp_Tide
-
-#write_csv(Stats_Samp_Site_Temp_Tide, "data/CarbPerProtein/2022/PC_SumStats.csv")
-
 ## All Stats Plot
 
-Plot.AllStats <- ggplot(PC2, aes(x = factor(Site, c("HIOC - North", "BBOC - Middle", "TBOC - South")), y = CarbPerProtein, color = Sampling)) +
+Plot.AllStats <- ggplot(PC2, aes(x = factor(Site, c("HIOC - North", "BBOC - Middle", "TBOC - South")), y = CarbPerProtein, color = Site)) +
   geom_boxplot() +
   facet_grid(SH_Temp ~ SH_Tide) +
   theme_classic() +
