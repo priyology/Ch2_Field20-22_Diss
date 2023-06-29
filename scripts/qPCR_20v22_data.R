@@ -35,6 +35,14 @@ OsHV1 %>%
             SD_Copies = sd(log_transform),
             SE_Copies = SD_Copies/sqrt(n()))
 
+#### 2020 Cohort Stats by Year ===== 
+OsHV1 %>%
+  filter(Cohort == "2020") %>% 
+  group_by(Year, Site) %>%
+  summarize(Mean_Copies = mean(Copies_per_mgTissue),
+            SD_Copies = sd(Copies_per_mgTissue),
+            SE_Copies = SD_Copies/sqrt(n()))
+
 OsHV1 %>%
 filter(Cohort == "2020" ) %>% 
 ggplot(aes(x = Site, y = log_transform, color = Site)) +
@@ -47,16 +55,16 @@ ggplot(aes(x = Site, y = log_transform, color = Site)) +
 
 
 #### 2020 v 2022 Cohort Stats by Year =====
-LogBarPlot.OsHV1_dark <- OsHV1 %>%
+BarPlot.OsHV1_dark <- OsHV1 %>%
   filter(Sample_Date == "27-Aug-22") %>% 
   group_by(Cohort) %>%
-  ggplot(aes(x = Cohort, y = log_transform, fill = Cohort)) +
+  ggplot(aes(x = Cohort, y = Copies_per_mgTissue, fill = Cohort)) +
   geom_boxplot() +
   scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x),
                 labels = trans_format("log10", math_format(10^.x))) +
   dark_theme_classic()
 
-LogBarPlot.OsHV1_dark
+BarPlot.OsHV1_dark
 
 LogBarPlot.OsHV1 <- OsHV1 %>%
   filter(Sample_Date == "27-Aug-22") %>% 
@@ -74,6 +82,9 @@ BarPlot.OsHV1 <- OsHV1 %>%
   group_by(Cohort) %>%
   ggplot(aes(x = Cohort, y = Copies_per_mgTissue, fill = Cohort)) +
   geom_boxplot() +
+  scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x),
+                  labels = trans_format("log10", math_format(10^.x))) +
+  #coord_flip() +
   theme_classic()
 
 BarPlot.OsHV1
