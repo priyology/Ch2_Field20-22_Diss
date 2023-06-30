@@ -296,3 +296,19 @@ summary(m7)
 #Smplng_Prd4 -0.655  0.463  0.463              
 #StMddl:S_P4  0.463 -0.655 -0.327 -0.707       
 #StSth:Sm_P4  0.463 -0.328 -0.655 -0.707  0.500
+
+#### AIC/BIC Scores ===============
+AIC(m_null, m1, m2, m3, m4, m5, m6, m7)
+BIC(m_null, m1, m2, m3, m4, m5, m6, m7)
+
+#### Test Assumptions ===============
+#### Pairwise Plot of Residuals ===============
+plot(fitted(m7), resid(m7))
+abline(0,0)
+
+#### Q-Q plot of Residuals ===============
+qqnorm(resid(m7))
+qqline(resid(m7))
+
+#### Density Plot of Residuals ===============
+plot(density(resid(m7)))
