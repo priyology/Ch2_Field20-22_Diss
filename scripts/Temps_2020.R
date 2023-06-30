@@ -46,7 +46,7 @@ Temps2020 %>%
 1704 / 24 # 71 days / 100 days that temps were above the threshold for OsHV-1
 71/100 # 71% of deployment
 
-### HIOC Temps Above 16 deg C
+### TBOC Temps Above 16 deg C
 
 Temps2020 %>% 
   filter(Site == "TBOC",

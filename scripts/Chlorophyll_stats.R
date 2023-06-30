@@ -300,11 +300,16 @@ summary(m7)
 #
 #Number of Fisher Scoring iterations: 3
 
+#### m8: Chl_a ~ Type =====
 
-#### m8: Chl_a ~ Site + (1|Year:Sampling_Period) =====
-
-m8 <- glmer(Chl_a ~ Site + (1|Year:Sampling_Period), family = Gamma(link = "identity"), data = ChlA_gamma)
+m8 <- glm(Chl_a ~ Type, family = Gamma(link = "identity"), data = ChlA_gamma)
 summary(m8)
+
+
+#### m9: Chl_a ~ Site + Year/Sampling_Period =====
+
+m9 <- glm(Chl_a ~ Site + Year/Sampling_Period, family = Gamma(link = "identity"), data = ChlA_gamma)
+summary(m9)
 
 # Generalized linear mixed model fit by maximum likelihood (Laplace
 #Approximation) [glmerMod]
@@ -337,6 +342,11 @@ summary(m8)
 #  (Intr) StMddl
 #SiteMiddle -0.311       
 #SiteSouth  -0.380  0.485
+
+
+### Model Selection =====
+AIC(m_null_gamma, m5, m6, m7, m8)
+BIC(m_null_gamma, m5, m6, m7, m8)
 
 #### Test Assumptions ===============
 #### Pairwise Plot of Residuals ===============

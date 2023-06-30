@@ -2,6 +2,7 @@
 
 ### load libraries
 library(tidyverse)
+library(ggdark)
 
 #### *** 2021: Benthic Chlorophyll *** ====
 ### load data sheet
@@ -23,15 +24,20 @@ colSums(is.na(BChl2021_2))
 BChl2021_2$Sampling_Period <- as.character(BChl2021_2$Sampling_Period)
 is.character(BChl2021_2$Sampling_Period)
 
+BChl2021_2
+
 #### Figures, Mean, SD, SE =====
 
 #### No Grouping ====
 
 AllStats.B2021 <- BChl2021_2 %>%
+  group_by(Lease) %>% 
   summarize(
     MeanChla = mean(Chl_a),
     SD_Chla = sd(Chl_a),
-    SE_Chla = SD_Chla/sqrt(n()))
+    SE_Chla = SD_Chla/sqrt(n()),
+    min = min(Chl_a),
+    max = max(Chl_a))
 
 AllStats.B2021
 
@@ -40,7 +46,7 @@ AllStats.B2021
 #### By Sampling ====
 
 SamplingB2021.Stats <- BChl2021_2 %>%
-  group_by(Sampling_Period) %>% 
+  group_by(Sampling_Period, Lease) %>% 
   summarize(
     Mean_Chla = mean(Chl_a),
     SD_Chla = sd(Chl_a),
@@ -137,7 +143,7 @@ AllStats.B2022
 #### By Sampling ====
 
 SamplingB2022.Stats <- BChl2022 %>%
-  group_by(Sampling_Period) %>% 
+  group_by(Lease, Sampling_Period) %>% 
   summarize(
     Mean_Chla = mean(Chl_a),
     SD_Chla = sd(Chl_a),
@@ -239,7 +245,7 @@ AllStats.W2022
 #### By Sampling ====
 
 SamplingW2022.Stats <- WChl2022_2 %>%
-  group_by(Sampling_Period) %>% 
+  group_by(Lease, Sampling_Period) %>% 
   summarize(
     Mean_Chla = mean(Chl_a),
     SD_Chla = sd(Chl_a),
@@ -304,3 +310,67 @@ Plot.W2022SiteStats <- ggplot(WChl2022_2, aes(x = Sampling_Period, y = Chl_a)) +
        y = expression(paste("Chlorophyll ", italic("a"), " (mg/m"^3,")")))
 
 Plot.W2022SiteStats 
+
+
+############==========
+  
+MeanChlA <- read_csv("data/Chlorophyll/Mean_Chla.csv")
+glimpse(MeanChlA)
+summary(MeanChlA)
+tail(MeanChlA)
+View(MeanChlA)
+
+MeanChlA$Sampling_Period <- as.character(MeanChlA$Sampling_Period)
+is.character(MeanChlA$Sampling_Period)
+
+MeanChlA$Year <- as.character(MeanChlA$Year)
+is.character(MeanChlA$Year)
+
+Plot.MeanChlA <- ggplot(MeanChlA, aes(x = factor(Site, c("South", "Middle", "North")), y = Mean_Chl_a, color = Site, shape = Year)) +
+  geom_point(stat ="identity", size = 4) + 
+  scale_shape_manual(values=c(17, 15)) +
+  geom_errorbar(aes(ymin = Mean_Chl_a-SE_Chla, ymax = Mean_Chl_a+SE_Chla), width = 0.5) + 
+  facet_grid(Year~Sample) +
+  scale_color_manual(values=c("#FDAE61", "#ABD9E9", "#D53E4F"),
+                    guide = "none") +
+  theme(legend.position="none") +
+  coord_flip() +
+  theme_classic()
+
+Plot.MeanChlA
+
+
+## made long on purpose!
+ggsave(filename = "fig_output/Plot_ChlA.png", width = 5.10, height = 5.77, dpi = 300)
+
+#### ** PPT: Prop >-16C Plot =============
+
+#### officeR directly exports the plot to your desired file into a powerpoint slide-shaped image ===== 
+library(officer)
+## initialize R object representing .pptx file. 
+Plot.MeanChlA_fig <- read_pptx()
+Plot.MeanChlA_fig <- add_slide(Plot.MeanChlA_fig , layout = "Title and Content", master = "Office Theme")
+Plot.MeanChlA_fig <-  ph_with(x = Plot.MeanChlA_fig, value = Plot.MeanChlA, location = ph_location_fullsize() )
+Plot.MeanChlA_fig  <- ph_with(x = Plot.MeanChlA_fig, "Plot", location = ph_location_type(type = "title") )
+print(Plot.MeanChlA_fig, target = "presentations/plot.pptx")
+
+#### R2PPT / RDCOMClient =====
+
+#install.packages("devtools", dependencies = TRUE)
+
+library(RDCOMClient)
+library(R2PPT)
+
+## Step 1: Save as a temporary file
+TEMP_FILE <- paste(tempfile(), ".wmf", sep="")
+ggsave(TEMP_FILE, plot = Plot.MeanChlA) # Saving the plot to the temporary file
+
+
+## Step 2: Open a blank PPT slide
+mkppt <- PPT.Init (method = "RDCOMClient")
+mkppt <- PPT.AddBlankSlide(mkppt)
+
+## Step 3: Export graph to PPT slide
+mkppt <- PPT.AddGraphicstoSlide(mkppt, file = TEMP_FILE)
+
+unlink(TEMP_FILE)
