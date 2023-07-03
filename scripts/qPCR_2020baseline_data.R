@@ -42,6 +42,18 @@ BaselineStats <- OsHV1 %>%
 
 BaselineStats
 
+#### Mean, SD, SE, min, max for 2020 Cohort ===== 
+BaselineStats <- OsHV1 %>%
+  filter(Year == "2020") %>% 
+  group_by(Site, Sampling_Period) %>%
+  summarize(Mean_Copies = mean(Copies_per_mgTissue),
+            SD_Copies = sd(Copies_per_mgTissue),
+            SE_Copies = SD_Copies/sqrt(n()),
+            min_Copies = min(Copies_per_mgTissue),
+            max_Copies = max(Copies_per_mgTissue))
+
+BaselineStats
+
 #### 2020 Baseline Plot ====
 BaselineStats.plot <- ggplot(BaselineStats, aes(x = factor(Site, c("South", "North")), y = Mean_Copies), fill = Sampling_Period) +
   facet_wrap(~ Sampling_Period) +
@@ -87,9 +99,8 @@ unlink(TEMP_FILE)
 
 #### Mean, SD, SE, min, max for 2020 Cohort by Year + Site ===== 
 Yr3Stats <- OsHV1 %>%
-  filter(Cohort == "2020",
-         Sampling_Period != 4) %>%
-  group_by(Site, Year) %>%
+  filter(Cohort == "2020") %>%
+  group_by(Sampling_Period, Site, Year) %>%
   summarize(Mean_Copies = mean(Copies_per_mgTissue),
             SD_Copies = sd(Copies_per_mgTissue),
             SE_Copies = SD_Copies/sqrt(n()),
@@ -100,7 +111,7 @@ Yr3Stats
 
 #### 2020-2022 Plot ====
 Yr3Stats.plot <- ggplot(Yr3Stats, aes(x = factor(Site, c("South", "Middle", "North")), y = Mean_Copies)) +
-  facet_wrap(~Year) +
+  facet_wrap(Year~Sampling_Period) +
   geom_bar(stat = "identity") +
   geom_errorbar(aes(ymin = Mean_Copies-SE_Copies, ymax = Mean_Copies + SE_Copies), width=.1, position=position_dodge(.9)) +
   scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x),
@@ -114,7 +125,7 @@ Yr3Stats.plot
 library(officer)
 ## initialize R object representing .pptx file. 
 Yr3Stats.plot_fig <- read_pptx()
-Yr3Stats.plot_fig <- add_slide(BaselineStats.plot_fig , layout = "Title and Content", master = "Office Theme")
+Yr3Stats.plot_fig <- add_slide(Yr3Stats.plot_fig , layout = "Title and Content", master = "Office Theme")
 Yr3Stats.plot_fig <-  ph_with(x = Yr3Stats.plot_fig, value = Yr3Stats.plot, location = ph_location_fullsize() )
 Yr3Stats.plot_fig  <- ph_with(x = Yr3Stats.plot_fig, "Plot", location = ph_location_type(type = "title") )
 print(Yr3Stats.plot_fig, target = "presentations/plot.pptx")

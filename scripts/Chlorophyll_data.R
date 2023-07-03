@@ -40,8 +40,6 @@ AllStats.B2021 <- BChl2021_2 %>%
     max = max(Chl_a))
 
 AllStats.B2021
-
-
  
 #### By Sampling ====
 
