@@ -58,7 +58,7 @@ ggplot(LW2020, aes(x = Sampling_Time, y = L)) +
 #### By Site====
 
 SiteStats.LW2020 <- LW2020 %>%
-  group_by(Site) %>% 
+  group_by(Site, Sampling_Time) %>% 
   summarize(
     Mean_Length = mean(L),
     SD_Length = sd(L),
@@ -67,8 +67,52 @@ SiteStats.LW2020 <- LW2020 %>%
 SiteStats.LW2020
 
 ## plot
-ggplot(LW2020, aes(x = Site, y = L)) +
-  geom_boxplot()
+Plot.2020.L <- SiteStats.LW2020 %>% 
+  ggplot(aes(x = factor(Site, c("South", "North")), y = Mean_Length, group = factor(Sampling_Time, c("5", "1")), fill = Sampling_Time)) +
+  geom_bar(stat="identity", position=position_dodge()) +
+  geom_errorbar(aes(ymin = Mean_Length - SE_Length, ymax = Mean_Length + SE_Length), width=.1, position=position_dodge(.9), color = "black") +
+  scale_fill_manual(values=c("#FDAE61", "#ABD9E9", "#D53E4F")) + #,
+  # guide = "none") +
+  ylim(0,6) +
+  coord_flip() +
+  theme_classic()
+
+Plot.2020.L
+
+#### ** PPT: M. gigas Shell Lengths 2020 ==============
+
+#### officeR directly exports the plot to your desired file into a powerpoint slide-shaped image ===== 
+library(officer)
+## initialize R object representing .pptx file. 
+Plot.2020.L_fig <- read_pptx()
+Plot.2020.L_fig <- add_slide(Plot.2020.L_fig , layout = "Title and Content", master = "Office Theme")
+Plot.2020.L_fig <-  ph_with(x = Plot.2020.L_fig, value = Plot.2020.L, location = ph_location_fullsize() )
+Plot.2020.L_fig  <- ph_with(x = Plot.2020.L_fig, "Plot", location = ph_location_type(type = "title") )
+print(Plot.2020.L_fig, target = "presentations/plot.pptx")
+
+#### R2PPT / RDCOMClient =====
+
+#install.packages("devtools", dependencies = TRUE)
+
+library(RDCOMClient)
+library(R2PPT)
+
+## Step 1: Save as a temporary file
+TEMP_FILE <- paste(tempfile(), ".wmf", sep="")
+ggsave(TEMP_FILE, plot = Plot.2020.L) # Saving the plot to the temporary file
+
+
+## Step 2: Open a blank PPT slide
+mkppt <- PPT.Init (method = "RDCOMClient")
+mkppt <- PPT.AddBlankSlide(mkppt)
+
+## Step 3: Export graph to PPT slide
+mkppt <- PPT.AddGraphicstoSlide(mkppt, file = TEMP_FILE)
+
+unlink(TEMP_FILE)
+
+#########################################################
+
 
 
 #### By Bag by Sampling_Time ====
@@ -145,8 +189,10 @@ AllStats.2021gigas
 
 #### By SH_Temp ====
 
+glimpse(LW2021.gigas.na)
+
 SHTemp_Stats.2021gigas <- LW2021.gigas.na %>%
-  group_by(SH_Temp) %>% 
+  group_by(Sampling_Time, SH_Temp, Site) %>% 
   summarize(
     Mean_Length = mean(L),
     SD_Length = sd(L),
@@ -155,8 +201,53 @@ SHTemp_Stats.2021gigas <- LW2021.gigas.na %>%
 SHTemp_Stats.2021gigas 
 
 ## plot
-ggplot(LW2021.gigas.na, aes(x = SH_Temp, y = L, color = SH_Temp)) +
-  geom_boxplot()
+
+Plot.L.gigas21 <- SHTemp_Stats.2021gigas %>% 
+  ggplot(aes(x = factor(Site, c("South", "Middle", "North")), y = Mean_Length, group = Sampling_Time, fill = Sampling_Time)) +
+  facet_wrap(~SH_Temp) +
+  geom_bar(stat="identity", position=position_dodge()) +
+  geom_errorbar(aes(ymin = Mean_Length - SE_Length, ymax = Mean_Length + SE_Length), width=.1, position=position_dodge(.9), color = "black") +
+  scale_fill_manual(values=c("#FDAE61", "#ABD9E9", "#D53E4F")) + #,
+  # guide = "none") +
+  ylim(0,6) +
+  coord_flip() +
+  theme_classic()
+
+Plot.L.gigas21
+
+#### ** PPT: M. gigas lengths 2021 ==============
+
+#### officeR directly exports the plot to your desired file into a powerpoint slide-shaped image ===== 
+library(officer)
+## initialize R object representing .pptx file. 
+Plot.L.gigas21_fig <- read_pptx()
+Plot.L.gigas21_fig <- add_slide(Plot.L.gigas21_fig , layout = "Title and Content", master = "Office Theme")
+Plot.L.gigas21_fig <-  ph_with(x = Plot.L.gigas21_fig, value = Plot.L.gigas21, location = ph_location_fullsize() )
+Plot.L.gigas21_fig  <- ph_with(x = Plot.L.gigas21_fig, "Plot", location = ph_location_type(type = "title") )
+print(Plot.L.gigas21_fig, target = "presentations/plot.pptx")
+
+#### R2PPT / RDCOMClient =====
+
+#install.packages("devtools", dependencies = TRUE)
+
+library(RDCOMClient)
+library(R2PPT)
+
+## Step 1: Save as a temporary file
+TEMP_FILE <- paste(tempfile(), ".wmf", sep="")
+ggsave(TEMP_FILE, plot = Plot.L.gigas21) # Saving the plot to the temporary file
+
+
+## Step 2: Open a blank PPT slide
+mkppt <- PPT.Init (method = "RDCOMClient")
+mkppt <- PPT.AddBlankSlide(mkppt)
+
+## Step 3: Export graph to PPT slide
+mkppt <- PPT.AddGraphicstoSlide(mkppt, file = TEMP_FILE)
+
+unlink(TEMP_FILE)
+
+#########################################################
 
 #### By Sampling_Time ====
 
@@ -169,9 +260,7 @@ SamplingStats.2021gigas <- LW2021.gigas.na %>%
 
 SamplingStats.2021gigas 
 
-## plot
-ggplot(LW2021.gigas.na, aes(x = Sampling_Time, y = L, color = Sampling_Time)) +
-  geom_boxplot()
+
 
 
 #### By Site ====
@@ -266,8 +355,10 @@ AllStats.2021sikamea
 
 #### By SH_Temp ====
 
+glimpse(LW2021.sikamea.na)
+
 SHTemp_Stats.2021sikamea <- LW2021.sikamea.na %>%
-  group_by(SH_Temp) %>% 
+  group_by(Sampling_Time, Site) %>% 
   summarize(
     Mean_Length = mean(L),
     SD_Length = sd(L),
@@ -276,8 +367,51 @@ SHTemp_Stats.2021sikamea <- LW2021.sikamea.na %>%
 SHTemp_Stats.2021sikamea 
 
 ## plot
-ggplot(LW2021.sikamea.na, aes(x = SH_Temp, y = L, color = SH_Temp)) +
-  geom_boxplot()
+
+Plot.2021.sik <- SHTemp_Stats.2021sikamea %>% 
+  ggplot(aes(x = factor(Site, c("South", "Middle", "North")), y = Mean_Length, group = factor(Sampling_Time, c("4", "1")), fill = Sampling_Time)) +
+  geom_bar(stat="identity", position=position_dodge()) +
+  geom_errorbar(aes(ymin = Mean_Length - SE_Length, ymax = Mean_Length + SE_Length), width=.1, position=position_dodge(.9), color = "black") +
+  scale_fill_manual(values=c("#FDAE61", "#ABD9E9", "#D53E4F")) + #,
+  # guide = "none") +
+  coord_flip() +
+  theme_classic()
+
+Plot.2021.sik
+
+#### ** PPT: C. sikamea Shell Lengths 2021 ==============
+
+#### officeR directly exports the plot to your desired file into a powerpoint slide-shaped image ===== 
+library(officer)
+## initialize R object representing .pptx file. 
+Plot.2021.sik_fig <- read_pptx()
+Plot.2021.sik_fig <- add_slide(Plot.2021.sik_fig , layout = "Title and Content", master = "Office Theme")
+Plot.2021.sik_fig <-  ph_with(x = Plot.2021.sik_fig, value = Plot.2021.sik, location = ph_location_fullsize() )
+Plot.2021.sik_fig  <- ph_with(x = Plot.2021.sik_fig, "Plot", location = ph_location_type(type = "title") )
+print(Plot.2021.sik_fig, target = "presentations/plot.pptx")
+
+#### R2PPT / RDCOMClient =====
+
+#install.packages("devtools", dependencies = TRUE)
+
+library(RDCOMClient)
+library(R2PPT)
+
+## Step 1: Save as a temporary file
+TEMP_FILE <- paste(tempfile(), ".wmf", sep="")
+ggsave(TEMP_FILE, plot = Plot.2021.sik) # Saving the plot to the temporary file
+
+
+## Step 2: Open a blank PPT slide
+mkppt <- PPT.Init (method = "RDCOMClient")
+mkppt <- PPT.AddBlankSlide(mkppt)
+
+## Step 3: Export graph to PPT slide
+mkppt <- PPT.AddGraphicstoSlide(mkppt, file = TEMP_FILE)
+
+unlink(TEMP_FILE)
+
+#########################################################
 
 #### By SH_Tide ====
 

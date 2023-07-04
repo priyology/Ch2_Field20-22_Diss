@@ -2,6 +2,12 @@
 
 ### load libraries
 library(tidyverse)
+library(gtsummary) # for producing tables: 
+library(broom.mixed) ## to use with gtsummary
+library(lme4) ##glm
+library(lmerTest) ##p-values
+library(emmeans) ## comparisons
+library(ggeffects) ## another model plotting option
 
 #### *** 2020: L/W *** ====
 ### load data sheet
@@ -105,25 +111,29 @@ summary(m2)
 #
 #Number of Fisher Scoring iterations: 2
 
+#### m2.bag: L ~ Sampling_Time + (1|Bag)  =====
+m1.bag <- lmer(L ~ Sampling_Time + (1|Bag), data = LW2020)
+summary(m1.bag)
+
 #### AIC/BIC Scores ===============
-AIC(m_null, m1, m2)
-BIC(m_null, m1, m2)
+AIC(m_null_2020, m1, m2, m1.bag)
+BIC(m_null_2020, m1, m2, m1.bag)
 
 #### Test Assumptions ===============
 #### Pairwise Plot of Residuals ===============
-plot(fitted(m1), resid(m1))
+plot(fitted(m1.bag), resid(m1.bag))
 abline(0,0)
 
 #### Q-Q plot of Residuals ===============
-qqnorm(resid(m1))
-qqline(resid(m1))
+qqnorm(resid(m1.bag))
+qqline(resid(m1.bag))
 
 #### Density Plot of Residuals ===============
-plot(density(resid(m1)))
+plot(density(resid(m1.bag)))
 
 
 #### Plot 2020 Model =========
-m1.plot <- ggpredict(m1, terms = c("Sampling_Time"))
+m1.plot <- ggpredict(m1.bag, terms = c("Sampling_Time"))
 
 plot(m1.plot) +
   theme_classic() +
@@ -338,7 +348,7 @@ summary(m7)
 
 #### m8: L ~ Sampling_Time + Site + Sampling_Time*Site  =====
 m8 <- glm(L ~ Sampling_Time + Site + Sampling_Time*Site, family = gaussian(link = "identity"), data = LW2021.sik)
-summary(m8)
+  summary(m8)
 
 # Call:
 #glm(formula = L ~ Sampling_Time + Site + Sampling_Time * Site, 
@@ -366,22 +376,26 @@ summary(m8)
 #AIC: 483.15
 #
 #Number of Fisher Scoring iterations: 2
+  
+#### m8.bag: L ~ Sampling_Time + Site + Sampling_Time*Site + (1|Bag)  =====
+m8.bag <- lmer(L ~ Sampling_Time + Site + Sampling_Time*Site + (1|Bag), data = LW2021.sik)
+summary(m8.bag)
 
 #### AIC/BIC Scores ===============
-AIC(m_null.sik, m3, m4, m5, m6, m7, m8)
-BIC(m_null.sik, m3, m4, m5, m6, m7, m8)
+AIC(m_null.sik, m3, m4, m5, m6, m7, m8, m8.bag)
+BIC(m_null.sik, m3, m4, m5, m6, m7, m8, m8.bag)
 
 #### Test Assumptions ===============
 #### Pairwise Plot of Residuals ===============
-plot(fitted(m8), resid(m8))
+plot(fitted(m8.bag), resid(m8.bag))
 abline(0,0)
 
 #### Q-Q plot of Residuals ===============
-qqnorm(resid(m8))
-qqline(resid(m8))
+qqnorm(resid(m8.bag))
+qqline(resid(m8.bag))
 
 #### Density Plot of Residuals ===============
-plot(density(resid(m8)))
+plot(density(resid(m8.bag)))
 
 #### Pairwise Comparisons ===============
 ## pairwise comparison for m8
@@ -563,189 +577,161 @@ summary(m11)
 #Number of Fisher Scoring iterations: 2
 
 
-#### m12: L ~ SH_Temp + SH_Tide + Site =====
-m12 <- glm(L ~ SH_Temp + SH_Tide + Site, family = gaussian(link = "identity"), data = LW21_22.gigas)
-summary(m12)
+#### m11a: L ~ Year/Sampling_Time =====
 
-# Call:
-#glm(formula = L ~ SH_Temp + SH_Tide + Site, family = gaussian(link = "identity"), 
+m11a <- glm(L ~ Year/Sampling_Time, family = gaussian(link = "identity"), data = LW21_22.gigas)
+summary(m11a)
+
+#Call:
+#glm(formula = L ~ Year/Sampling_Time, family = gaussian(link = "identity"), 
 #    data = LW21_22.gigas)
 #
 #Deviance Residuals: 
 #  Min       1Q   Median       3Q      Max  
-#-2.0175  -0.6264  -0.1533   0.5306   3.2253  
+#-2.0901  -0.3951  -0.0450   0.3677   2.7639  
 #
 #Coefficients:
 #  Estimate Std. Error t value Pr(>|t|)    
-#(Intercept)  3.734068   0.172513  21.645  < 2e-16 ***
-#  SH_Temp     -0.019752   0.009074  -2.177 0.029714 *  
-#  SH_TideTide  0.527987   0.054989   9.602  < 2e-16 ***
-#  SiteMiddle   0.046468   0.063384   0.733 0.463650    
-#SiteSouth   -0.215704   0.063294  -3.408 0.000679 ***
+#(Intercept)         -1.263e+03  1.111e+02  -11.36   <2e-16 ***
+#  Year                 6.262e-01  5.498e-02   11.39   <2e-16 ***
+#  Year:Sampling_Time4  3.616e-04  3.156e-05   11.46   <2e-16 ***
+#  Year:Sampling_Time6  5.745e-04  2.229e-05   25.77   <2e-16 ***
 #  ---
 #  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 #
-#(Dispersion parameter for gaussian family taken to be 0.7130925)
+#(Dispersion parameter for gaussian family taken to be 0.3610219)
 #
 #Null deviance: 840.70  on 1065  degrees of freedom
-#Residual deviance: 756.59  on 1061  degrees of freedom
-#AIC: 2671.7
+#Residual deviance: 383.41  on 1062  degrees of freedom
+#AIC: 1945.1
 #
 #Number of Fisher Scoring iterations: 2
 
-#### m13: L ~ SH_Temp + SH_Tide + Site + SH_Temp*SH_Tide =====
-m13 <- glm(L ~ SH_Temp + SH_Tide + Site + SH_Temp*SH_Tide, family = gaussian(link = "identity"), data = LW21_22.gigas)
+#### m12: L ~ SH_Temp + SH_Tide + Site + Year/Sampling_Time =====
+m12 <- glm(L ~ SH_Temp + SH_Tide + Site + Year/Sampling_Time, family = gaussian(link = "identity"), data = LW21_22.gigas)
+summary(m12)
+
+#Call:
+#glm(formula = L ~ SH_Temp + SH_Tide + Site + Year/Sampling_Time, 
+#    family = gaussian(link = "identity"), data = LW21_22.gigas)
+#
+#Deviance Residuals: 
+#  Min       1Q   Median       3Q      Max  
+#-2.0826  -0.3920  -0.0531   0.3643   2.6253  
+#
+#Coefficients:
+#  Estimate Std. Error t value Pr(>|t|)    
+#(Intercept)         -1.105e+03  1.174e+02  -9.409  < 2e-16 ***
+#  SH_Temp             -1.191e-02  6.327e-03  -1.882 0.060121 .  
+#SH_TideTide          1.461e-01  4.405e-02   3.317 0.000942 ***
+#  SiteMiddle           4.456e-02  4.408e-02   1.011 0.312367    
+#SiteSouth           -2.136e-01  4.402e-02  -4.853  1.4e-06 ***
+#  Year                 5.481e-01  5.809e-02   9.437  < 2e-16 ***
+#  Year:Sampling_Time4  3.630e-04  3.085e-05  11.767  < 2e-16 ***
+#  Year:Sampling_Time6  5.742e-04  2.179e-05  26.355  < 2e-16 ***
+#  ---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#
+#(Dispersion parameter for gaussian family taken to be 0.3449315)
+#
+#Null deviance: 840.70  on 1065  degrees of freedom
+#Residual deviance: 364.94  on 1058  degrees of freedom
+#AIC: 1900.5
+#
+#Number of Fisher Scoring iterations: 2
+
+#### m13: L ~ SH_Temp + SH_Tide + Site + Year/Sampling_Time + SH_Temp*SH_Tide =====
+m13 <- glm(L ~ SH_Temp + SH_Tide + Site + Year/Sampling_Time + SH_Temp*SH_Tide, family = gaussian(link = "identity"), data = LW21_22.gigas)
 summary(m13)
 
 # Call:
-#glm(formula = L ~ SH_Temp + SH_Tide + Site + SH_Temp * SH_Tide, 
-#    family = gaussian(link = "identity"), data = LW21_22.gigas)
+#glm(formula = L ~ SH_Temp + SH_Tide + Site + Year/Sampling_Time + 
+#      SH_Temp * SH_Tide, family = gaussian(link = "identity"), 
+#    data = LW21_22.gigas)
 #
 #Deviance Residuals: 
 #  Min       1Q   Median       3Q      Max  
-#-2.0240  -0.6282  -0.1637   0.5284   3.2107  
+#-2.0866  -0.3890  -0.0542   0.3657   2.6322  
 #
 #Coefficients:
 #  Estimate Std. Error t value Pr(>|t|)    
-#(Intercept)          3.78635    0.21374  17.714  < 2e-16 ***
-#  SH_Temp             -0.02261    0.01141  -1.983 0.047651 *  
-#  SH_TideTide          0.38635    0.34602   1.117 0.264435    
-#SiteMiddle           0.04648    0.06341   0.733 0.463672    
-#SiteSouth           -0.21565    0.06332  -3.406 0.000685 ***
-#  SH_Temp:SH_TideTide  0.00781    0.01884   0.415 0.678506    
+#(Intercept)         -1.106e+03  1.176e+02  -9.409  < 2e-16 ***
+#  SH_Temp             -1.054e-02  7.966e-03  -1.324    0.186    
+#SH_TideTide          2.129e-01  2.408e-01   0.884    0.377    
+#SiteMiddle           4.455e-02  4.410e-02   1.010    0.313    
+#SiteSouth           -2.137e-01  4.404e-02  -4.851 1.41e-06 ***
+#  Year                 5.488e-01  5.816e-02   9.436  < 2e-16 ***
+#  Year:Sampling_Time4  3.630e-04  3.086e-05  11.761  < 2e-16 ***
+#  Year:Sampling_Time6  5.742e-04  2.180e-05  26.343  < 2e-16 ***
+#  SH_Temp:SH_TideTide -3.701e-03  1.312e-02  -0.282    0.778    
 #---
 #  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 #
-#(Dispersion parameter for gaussian family taken to be 0.7136495)
+#(Dispersion parameter for gaussian family taken to be 0.3452318)
 #
 #Null deviance: 840.70  on 1065  degrees of freedom
-#Residual deviance: 756.47  on 1060  degrees of freedom
-#AIC: 2673.5
+#Residual deviance: 364.91  on 1057  degrees of freedom
+#AIC: 1902.4
 #
 #Number of Fisher Scoring iterations: 2
 
-#### m14: L ~ SH_Temp + SH_Tide + Site + SH_Tide*Site =====
-m14 <- glm(L ~ SH_Temp + SH_Tide + Site + SH_Tide*Site, family = gaussian(link = "identity"), data = LW21_22.gigas)
+
+#### m14: L ~ SH_Temp + SH_Tide + Site + Year/Sampling_Time + SH_Tide*Site =====
+m14 <- glm(L ~ SH_Temp + SH_Tide + Site + Year/Sampling_Time + SH_Tide*Site, family = gaussian(link = "identity"), data = LW21_22.gigas)
 summary(m14)
 
 # Call:
-#glm(formula = L ~ SH_Temp + SH_Tide + Site + SH_Tide * Site, 
-#    family = gaussian(link = "identity"), data = LW21_22.gigas)
+#glm(formula = L ~ SH_Temp + SH_Tide + Site + Year/Sampling_Time + 
+#      SH_Tide * Site, family = gaussian(link = "identity"), data = LW21_22.gigas)
 #
 #Deviance Residuals: 
-#  Min       1Q   Median       3Q      Max  
-#-2.0056  -0.6316  -0.1681   0.5324   3.2010  
+#  Min        1Q    Median        3Q       Max  
+#-2.07137  -0.39428  -0.06215   0.37039   2.60257  
 #
 #Coefficients:
 #  Estimate Std. Error t value Pr(>|t|)    
-#(Intercept)             3.719259   0.174460  21.319  < 2e-16 ***
-#  SH_Temp                -0.019772   0.009077  -2.178   0.0296 *  
-#  SH_TideTide             0.573786   0.095132   6.031 2.24e-09 ***
-#  SiteMiddle              0.049645   0.077525   0.640   0.5221    
-#SiteSouth              -0.173385   0.077443  -2.239   0.0254 *  
-#  SH_TideTide:SiteMiddle -0.009478   0.134752  -0.070   0.9439    
-#SH_TideTide:SiteSouth  -0.127674   0.134513  -0.949   0.3428    
+#(Intercept)            -1.105e+03  1.174e+02  -9.414  < 2e-16 ***
+#  SH_Temp                -1.192e-02  6.326e-03  -1.885  0.05971 .  
+#SH_TideTide             1.944e-01  6.962e-02   2.792  0.00533 ** 
+#  SiteMiddle              4.934e-02  5.389e-02   0.916  0.36004    
+#SiteSouth              -1.703e-01  5.383e-02  -3.163  0.00160 ** 
+#  Year                    5.483e-01  5.808e-02   9.441  < 2e-16 ***
+#  Year:Sampling_Time4     3.629e-04  3.085e-05  11.763  < 2e-16 ***
+#  Year:Sampling_Time6     5.741e-04  2.178e-05  26.357  < 2e-16 ***
+#  SH_TideTide:SiteMiddle -1.434e-02  9.366e-02  -0.153  0.87833    
+#SH_TideTide:SiteSouth  -1.308e-01  9.350e-02  -1.399  0.16223    
 #---
 #  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 #
-#(Dispersion parameter for gaussian family taken to be 0.7136861)
+#(Dispersion parameter for gaussian family taken to be 0.344817)
 #
 #Null deviance: 840.70  on 1065  degrees of freedom
-#Residual deviance: 755.79  on 1059  degrees of freedom
-#AIC: 2674.6
+#Residual deviance: 364.13  on 1056  degrees of freedom
+#AIC: 1902.1
 #
 #Number of Fisher Scoring iterations: 2
 
-#### m15: L ~ SH_Temp + SH_Tide + Site + SH_Temp*Site =====
-m15 <- glm(L ~ SH_Temp + SH_Tide + Site + SH_Temp*Site, family = gaussian(link = "identity"), data = LW21_22.gigas)
-summary(m15)
-
-# Call:
-#glm(formula = L ~ SH_Temp + SH_Tide + Site + SH_Temp * Site, 
-#    family = gaussian(link = "identity"), data = LW21_22.gigas)
-#
-#Deviance Residuals: 
-#  Min       1Q   Median       3Q      Max  
-#-2.0069  -0.6323  -0.1457   0.5229   3.2119  
-#
-#Coefficients:
-#  Estimate Std. Error t value Pr(>|t|)    
-#(Intercept)         3.841330   0.289955  13.248   <2e-16 ***
-#  SH_Temp            -0.025651   0.015705  -1.633    0.103    
-#SH_TideTide         0.528005   0.055035   9.594   <2e-16 ***
-#  SiteMiddle         -0.147809   0.409448  -0.361    0.718    
-#SiteSouth          -0.343815   0.409179  -0.840    0.401    
-#SH_Temp:SiteMiddle  0.010677   0.022229   0.480    0.631    
-#SH_Temp:SiteSouth   0.007045   0.022221   0.317    0.751    
-#---
-#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-#
-#(Dispersion parameter for gaussian family taken to be 0.7142783)
-#
-#Null deviance: 840.70  on 1065  degrees of freedom
-#Residual deviance: 756.42  on 1059  degrees of freedom
-#AIC: 2675.5
-#
-#Number of Fisher Scoring iterations: 2
-
-#### m16: L ~ SH_Temp + SH_Tide + Site + (1|Year:Sampling_Time) =====
-m16 <- lmer(L ~ SH_Temp + SH_Tide + Site + (1|Year:Sampling_Time), data = LW21_22.gigas)
-summary(m16)
-
-# Linear mixed model fit by REML. t-tests use Satterthwaite's  method
-#[lmerModLmerTest]
-#Formula: L ~ SH_Temp + SH_Tide + Site + (1 | Year:Sampling_Time)
-#Data: LW21_22.gigas
-#
-#REML criterion at convergence: 1931.2
-#
-#Scaled residuals: 
-#  Min      1Q  Median      3Q     Max 
-#-3.5415 -0.6679 -0.0936  0.6215  4.4721 
-#
-#Random effects:
-#  Groups             Name        Variance Std.Dev.
-#Year:Sampling_Time (Intercept) 0.5064   0.7116  
-#Residual                       0.3449   0.5873  
-#Number of obs: 1066, groups:  Year:Sampling_Time, 4
-#
-#Fixed effects:
-#  Estimate Std. Error         df t value Pr(>|t|)    
-#(Intercept)  3.592e+00  3.756e-01  3.703e+00   9.564 0.000963 ***
-#  SH_Temp     -1.194e-02  6.327e-03  1.058e+03  -1.887 0.059488 .  
-#SH_TideTide  1.476e-01  4.403e-02  1.060e+03   3.351 0.000833 ***
-#  SiteMiddle   4.456e-02  4.408e-02  1.058e+03   1.011 0.312322    
-#SiteSouth   -2.136e-01  4.402e-02  1.058e+03  -4.853  1.4e-06 ***
-#  ---
-#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-#
-#Correlation of Fixed Effects:
-#  (Intr) SH_Tmp SH_TdT StMddl
-#SH_Temp     -0.307                     
-#SH_TideTide -0.027 -0.006              
-#SiteMiddle  -0.057 -0.004  0.001       
-#SiteSouth   -0.058 -0.002 -0.003  0.499
 
 #### AIC/BIC Scores ===============
-AIC(m_null_gigas, m9, m10, m11, m12, m13, m14, m15, m16)
-BIC(m_null_gigas, m9, m10, m11, m12, m13, m14, m15, m16)
+AIC(m_null_gigas, m9, m10, m11, m12, m13, m14)
+BIC(m_null_gigas, m9, m10, m11, m12, m13, m14)
 
 #### Test Assumptions ===============
 #### Pairwise Plot of Residuals ===============
-plot(fitted(m16), resid(m16))
+plot(fitted(m12), resid(m12))
 abline(0,0)
 
 #### Q-Q plot of Residuals ===============
-qqnorm(resid(m16))
-qqline(resid(m16))
+qqnorm(resid(m12))
+qqline(resid(m12))
 
 #### Density Plot of Residuals ===============
-plot(density(resid(m16)))
+plot(density(resid(m12)))
 
 #### Plot 2021/2022 M. gigas Model =========
-m16.plot <- ggpredict(m16, terms = c("Site", "SH_Temp", "SH_Tide"))
+m12.plot <- ggpredict(m12 terms = c("Site", "SH_Temp", "SH_Tide"))
 
-plot(m16.plot) +
+plot(m12.plot) +
   theme_classic() + 
   #scale_color_brewer(palette = "Paired", direction = -1)  +
   labs(title = expression(paste(italic("M. gigas"), ": glm(Length ~ Sampling_Time")), 
@@ -758,9 +744,9 @@ ggsave(filename = "fig_output/model_Mgigas_20-21.png", width = 5.10, height = 5.
 ##### DARK PLOTS: ggdark / black background =================
 library(ggdark)
 
-m8.DARKplot <- ggpredict(m16, terms = c("Site", "SH_Temp", "SH_Tide"))
+12.DARKplot <- ggpredict(m12, terms = c("Site", "SH_Temp", "SH_Tide"))
 
-plot(m8.DARKplot) +
+plot(m12.DARKplot) +
   dark_theme_classic() +
   #scale_color_brewer(palette = "RdYlBu", direction = -1)  +
   labs(title = expression(paste(italic("M. gigas"), ": glm(Length ~ Sampling_Time")), 
