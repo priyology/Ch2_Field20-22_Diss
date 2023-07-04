@@ -711,10 +711,43 @@ summary(m14)
 #
 #Number of Fisher Scoring iterations: 2
 
+#### m15: L ~ SH_Temp + SH_Tide + Site + Year/Sampling_Time + (1|Bag) =====
+m15 <- lmer(L ~ SH_Temp + SH_Tide + Site + Year/Sampling_Time + (1|Bag), data = LW21_22.gigas)
+summary(m15)
+
+#Call:
+#glm(formula = L ~ SH_Temp + SH_Tide + Site + Year/Sampling_Time, 
+#    family = gaussian(link = "identity"), data = LW21_22.gigas)
+#
+#Deviance Residuals: 
+#  Min       1Q   Median       3Q      Max  
+#-2.0826  -0.3920  -0.0531   0.3643   2.6253  
+#
+#Coefficients:
+#  Estimate Std. Error t value Pr(>|t|)    
+#(Intercept)         -1.105e+03  1.174e+02  -9.409  < 2e-16 ***
+#  SH_Temp             -1.191e-02  6.327e-03  -1.882 0.060121 .  
+#SH_TideTide          1.461e-01  4.405e-02   3.317 0.000942 ***
+#  SiteMiddle           4.456e-02  4.408e-02   1.011 0.312367    
+#SiteSouth           -2.136e-01  4.402e-02  -4.853  1.4e-06 ***
+#  Year                 5.481e-01  5.809e-02   9.437  < 2e-16 ***
+#  Year:Sampling_Time4  3.630e-04  3.085e-05  11.767  < 2e-16 ***
+#  Year:Sampling_Time6  5.742e-04  2.179e-05  26.355  < 2e-16 ***
+#  ---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#
+#(Dispersion parameter for gaussian family taken to be 0.3449315)
+#
+#Null deviance: 840.70  on 1065  degrees of freedom
+#Residual deviance: 364.94  on 1058  degrees of freedom
+#AIC: 1900.5
+#
+#Number of Fisher Scoring iterations: 2
+
 
 #### AIC/BIC Scores ===============
-AIC(m_null_gigas, m9, m10, m11, m12, m13, m14)
-BIC(m_null_gigas, m9, m10, m11, m12, m13, m14)
+AIC(m_null_gigas, m9, m10, m11, m12, m13, m14, m15)
+BIC(m_null_gigas, m9, m10, m11, m12, m13, m14, m15)
 
 #### Test Assumptions ===============
 #### Pairwise Plot of Residuals ===============

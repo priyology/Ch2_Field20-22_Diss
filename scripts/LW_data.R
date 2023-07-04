@@ -192,7 +192,7 @@ AllStats.2021gigas
 glimpse(LW2021.gigas.na)
 
 SHTemp_Stats.2021gigas <- LW2021.gigas.na %>%
-  group_by(Sampling_Time, SH_Temp, Site) %>% 
+  group_by(Sampling_Time, Site) %>% 
   summarize(
     Mean_Length = mean(L),
     SD_Length = sd(L),
@@ -203,7 +203,7 @@ SHTemp_Stats.2021gigas
 ## plot
 
 Plot.L.gigas21 <- SHTemp_Stats.2021gigas %>% 
-  ggplot(aes(x = factor(Site, c("South", "Middle", "North")), y = Mean_Length, group = Sampling_Time, fill = Sampling_Time)) +
+  ggplot(aes(x = factor(Site, c("South", "Middle", "North")), y = Mean_Length, group = factor(Sampling_Time, c("4","1")), fill = Sampling_Time)) +
   facet_wrap(~SH_Temp) +
   geom_bar(stat="identity", position=position_dodge()) +
   geom_errorbar(aes(ymin = Mean_Length - SE_Length, ymax = Mean_Length + SE_Length), width=.1, position=position_dodge(.9), color = "black") +
@@ -296,15 +296,14 @@ ggplot(LW2021.gigas.na, aes(x = SH_Temp, y = L, color = SH_Temp)) +
 
 #### By SH_Temp + Sampling_Time ====
 
-SHTempSampling_Stats.2021gigas <- LW2021.gigas.na %>%
-  group_by(SH_Temp, Sampling_Time) %>% 
+SiteSampling_Stats.2021gigas <- LW2021.gigas.na %>%
+  group_by(Sampling_Time, Site) %>% 
   summarize(
     Mean_Length = mean(L),
     SD_Length = sd(L),
     SE_Length = SD_Length/sqrt(n()))
 
-SHTempSampling_Stats.2021gigas 
-
+SiteSampling_Stats.2021gigas
 ## plot
 ggplot(LW2021.gigas.na, aes(x = SH_Temp, y = L, color = SH_Temp)) +
   facet_wrap(~Sampling_Time) +
@@ -366,6 +365,15 @@ SHTemp_Stats.2021sikamea <- LW2021.sikamea.na %>%
 
 SHTemp_Stats.2021sikamea 
 
+SampTime_Stats.2021sikamea <- LW2021.sikamea.na %>%
+  group_by(Sampling_Time) %>% 
+  summarize(
+    Mean_Length = mean(L),
+    SD_Length = sd(L),
+    SE_Length = SD_Length/sqrt(n()))
+
+SampTime_Stats.2021sikamea 
+
 ## plot
 
 Plot.2021.sik <- SHTemp_Stats.2021sikamea %>% 
@@ -374,6 +382,7 @@ Plot.2021.sik <- SHTemp_Stats.2021sikamea %>%
   geom_errorbar(aes(ymin = Mean_Length - SE_Length, ymax = Mean_Length + SE_Length), width=.1, position=position_dodge(.9), color = "black") +
   scale_fill_manual(values=c("#FDAE61", "#ABD9E9", "#D53E4F")) + #,
   # guide = "none") +
+  ylim(0,6) +
   coord_flip() +
   theme_classic()
 
@@ -598,10 +607,10 @@ SamplingTime_Stats.LW2022
 ggplot(LW2022, aes(x = Sampling_Time, y = L, fill = Sampling_Time)) +
   geom_boxplot()
 
-#### By SH_Temp + Site ====
+#### By Site ====
 
 SHTempSite_Stats.LW2022 <- LW2022 %>%
-  group_by(SH_Temp, Site) %>% 
+  group_by(Site) %>% 
   summarize(
     Mean_Length = mean(L),
     SD_Length = sd(L),
@@ -630,18 +639,71 @@ ggplot(LW2022, aes(x = SH_Temp, y = L, fill = SH_Temp)) +
   facet_wrap(~Sampling_Time) +
   geom_boxplot()
 
-#### By SH_Temp + Sampling_Time + Site ====
+#### By SH_Tide + Sampling_Time + Site ====
 
-SHTempSamplingSite_Stats.LW2022 <- LW2022 %>%
-  group_by(SH_Temp, Sampling_Time, Site) %>% 
+SHTideSamplingSite_Stats.LW2022 <- LW2022 %>%
+  group_by(SH_Tide, Sampling_Time, Site) %>% 
   summarize(
     Mean_Length = mean(L),
     SD_Length = sd(L),
     SE_Length = SD_Length/sqrt(n()))
 
-SHTempSamplingSite_Stats.LW2022 
+SHTideSamplingSite_Stats.LW2022 
 
 ## plot
 ggplot(LW2022, aes(x = Site, y = L, color = SH_Temp)) +
   facet_wrap(~Sampling_Time) +
   geom_boxplot()
+
+
+glimpse(LW2022)
+unique(LW2022$Sampling_Time)
+
+## plot
+
+Plot.2022.gigas <- SHTideSamplingSite_Stats.LW2022 %>% 
+  ggplot(aes(x = factor(Site, c("South", "Middle", "North")), y = Mean_Length, group = factor(Sampling_Time, c("6", "1")), fill = Sampling_Time)) +
+  facet_grid(SH_Tide~.) +
+  geom_bar(stat="identity", position=position_dodge()) +
+  geom_errorbar(aes(ymin = Mean_Length - SE_Length, ymax = Mean_Length + SE_Length), width=.1, position=position_dodge(.9), color = "black") +
+  scale_fill_manual(values=c("#FDAE61", "#ABD9E9", "#D53E4F")) + #,
+  # guide = "none") +
+  ylim(0,6) +
+  coord_flip() +
+  theme_classic()
+
+Plot.2022.gigas
+
+#### ** PPT: C. sikamea Shell Lengths 2021 ==============
+
+#### officeR directly exports the plot to your desired file into a powerpoint slide-shaped image ===== 
+library(officer)
+## initialize R object representing .pptx file. 
+Plot.2022.gigas_fig <- read_pptx()
+Plot.2022.gigas_fig <- add_slide(Plot.2022.gigas_fig , layout = "Title and Content", master = "Office Theme")
+Plot.2022.gigas_fig <-  ph_with(x = Plot.2022.gigas_fig, value = Plot.2022.gigas, location = ph_location_fullsize() )
+Plot.2022.gigas_fig  <- ph_with(x = Plot.2022.gigas_fig, "Plot", location = ph_location_type(type = "title") )
+print(Plot.2022.gigas_fig, target = "presentations/plot.pptx")
+
+#### R2PPT / RDCOMClient =====
+
+#install.packages("devtools", dependencies = TRUE)
+
+library(RDCOMClient)
+library(R2PPT)
+
+## Step 1: Save as a temporary file
+TEMP_FILE <- paste(tempfile(), ".wmf", sep="")
+ggsave(TEMP_FILE, plot = Plot.2022.gigas) # Saving the plot to the temporary file
+
+
+## Step 2: Open a blank PPT slide
+mkppt <- PPT.Init (method = "RDCOMClient")
+mkppt <- PPT.AddBlankSlide(mkppt)
+
+## Step 3: Export graph to PPT slide
+mkppt <- PPT.AddGraphicstoSlide(mkppt, file = TEMP_FILE)
+
+unlink(TEMP_FILE)
+
+#########################################################
