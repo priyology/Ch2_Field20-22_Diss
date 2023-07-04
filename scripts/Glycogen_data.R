@@ -445,7 +445,7 @@ BarPlot.Gly <- ggplot(GlyMean_SampSites, aes(x = factor(Site, c("TBOC - South", 
   geom_bar(stat = "identity", position = position_dodge()) +
   geom_errorbar(aes(ymin = MeanGly-SEGly, ymax = MeanGly + SEGly), width=.2, position=position_dodge(.9)) +
   #facet_grid(SH_Temp ~ factor(Sampling, c("June", "August"))) +
-  dark_theme_classic() + 
+  theme_classic() + 
   coord_flip()
   
                

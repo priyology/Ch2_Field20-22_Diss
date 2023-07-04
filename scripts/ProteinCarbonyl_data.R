@@ -92,9 +92,62 @@ Plot.Site <- ggplot(PC2, aes(x = factor(Site, c("HIOC - North", "BBOC - Middle",
   #scale_fill_manual(values=c("#4575B4", "#FDAE61")) +
   labs(title=expression(paste("Protein Carbonyl", italic("M. gigas"))), 
        x = "Site", 
-       y = "Protein Carbonyl (nmole_carbonyl/mg_protein)")
+       y = "Protein Carbonyl (nmole carbonyl mg protein ^ -1)")
 
 Plot.Site
+
+#### Plot of PC by Site ====
+
+BarPlot.PC <- ggplot(Site.Stats, aes(x = factor(Site, c("TBOC - South", "BBOC - Middle", "HIOC - North")), y = MeanPC, fill = Site, )) + #, fill = SH_Temp, group = SH_Temp)) +
+  geom_bar(stat = "identity", position = position_dodge()) +
+  geom_errorbar(aes(ymin = MeanPC - SE_PC, ymax = MeanPC + SE_PC), width=.2, position=position_dodge(.9)) +
+  #facet_grid(SH_Temp ~ factor(Sampling, c("June", "August"))) +
+  scale_fill_manual(values=c("#FDAE61", "#ABD9E9", "#D53E4F"),
+                    guide = "none") +
+  theme_classic() + 
+  coord_flip()
+
+
+#scale_fill_manual(values=c("#4575B4", "#FDAE61")) +
+#labs(title=expression(paste("Glycogen Content ", italic("M. gigas"))), 
+#     x = "Site", 
+#     y = "Glycogen (umol glycosyl units/g protein)")
+
+BarPlot.PC
+
+#### ** PPT: Glycogen 2022 ==============
+
+#### officeR directly exports the plot to your desired file into a powerpoint slide-shaped image ===== 
+library(officer)
+## initialize R object representing .pptx file. 
+BarPlot.PC_fig <- read_pptx()
+BarPlot.PC_fig <- add_slide(BarPlot.PC_fig , layout = "Title and Content", master = "Office Theme")
+BarPlot.PC_fig <-  ph_with(x = BarPlot.PC_fig, value = BarPlot.PC, location = ph_location_fullsize() )
+BarPlot.PC_fig  <- ph_with(x = BarPlot.PC_fig, "Plot", location = ph_location_type(type = "title") )
+print(BarPlot.PC_fig, target = "presentations/plot.pptx")
+
+#### R2PPT / RDCOMClient =====
+
+#install.packages("devtools", dependencies = TRUE)
+
+library(RDCOMClient)
+library(R2PPT)
+
+## Step 1: Save as a temporary file
+TEMP_FILE <- paste(tempfile(), ".wmf", sep="")
+ggsave(TEMP_FILE, plot = BarPlot.PC) # Saving the plot to the temporary file
+
+
+## Step 2: Open a blank PPT slide
+mkppt <- PPT.Init (method = "RDCOMClient")
+mkppt <- PPT.AddBlankSlide(mkppt)
+
+## Step 3: Export graph to PPT slide
+mkppt <- PPT.AddGraphicstoSlide(mkppt, file = TEMP_FILE)
+
+unlink(TEMP_FILE)
+
+############################################
 
 #### By SH_Temp ====
 

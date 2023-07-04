@@ -138,7 +138,7 @@ summary(m3)
 
 #### m4: Glycogen ~ Site  =====
 ## Reorder levels in Site for data analysis
-Gly$Site <- factor(Gly$Site, levels=c("TBOC - South","BBOC - Middle","HIOC - North"))
+Gly$Site <- factor(Gly$Site, levels=c("HIOC - North", "BBOC - Middle", "TBOC - South"))
 
 m4 <- glm(Glycogen ~ Site, family = gaussian(link = "identity"), data = Gly)
 summary(m4)
@@ -233,57 +233,63 @@ summary(m6)
 #
 #Number of Fisher Scoring iterations: 2
 
+#### m7: Glycogen ~ Sampling + Site + Sampling*Site + (1|Bag)  =====
+
+m7 <- lmer(Glycogen ~ Sampling + Site + Sampling*Site + (1|Bag), data = Gly)
+summary(m7)
+
+# Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+#lmerModLmerTest]
+#Formula: Glycogen ~ Sampling + Site + Sampling * Site + (1 | Bag)
+#Data: Gly
+#
+#REML criterion at convergence: 2234.4
+#
+#Scaled residuals: 
+#  Min      1Q  Median      3Q     Max 
+#-2.1068 -0.3890 -0.1256  0.2517  6.8270 
+#
+#Random effects:
+#  Groups   Name        Variance Std.Dev.
+#Bag      (Intercept)  0.6335  0.7959  
+#Residual             29.5324  5.4344  
+#Number of obs: 359, groups:  Bag, 36
+#
+#Fixed effects:
+#  Estimate Std. Error       df t value Pr(>|t|)    
+#(Intercept)                  1.3565     1.2816 322.9010   1.058  0.29065    
+#Sampling                     0.4223     0.3321 320.5711   1.271  0.20450    
+#SiteBBOC - Middle           -4.7437     1.8115 322.8268  -2.619  0.00924 ** 
+#  SiteHIOC - North            16.4853     1.8115 322.8268   9.101  < 2e-16 ***
+#  Sampling:SiteBBOC - Middle   2.4485     0.4687 320.3598   5.224 3.16e-07 ***
+#  Sampling:SiteHIOC - North   -2.0255     0.4687 320.3598  -4.321 2.07e-05 ***
+#  ---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#
+#Correlation of Fixed Effects:
+#  (Intr) Smplng SBBO-M SHIO-N S:SB-M
+#Sampling    -0.904                            
+#StBBOC-Mddl -0.708  0.639                     
+#StHIOC-Nrth -0.708  0.639  0.501              
+#Smp:SBBOC-M  0.640 -0.709 -0.904 -0.453       
+#Smp:SHIOC-N  0.640 -0.709 -0.453 -0.904  0.502
+
 #### AIC/BIC Scores ===============
-AIC(m_null, m1, m2, m3, m4, m5, m6)
-BIC(m_null, m1, m2, m3, m4, m5, m6)
+AIC(m_null, m1, m2, m3, m4, m5, m6, m7)
+BIC(m_null, m1, m2, m3, m4, m5, m6, m7)
 
 #### Test Assumptions ===============
 #### Pairwise Plot of Residuals ===============
-plot(fitted(m6), resid(m6))
+plot(fitted(m7), resid(m7))
 abline(0,0)
 
 #### Q-Q plot of Residuals ===============
-qqnorm(resid(m6))
-qqline(resid(m6))
+qqnorm(resid(m7))
+qqline(resid(m7))
 
 #### Density Plot of Residuals ===============
-plot(density(resid(m6)))
+plot(density(resid(m7)))
 
-#### Pairwise Comparisons ===============
-## pairwise comparison for m6
-emm_Lm6a <-  emmeans(m6, specs = ~ Site|Sampling)
-emm_Lm6a
-pairwise_Lm6a <- contrast(emm_Lm6a, interaction = "pairwise")
-pairwise_Lm6a
-
-#Sampling = 2:
-#Site_pairwise                    estimate   SE  df t.ratio p.value
-#(TBOC - South) - (BBOC - Middle)   -0.153 1.00 353  -0.153  0.8784
-#(TBOC - South) - (HIOC - North)   -12.434 1.00 353 -12.409  <.0001
-#(BBOC - Middle) - (HIOC - North)  -12.281 1.00 353 -12.256  <.0001
-#
-#Sampling = 5:
-#  Site_pairwise                    estimate   SE  df t.ratio p.value
-#(TBOC - South) - (BBOC - Middle)   -7.498 1.01 353  -7.451  <.0001
-#(TBOC - South) - (HIOC - North)    -6.357 1.01 353  -6.317  <.0001
-#(BBOC - Middle) - (HIOC - North)    1.141 1.00 353   1.139  0.2554
-
-emm_Lm6b <-  emmeans(m6, specs = ~ Sampling|Site)
-emm_Lm6b
-pairwise_Lm6b <- contrast(emm_Lm6b, interaction = "pairwise")
-pairwise_Lm6b
-
-#Site = TBOC - South:
-#Sampling_pairwise estimate   SE  df t.ratio p.value
-#2 - 5                -1.27 1.01 353  -1.260  0.2086
-#
-#Site = BBOC - Middle:
-#  Sampling_pairwise estimate   SE  df t.ratio p.value
-#2 - 5                -8.61 1.00 353  -8.595  <.0001
-#
-#Site = HIOC - North:
-#  Sampling_pairwise estimate   SE  df t.ratio p.value
-#2 - 5                 4.81 1.00 353   4.800  <.0001
 
 #### Plot Model ========
 ## using ggeffects

@@ -20,9 +20,9 @@ View(PC)
 ## re-organize site
 PC$Site <- fct_relevel(PC$Site, "HIOC - North", "BBOC - Middle", "TBOC - South")
 
-##*****************##
-#### Gaussian ====
-##*****************##
+  ########################
+#### Gaussian ==========
+########################
 
 #### Model selection ====
 #### m_null: Protein Carbonyl ~ 1  =====
@@ -215,9 +215,9 @@ qqline(resid(m4))
 #### Density Plot of Residuals ===============
 plot(density(resid(m4)))
 
-##*****************##
-#### Gamma ====
-##*****************##
+#####################
+#### Gamma =========
+#####################
 
 #### Model selection ====
 #### m_null: Protein Carbonyl ~ 1  =====
@@ -394,13 +394,47 @@ summary(m10)
 #
 #Number of Fisher Scoring iterations: 3
 
-#### m11: Protein Carbonyl ~ SH_Temp + SH_Tide + Site  =====
-m9 <- glm(CarbPerProtein ~ SH_Temp + SH_Tide + Site, family = Gamma(link = "identity"), data = PC)
-summary(m9)
+#### m11: Protein Carbonyl ~ SH_Tide + Site + (1|Bag) =====
+m11 <- glmer(CarbPerProtein ~ SH_Tide + Site + (1|Bag), family = Gamma(link = "identity"), data = PC)
+summary(m11)
+
+# Generalized linear mixed model fit by maximum likelihood (Laplace  Approximation)
+#[glmerMod]
+#Family: Gamma  ( identity )
+#Formula: CarbPerProtein ~ SH_Tide + Site + (1 | Bag)
+#Data: PC
+#
+#AIC      BIC   logLik deviance df.resid 
+#714.1    733.2   -351.1    702.1      171 
+#
+#Scaled residuals: 
+#  Min      1Q  Median      3Q     Max 
+#-1.2711 -0.4790 -0.1669  0.1047  7.6055 
+#
+#Random effects:
+#  Groups   Name        Variance Std.Dev.
+#Bag      (Intercept) 1.300    1.1402  
+#Residual             0.276    0.5254  
+#Number of obs: 177, groups:  Bag, 36
+#
+#Fixed effects:
+#  Estimate Std. Error t value Pr(>|z|)    
+#(Intercept)         4.8513     0.5125   9.465   <2e-16 ***
+#  SH_TideTide         0.8036     0.5163   1.556   0.1196    
+#SiteBBOC - Middle  -1.1105     0.6320  -1.757   0.0789 .  
+#SiteTBOC - South   -1.2907     0.6309  -2.046   0.0408 *  
+#  ---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#
+#Correlation of Fixed Effects:
+#  (Intr) SH_TdT SBBO-M
+#SH_TideTide -0.454              
+#StBBOC-Mddl -0.602 -0.047       
+#SitTBOC-Sth -0.594 -0.058  0.502
 
 #### AIC/BIC Scores ===============
-AIC(m_null_Gamma, m6, m7, m8, m9, m10)
-BIC(m_null_Gamma, m6, m7, m8, m9, m10)
+AIC(m_null_Gamma, m6, m7, m8, m9, m10, m11)
+BIC(m_null_Gamma, m6, m7, m8, m9, m10, m11)
 
 #### Test Assumptions ===============
 #### Pairwise Plot of Residuals ===============
