@@ -1,0 +1,91 @@
+﻿Year,Site,Species,SH_Temp,SH_Tide,Bag_Numb,TotalMort,BegQuant,PropMort
+2021,Middle,M. gigas,Low,No Tide,54,193,225,0.857777778
+2021,Middle,M. gigas,Low,No Tide,55,197,225,0.875555556
+2021,Middle,M. gigas,Low,No Tide,54,156,225,0.693333333
+2021,Middle,M. gigas,High,No Tide,51,102,225,0.453333333
+2021,Middle,M. gigas,High,No Tide,52,115,225,0.511111111
+2021,Middle,M. gigas,High,No Tide,53,138,225,0.613333333
+2021,Middle,C. sikamea,Low,No Tide,22,8,250,0.032
+2021,Middle,C. sikamea,Low,No Tide,23,2,250,0.008
+2021,Middle,C. sikamea,Low,No Tide,24,7,250,0.028
+2021,Middle,C. sikamea,Low,Tide,16,2,250,0.008
+2021,Middle,C. sikamea,Low,Tide,17,1,250,0.004
+2021,Middle,C. sikamea,Low,Tide,18,2,250,0.008
+2021,Middle,C. sikamea,High,No Tide,19,8,175,0.045714286
+2021,Middle,C. sikamea,High,No Tide,20,4,175,0.022857143
+2021,Middle,C. sikamea,High,No Tide,21,3,175,0.017142857
+2021,Middle,C. sikamea,High,Tide,13,6,245,0.024489796
+2021,Middle,C. sikamea,High,Tide,14,3,245,0.012244898
+2021,Middle,C. sikamea,High,Tide,15,2,245,0.008163265
+2021,North,M. gigas,Low,No Tide,44,172,225,0.764444444
+2021,North,M. gigas,Low,No Tide,45,183,225,0.813333333
+2021,North,M. gigas,Low,No Tide,46,180,225,0.8
+2021,North,M. gigas,High,No Tide,41,146,225,0.648888889
+2021,North,M. gigas,High,No Tide,42,118,225,0.524444444
+2021,North,M. gigas,High,No Tide,43,135,225,0.6
+2021,North,C. sikamea,Low,No Tide,10,2,250,0.008
+2021,North,C. sikamea,Low,No Tide,11,5,250,0.02
+2021,North,C. sikamea,Low,No Tide,12,6,250,0.024
+2021,North,C. sikamea,Low,Tide,4,1,250,0.004
+2021,North,C. sikamea,Low,Tide,5,0,250,0
+2021,North,C. sikamea,Low,Tide,6,2,250,0.008
+2021,North,C. sikamea,High,No Tide,7,4,175,0.022857143
+2021,North,C. sikamea,High,No Tide,8,3,175,0.017142857
+2021,North,C. sikamea,High,No Tide,9,7,175,0.04
+2021,North,C. sikamea,High,Tide,1,3,245,0.012244898
+2021,North,C. sikamea,High,Tide,2,0,245,0
+2021,North,C. sikamea,High,Tide,3,3,245,0.012244898
+2021,South,M. gigas,Low,No Tide,64,5,225,0.022222222
+2021,South,M. gigas,Low,No Tide,65,6,225,0.026666667
+2021,South,M. gigas,Low,No Tide,66,34,225,0.151111111
+2021,South,M. gigas,High,No Tide,61,12,225,0.053333333
+2021,South,M. gigas,High,No Tide,62,17,225,0.075555556
+2021,South,M. gigas,High,No Tide,63,13,225,0.057777778
+2021,South,C. sikamea,Low,No Tide,34,47,250,0.188
+2021,South,C. sikamea,Low,No Tide,35,28,250,0.112
+2021,South,C. sikamea,Low,No Tide,36,25,250,0.1
+2021,South,C. sikamea,Low,Tide,28,52,250,0.208
+2021,South,C. sikamea,Low,Tide,29,75,250,0.3
+2021,South,C. sikamea,Low,Tide,30,47,250,0.188
+2021,South,C. sikamea,High,No Tide,31,44,175,0.251428571
+2021,South,C. sikamea,High,No Tide,32,71,175,0.405714286
+2021,South,C. sikamea,High,No Tide,33,18,175,0.102857143
+2021,South,C. sikamea,High,Tide,25,17,245,0.069387755
+2021,South,C. sikamea,High,Tide,26,46,245,0.187755102
+2021,South,C. sikamea,High,Tide,27,73,245,0.297959184
+2022,Middle,M. gigas,Low,No Tide,13,84,250,0.336
+2022,Middle,M. gigas,Low,No Tide,14,36,250,0.144
+2022,Middle,M. gigas,Low,No Tide,15,85,250,0.34
+2022,Middle,M. gigas,Low,Tide,16,4,250,0.016
+2022,Middle,M. gigas,Low,Tide,17,16,250,0.064
+2022,Middle,M. gigas,Low,Tide,18,132,250,0.528
+2022,Middle,M. gigas,High,No Tide,22,55,250,0.22
+2022,Middle,M. gigas,High,No Tide,23,50,250,0.2
+2022,Middle,M. gigas,High,No Tide,24,108,250,0.432
+2022,Middle,M. gigas,High,Tide,19,76,250,0.304
+2022,Middle,M. gigas,High,Tide,20,2,250,0.008
+2022,Middle,M. gigas,High,Tide,21,96,250,0.384
+2022,North,M. gigas,Low,No Tide,1,51,250,0.204
+2022,North,M. gigas,Low,No Tide,2,10,250,0.04
+2022,North,M. gigas,Low,No Tide,3,56,250,0.224
+2022,North,M. gigas,Low,Tide,4,6,250,0.024
+2022,North,M. gigas,Low,Tide,5,48,250,0.192
+2022,North,M. gigas,Low,Tide,6,39,250,0.156
+2022,North,M. gigas,High,No Tide,10,90,250,0.36
+2022,North,M. gigas,High,No Tide,11,108,250,0.432
+2022,North,M. gigas,High,No Tide,12,62,250,0.248
+2022,North,M. gigas,High,Tide,7,86,250,0.344
+2022,North,M. gigas,High,Tide,8,59,250,0.236
+2022,North,M. gigas,High,Tide,9,40,250,0.16
+2022,South,M. gigas,Low,No Tide,25,16,250,0.064
+2022,South,M. gigas,Low,No Tide,26,5,250,0.02
+2022,South,M. gigas,Low,No Tide,27,34,250,0.136
+2022,South,M. gigas,Low,Tide,28,18,250,0.072
+2022,South,M. gigas,Low,Tide,29,7,250,0.028
+2022,South,M. gigas,Low,Tide,30,11,250,0.044
+2022,South,M. gigas,High,No Tide,34,21,250,0.084
+2022,South,M. gigas,High,No Tide,35,18,250,0.072
+2022,South,M. gigas,High,No Tide,36,13,250,0.052
+2022,South,M. gigas,High,Tide,31,13,250,0.052
+2022,South,M. gigas,High,Tide,32,31,250,0.124
+2022,South,M. gigas,High,Tide,33,14,250,0.056

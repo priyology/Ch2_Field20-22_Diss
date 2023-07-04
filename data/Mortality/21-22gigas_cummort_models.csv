@@ -1,0 +1,34 @@
+﻿SH-Temp,,,,,,,,,,,X
+SH-Tide,,,,,,,,,,,X
+Year,,,,,,,,,,,X
+Site,,,,,,,,,,,X
+SH-Temp,SH-Tide,,,,,,,,,,X
+SH-Temp,Year,,,,,,,,,,X
+SH-Temp,Site,,,,,,,,,,X
+SH-Tide,Year,,,,,,,,,,X
+SH-Tide,Site,,,,,,,,,,X
+Year,Site,,,,,,,,,,X
+SH-Temp,SH-Tide,Year,,,,,,,,,X
+SH-Temp,SH-Tide,Site,,,,,,,,,X
+SH-Temp,Year,Site,,,,,,,,,X
+SH-Tide,Year,Site,,,,,,,,,X
+Site,SH-Tide,Year,Site,,,,,,,,X
+SH-Temp,SH-Tide,Year,Site,SH_Tide * Year,,,,,,,
+SH-Temp,SH-Tide,Year,Site,SH-Tide * Site,,,,,,,
+SH-Temp,SH-Tide,Year,Site,Year * Site,,,,,,,
+SH-Temp,SH-Tide,Year,Site,SH_Temp*Site,,,,,,,
+SH-Temp,SH-Tide,Year,Site,SH_Temp*Year,,,,,,,
+SH-Temp,SH-Tide,Year,Site,SH_Temp*SH_Tide,,,,,,,
+SH-Temp,SH-Tide,Year,Site,SH_Temp * SH_Tide * Year,,,,,,,
+SH-Temp,SH-Tide,Year,Site,SH_Temp * SH_Tide * Site,,,,,,,
+SH-Temp,SH-Tide,Year,Site,SH_Temp * Year * Site,,,,,,,
+SH-Temp,SH-Tide,Year,Site,SH_Tide * Year * Site,,,,,,,
+SH-Temp,SH-Tide,Year,Site,SH_Tide * Site,Year * Site,,,,,,
+SH-Temp,SH-Tide,Year,Site,SH_Tide*Site,SH_Temp*Site,,,,,,
+SH-Temp,SH-Tide,Year,Site,SH_Tide*Site,SH_Temp*Year,,,,,,
+SH-Temp,SH-Tide,Year,Site,SH_Tide*Site,SH_Temp*SH_Tide,,,,,,
+SH-Temp,SH-Tide,Year,Site,SH_Temp*Site,Year * Site,,,,,,
+SH-Temp,SH-Tide,Year,Site,SH_Temp*Site,SH_Temp*Year,,,,,,
+SH-Temp,SH-Tide,Year,Site,SH_Temp*SH_Tide,SH_Temp*Site,SH_Temp*Year,,,,,
+SH-Temp,SH-Tide,Year,Site,SH_Temp*SH_Tide,SH_Tide*Site,SH_Temp*Site,,,,,
+,,,,SH_Temp*SH_Tide,SH_Temp*Site,SH_Temp*Year,,,,,
