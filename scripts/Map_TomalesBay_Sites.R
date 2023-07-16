@@ -267,7 +267,7 @@ library(cowplot)
 ## Create Date Frame with latitude ('38') and longitude ('-122') of sites
 sites<- data.frame(longitude = c(-122.947833, -122.927504, -122.865700), 
                    latitude = c(38.218050, 38.205616, 38.120200), 
-                   site = c("HI", "BB", "TB"))
+                   site = c("North", "Middle", "South"))
 
 ## Read in the shape files of NOAA coasline data and CA state outline
 # Download the Continuously Updated Shoreline Product here: https://shoreline.noaa.gov/data/datasheets/cusp.html
@@ -286,7 +286,7 @@ Tomales <- ggplot(data = Tomales_Coastline) +
   annotation_scale(aes(location = "bl")) + # adds scale bar to bottom left
   annotation_north_arrow(aes(location = "tl"), style = north_arrow_nautical())+ #adds a north arrow with nautical style to top left
   geom_point(data = sites, aes(x = longitude, y = latitude), size = 3) + # adds in points for each site
-  geom_text(data = sites, aes(x = longitude, y = latitude, label = site), nudge_x = 0.025, nudge_y = 0.011, hjust = 1) + # adds in label for each site
+  geom_text(data = sites, aes(x = longitude, y = latitude, label = site), nudge_x = 0.043, nudge_y = 0.001, hjust = 1, fontface = "bold") + # adds in label for each site
   theme_bw() +
   labs(x= "Longitude", y = "Latitude") +
   theme(panel.grid.major = element_blank(), # Removes the grid
@@ -309,8 +309,8 @@ California <- ggplot(data = CA_State) +
 ## Combine the plots and specify the inset plot size and position
 gg_inset_map = ggdraw() +
   draw_plot(Tomales) +
-  draw_plot(California, x = 0.628, y = 0.705, width = 0.3, height = 0.3)
+  draw_plot(California, x = 0.636, y = 0.705, width = 0.3, height = 0.3)
 
 gg_inset_map
 
-ggsave("fig_output/TomalesMap.png", dpi = 320)
+ggsave("fig_output/TomalesMap.png", dpi = 640)

@@ -37,8 +37,7 @@ OsHV1 %>%
 
 #### 2020 Cohort Stats by Year ===== 
 OsHV1 %>%
-  filter(Cohort == "2020") %>% 
-  group_by(Year, Site) %>%
+  group_by(Cohort, Year, Site) %>%
   summarize(Mean_Copies = mean(Copies_per_mgTissue),
             SD_Copies = sd(Copies_per_mgTissue),
             SE_Copies = SD_Copies/sqrt(n()))
