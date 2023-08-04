@@ -41,14 +41,14 @@ sites.labelsB <- data.frame(
 glimpse(sites.labelsB)
 
 landmarks.df <- data.frame(
-  lon = c(-121.761846, -123.071649, -122.894181, -122.267464),
-  lat = c(38.538226, 38.317992, 38.161813, 37.814870))
+  lon = c(-121.761846, -123.071649, -122.894181),# -122.267464),
+  lat = c(38.538226, 38.317992, 38.161813)) # 37.814870))
 glimpse(landmarks.df)
 
 landmarks.labels <- data.frame(
-  lon = c(-121.761846, -123.071649, -122.894181, -122.267464),
-  lat = c(38.538226, 38.317992, 38.161813, 37.814870),
-  site.name = c("UCD", "BML", "HIOC", "Home"))
+  lon = c(-121.761846, -123.071649, -122.894181),# -122.267464),
+  lat = c(38.538226, 38.317992, 38.161813),# 37.814870),
+  site.name = c("UCD", "BML", "HIOC"))#, "Home"))
 glimpse(landmarks.labels)
 
 BML_TB.labels <- data.frame(
