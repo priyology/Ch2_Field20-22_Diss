@@ -79,6 +79,72 @@ summary(PropMorts21.22)
 tail(PropMorts21.22)
 View(PropMorts21.22)
 
+#### All proportional mortality
+
+AllPropMort <- PropMorts21.22 %>% 
+  group_by(Site, Species, Year) %>% 
+  summarize(MeanMort = mean(PropMort),
+            SD_Mort = sd(PropMort),
+            SE_Mort = SD_Mort/sqrt(n()),
+            min_Mort = min(PropMort),
+            max_Mort = max(PropMort))
+
+AllPropMort
+
+## Plot
+
+Plot.AllPropMort <- AllPropMort %>% 
+  ggplot(aes(x = factor(Site, c("South", "Middle", "North")), y = MeanMort, fill = Site, group = Species)) +
+  facet_wrap(~Year) +
+  geom_bar(stat="identity", position=position_dodge()) +
+  geom_errorbar(aes(ymin = MeanMort-SE_Mort, ymax = MeanMort + SE_Mort), width=.1, position=position_dodge(.9), color = "black") +
+  scale_fill_manual(values=c("#FDAE61", "#ABD9E9", "#D53E4F")) + #,
+  # guide = "none") +
+  coord_flip() +
+  theme_classic()
+
+Plot.AllPropMort
+
+#########################################################
+
+
+#### ** PRESENTATION - PPT: M. gigas site morts 2021 ==============
+
+#### officeR directly exports the plot to your desired file into a powerpoint slide-shaped image ===== 
+library(officer)
+## initialize R object representing .pptx file. 
+Plot.AllPropMort_fig <- read_pptx()
+Plot.AllPropMort_fig <- add_slide(Plot.AllPropMort_fig , layout = "Title and Content", master = "Office Theme")
+Plot.AllPropMort_fig <-  ph_with(x = Plot.AllPropMort_fig, value = Plot.AllPropMort, location = ph_location_fullsize() )
+Plot.AllPropMort_fig  <- ph_with(x = Plot.AllPropMort_fig, "Plot", location = ph_location_type(type = "title") )
+print(Plot.AllPropMort_fig, target = "presentations/plot.pptx")
+
+#### R2PPT / RDCOMClient =====
+
+#install.packages("devtools", dependencies = TRUE)
+
+library(RDCOMClient)
+library(R2PPT)
+
+## Step 1: Save as a temporary file
+TEMP_FILE <- paste(tempfile(), ".wmf", sep="")
+ggsave(TEMP_FILE, plot = Plot.AllPropMort) # Saving the plot to the temporary file
+
+
+## Step 2: Open a blank PPT slide
+mkppt <- PPT.Init (method = "RDCOMClient")
+mkppt <- PPT.AddBlankSlide(mkppt)
+
+## Step 3: Export graph to PPT slide
+mkppt <- PPT.AddGraphicstoSlide(mkppt, file = TEMP_FILE)
+
+unlink(TEMP_FILE)
+
+#########################################################
+
+
+
+#### M. gigas proportional mortality =====
 
 PropMort.Gigas21 <- PropMorts21.22 %>% 
   filter(Species == c("M. gigas"),

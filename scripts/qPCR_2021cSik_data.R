@@ -116,7 +116,7 @@ Csik_Stats7
 #### Mean, SD, SE, min, max for C. sikeamea: Site, Sampling_Period ===== 
 Csik_Stats8 <- OsHV1 %>%
   filter(Species == "C. sikamea") %>% 
-  group_by(factor(Site), Sampling_Period) %>%
+  group_by(Site, Sampling_Period) %>%
   summarize(Mean_Copies = mean(Copies_per_mgTissue),
             SD_Copies = sd(Copies_per_mgTissue),
             SE_Copies = SD_Copies/sqrt(n()),
@@ -156,6 +156,60 @@ library(R2PPT)
 ## Step 1: Save as a temporary file
 TEMP_FILE <- paste(tempfile(), ".wmf", sep="")
 ggsave(TEMP_FILE, plot = Csik.plot) # Saving the plot to the temporary file
+
+
+## Step 2: Open a blank PPT slide
+mkppt <- PPT.Init (method = "RDCOMClient")
+mkppt <- PPT.AddBlankSlide(mkppt)
+
+## Step 3: Export graph to PPT slide
+mkppt <- PPT.AddGraphicstoSlide(mkppt, file = TEMP_FILE)
+
+unlink(TEMP_FILE)
+
+#### PRESENTATION: Mean, SD, SE, min, max for C. sikeamea: Site, Sampling_Period ===== 
+Csik_Stats9 <- OsHV1 %>%
+  filter(Species == "C. sikamea") %>% 
+  group_by(Site) %>%
+  summarize(Mean_Copies = mean(Copies_per_mgTissue),
+            SD_Copies = sd(Copies_per_mgTissue),
+            SE_Copies = SD_Copies/sqrt(n()),
+            min_Copies = min(Copies_per_mgTissue),
+            max_Copies = max(Copies_per_mgTissue))
+
+Csik_Stats9
+
+#### PRESENTATION: C. sikamea Plot - Site & Sampling_Period ====
+PresCsik.plot <- ggplot(Csik_Stats9, aes(x = factor(Site, c("South", "Middle", "North")), y = Mean_Copies)) +
+  geom_bar(stat = "identity") +
+  ylim(0,100000000) +
+  geom_errorbar(aes(ymin = Mean_Copies-SE_Copies, ymax = Mean_Copies + SE_Copies), width=.1, position=position_dodge(.9)) +
+  scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x),
+                labels = trans_format("log10", math_format(10^.x))) +
+  coord_flip() +
+  theme_classic()
+
+PresCsik.plot
+
+#### PRESENTATION: officeR directly exports the plot to your desired file into a powerpoint slide-shaped image ===== 
+library(officer)
+## initialize R object representing .pptx file. 
+PresCsik.plot_fig <- read_pptx()
+PresCsik.plot_fig <- add_slide(PresCsik.plot_fig , layout = "Title and Content", master = "Office Theme")
+PresCsik.plot_fig <-  ph_with(x = PresCsik.plot_fig, value = PresCsik.plot, location = ph_location_fullsize() )
+PresCsik.plot_fig  <- ph_with(x = PresCsik.plot_fig, "Plot", location = ph_location_type(type = "title") )
+print(PresCsik.plot_fig, target = "presentations/plot.pptx")
+
+#### R2PPT / RDCOMClient =====
+
+#install.packages("devtools", dependencies = TRUE)
+
+library(RDCOMClient)
+library(R2PPT)
+
+## Step 1: Save as a temporary file
+TEMP_FILE <- paste(tempfile(), ".wmf", sep="")
+ggsave(TEMP_FILE, plot = PresCsik.plot) # Saving the plot to the temporary file
 
 
 ## Step 2: Open a blank PPT slide

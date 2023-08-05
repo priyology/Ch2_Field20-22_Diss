@@ -182,3 +182,60 @@ mkppt <- PPT.AddBlankSlide(mkppt)
 mkppt <- PPT.AddGraphicstoSlide(mkppt, file = TEMP_FILE)
 
 unlink(TEMP_FILE)
+
+#### PRESENTATION Mean, SD, SE, min, max for C. sikeamea: Site, Year, Sampling_Period ===== 
+Mgig_Stats9 <- OsHV1 %>%
+  filter(Species == "M. gigas",
+         SH_TempLev != "None",
+         SH_Tide != "None") %>% 
+  group_by(Year, Site) %>%
+  summarize(Mean_Copies = mean(Copies_per_mgTissue),
+            SD_Copies = sd(Copies_per_mgTissue),
+            SE_Copies = SD_Copies/sqrt(n()),
+            min_Copies = min(Copies_per_mgTissue),
+            max_Copies = max(Copies_per_mgTissue))
+
+Mgig_Stats9
+
+
+#### PRESENTATION M. gigas Plot - Site & Year/Sampling_Period ====
+PresMgig.plot <- ggplot(Mgig_Stats9, aes(x = factor(Site, c("South", "Middle", "North")), y = Mean_Copies)) +
+  facet_wrap(~Year) +
+  geom_bar(stat = "identity") +
+  geom_errorbar(aes(ymin = Mean_Copies-SE_Copies, ymax = Mean_Copies + SE_Copies), width=.1, position=position_dodge(.9)) +
+  scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x),
+                labels = trans_format("log10", math_format(10^.x))) +
+  coord_flip() +
+  theme_classic()
+
+PresMgig.plot
+
+#### officeR directly exports the plot to your desired file into a powerpoint slide-shaped image ===== 
+library(officer)
+## initialize R object representing .pptx file. 
+PresMgig.plot_fig <- read_pptx()
+PresMgig.plot_fig <- add_slide(PresMgig.plot_fig , layout = "Title and Content", master = "Office Theme")
+PresMgig.plot_fig <-  ph_with(x = PresMgig.plot_fig, value = PresMgig.plot, location = ph_location_fullsize() )
+PresMgig.plot_fig  <- ph_with(x = PresMgig.plot_fig, "Plot", location = ph_location_type(type = "title") )
+print(PresMgig.plot_fig, target = "presentations/plot.pptx")
+
+#### R2PPT / RDCOMClient =====
+
+#install.packages("devtools", dependencies = TRUE)
+
+library(RDCOMClient)
+library(R2PPT)
+
+## Step 1: Save as a temporary file
+TEMP_FILE <- paste(tempfile(), ".wmf", sep="")
+ggsave(TEMP_FILE, plot = PresMgig.plot) # Saving the plot to the temporary file
+
+
+## Step 2: Open a blank PPT slide
+mkppt <- PPT.Init (method = "RDCOMClient")
+mkppt <- PPT.AddBlankSlide(mkppt)
+
+## Step 3: Export graph to PPT slide
+mkppt <- PPT.AddGraphicstoSlide(mkppt, file = TEMP_FILE)
+
+unlink(TEMP_FILE)
