@@ -192,7 +192,8 @@ AllStats.2021gigas
 glimpse(LW2021.gigas.na)
 
 SHTemp_Stats.2021gigas <- LW2021.gigas.na %>%
-  group_by(Sampling_Time, Site) %>% 
+  filter(Sampling_Time == "4") %>% 
+  group_by(Site) %>% 
   summarize(
     Mean_Length = mean(L),
     SD_Length = sd(L),
@@ -203,8 +204,7 @@ SHTemp_Stats.2021gigas
 ## plot
 
 Plot.L.gigas21 <- SHTemp_Stats.2021gigas %>% 
-  ggplot(aes(x = factor(Site, c("South", "Middle", "North")), y = Mean_Length, group = factor(Sampling_Time, c("4","1")), fill = Sampling_Time)) +
-  facet_wrap(~SH_Temp) +
+  ggplot(aes(x = factor(Site, c("South", "Middle", "North")), y = Mean_Length, fill = Site)) +
   geom_bar(stat="identity", position=position_dodge()) +
   geom_errorbar(aes(ymin = Mean_Length - SE_Length, ymax = Mean_Length + SE_Length), width=.1, position=position_dodge(.9), color = "black") +
   scale_fill_manual(values=c("#FDAE61", "#ABD9E9", "#D53E4F")) + #,
@@ -642,7 +642,8 @@ ggplot(LW2022, aes(x = SH_Temp, y = L, fill = SH_Temp)) +
 #### By SH_Tide + Sampling_Time + Site ====
 
 SHTideSamplingSite_Stats.LW2022 <- LW2022 %>%
-  group_by(SH_Tide, Sampling_Time, Site) %>% 
+  filter(Sampling_Time == "6") %>% 
+  group_by(Site) %>% 
   summarize(
     Mean_Length = mean(L),
     SD_Length = sd(L),
@@ -662,8 +663,7 @@ unique(LW2022$Sampling_Time)
 ## plot
 
 Plot.2022.gigas <- SHTideSamplingSite_Stats.LW2022 %>% 
-  ggplot(aes(x = factor(Site, c("South", "Middle", "North")), y = Mean_Length, group = factor(Sampling_Time, c("6", "1")), fill = Sampling_Time)) +
-  facet_grid(SH_Tide~.) +
+  ggplot(aes(x = factor(Site, c("South", "Middle", "North")), y = Mean_Length, fill = Site)) +
   geom_bar(stat="identity", position=position_dodge()) +
   geom_errorbar(aes(ymin = Mean_Length - SE_Length, ymax = Mean_Length + SE_Length), width=.1, position=position_dodge(.9), color = "black") +
   scale_fill_manual(values=c("#FDAE61", "#ABD9E9", "#D53E4F")) + #,
@@ -674,7 +674,7 @@ Plot.2022.gigas <- SHTideSamplingSite_Stats.LW2022 %>%
 
 Plot.2022.gigas
 
-#### ** PPT: C. sikamea Shell Lengths 2021 ==============
+#### ** PPT:M. gigas Shell Lengths 2022 ==============
 
 #### officeR directly exports the plot to your desired file into a powerpoint slide-shaped image ===== 
 library(officer)
