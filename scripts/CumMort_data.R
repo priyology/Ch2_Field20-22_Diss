@@ -79,9 +79,74 @@ summary(PropMorts21.22)
 tail(PropMorts21.22)
 View(PropMorts21.22)
 
-#### All proportional mortality
+#### SH proportional mortality: M.gigas ====
 
-AllPropMort <- PropMorts21.22 %>% 
+SH.PropMort.gigas <- PropMorts21.22 %>% 
+  filter(Species == "M. gigas") %>% 
+  group_by(Species, Year, SH_Temp, SH_Tide) %>% 
+  summarize(MeanMort = mean(PropMort),
+            SD_Mort = sd(PropMort),
+            SE_Mort = SD_Mort/sqrt(n()),
+            min_Mort = min(PropMort),
+            max_Mort = max(PropMort))
+
+SH.PropMort.gigas
+
+## Plot
+
+Plot.SH.PropMort.gigas <- SH.PropMort.gigas %>% 
+  ggplot(aes(x = factor(SH_Temp, c("Low","High")), y = MeanMort, fill = SH_Temp, group = SH_Tide)) +
+  facet_wrap(~Year) +
+  geom_bar(stat="identity", position=position_dodge()) +
+  geom_errorbar(aes(ymin = MeanMort-SE_Mort, ymax = MeanMort + SE_Mort), width=.1, position=position_dodge(.9), color = "black") +
+  scale_fill_manual(values=c("#FDAE61", "#ABD9E9", "#D53E4F")) + #,
+  # guide = "none") +
+  #coord_flip() +
+  theme_classic()
+
+Plot.SH.PropMort.gigas
+
+#########################################################
+
+
+#### ** PRESENTATION - PPT: M. gigas site morts 2021 ==============
+
+#### officeR directly exports the plot to your desired file into a powerpoint slide-shaped image ===== 
+library(officer)
+## initialize R object representing .pptx file. 
+Plot.SH.PropMort.gigas_fig <- read_pptx()
+Plot.SH.PropMort.gigas_fig <- add_slide(Plot.SH.PropMort.gigas_fig , layout = "Title and Content", master = "Office Theme")
+Plot.SH.PropMort.gigas_fig <-  ph_with(x = Plot.SH.PropMort.gigas_fig, value = Plot.SH.PropMort.gigas, location = ph_location_fullsize() )
+Plot.SH.PropMort.gigas_fig  <- ph_with(x = Plot.SH.PropMort.gigas_fig, "Plot", location = ph_location_type(type = "title") )
+print(Plot.SH.PropMort.gigas_fig, target = "presentations/plot.pptx")
+
+#### R2PPT / RDCOMClient =====
+
+#install.packages("devtools", dependencies = TRUE)
+
+library(RDCOMClient)
+library(R2PPT)
+
+## Step 1: Save as a temporary file
+TEMP_FILE <- paste(tempfile(), ".wmf", sep="")
+ggsave(TEMP_FILE, plot = Plot.SH.PropMort.gigas) # Saving the plot to the temporary file
+
+
+## Step 2: Open a blank PPT slide
+mkppt <- PPT.Init (method = "RDCOMClient")
+mkppt <- PPT.AddBlankSlide(mkppt)
+
+## Step 3: Export graph to PPT slide
+mkppt <- PPT.AddGraphicstoSlide(mkppt, file = TEMP_FILE)
+
+unlink(TEMP_FILE)
+
+#########################################################
+
+
+#### All proportional mortality: Site ====
+
+AllPropMort.Site <- PropMorts21.22 %>% 
   group_by(Site, Species, Year) %>% 
   summarize(MeanMort = mean(PropMort),
             SD_Mort = sd(PropMort),
@@ -89,11 +154,11 @@ AllPropMort <- PropMorts21.22 %>%
             min_Mort = min(PropMort),
             max_Mort = max(PropMort))
 
-AllPropMort
+AllPropMort.Site
 
 ## Plot
 
-Plot.AllPropMort <- AllPropMort %>% 
+Plot.AllPropMort.Site <- AllPropMort %>% 
   ggplot(aes(x = factor(Site, c("South", "Middle", "North")), y = MeanMort, fill = Site, group = Species)) +
   facet_wrap(~Year) +
   geom_bar(stat="identity", position=position_dodge()) +
@@ -103,7 +168,7 @@ Plot.AllPropMort <- AllPropMort %>%
   coord_flip() +
   theme_classic()
 
-Plot.AllPropMort
+Plot.AllPropMort.Site
 
 #########################################################
 
