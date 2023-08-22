@@ -32,16 +32,18 @@ brewer.pal(11, "Spectral")
 #[10] "#3288BD" "#5E4FA2"
 
 TBTemps.plot <- 
-  ggplot(TBTemps, aes(x = factor(Site, c("North", "Middle", "South")), y = Mean, shape = Year)) +
-  geom_point(stat ="identity", pch = 21, size = 6, aes(fill = Site), color = "black") + 
-  geom_errorbar(aes(ymin = Mean-SE_Min, ymax = Mean+SE_Max), width = 0.5) + 
-  #facet_wrap(~factor(Year, level=c('2020', '2021', '2022'))) +
+  ggplot(TBTemps, aes(x = factor(Site, c("North", "Middle", "South")), y = Mean)) +
+  geom_point(stat ="identity", pch = 21, size = 6, aes(fill = Site)) +
+  scale_fill_manual(values=c("#FDAE61", "#ABD9E9", "#D53E4F"),
+                    guide = "none") +
+  geom_errorbar(aes(ymin = Mean-SE_Min, ymax = Mean+SE_Max, color = factor(Site)), width = 0.5) + 
+  scale_color_manual(values=c("#FDAE61", "#ABD9E9", "#D53E4F"),
+                     guide = "none") +
+  facet_wrap(~factor(Year, level=c('2020', '2021', '2022'))) +
   scale_y_continuous(
     limits = c(16,21),
     breaks = c(16, 17, 18, 19, 20, 21)) + 
   theme_classic() +
-  scale_fill_manual(values=c("#FDAE61", "#ABD9E9", "#D53E4F"),
-                     guide = "none") +
   theme(text = element_text(family = "Georgia"),
         legend.position = "top") +
   labs(title = expression(paste("Mean Temperature in Tomales Bay: 2020-2022")), 

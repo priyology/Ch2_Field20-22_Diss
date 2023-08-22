@@ -3,6 +3,9 @@
 ### load libraries
 library(tidyverse)
 library(ggdark)
+library(extrafont)
+font_import()
+loadfonts(device = "win")
 
 #### *** 2021: Benthic Chlorophyll *** ====
 ### load data sheet
@@ -105,7 +108,7 @@ Plot.B2021SiteStats <- ggplot(BChl2021_2, aes(x = Sampling_Period, y = Chl_a)) +
   theme_classic() +
   #scale_fill_manual(values=c("#4575B4", "#FDAE61")) +
   labs(title=expression(paste("Benthic Chl ", italic("a"), " in Tomales Bay (2021)")), 
-       x = "Lease", 
+       x = "Sampling", 
        y = expression(paste("Chlorophyll ", italic("a"), " (mg/m"^3,")")))
 
 Plot.B2021SiteStats 
@@ -324,15 +327,17 @@ is.character(MeanChlA$Sampling_Period)
 MeanChlA$Year <- as.character(MeanChlA$Year)
 is.character(MeanChlA$Year)
 
-Plot.MeanChlA <- ggplot(MeanChlA, aes(x = factor(Site, c("South", "Middle", "North")), y = Mean_Chl_a, color = Site, shape = Year)) +
-  geom_point(stat ="identity", size = 4) + 
+Plot.MeanChlA <- ggplot(MeanChlA, aes(x = factor(Site, c("North", "Middle", "South")), y = Mean_Chl_a, color = Site)) +
+  geom_point(stat ="identity", size = 4, pch = 21, color = "black", aes(fill = Site)) + 
   scale_shape_manual(values=c(17, 15)) +
+  scale_fill_manual(values=c("#FDAE61", "#ABD9E9", "#D53E4F"),
+                     guide = "none") +
   geom_errorbar(aes(ymin = Mean_Chl_a-SE_Chla, ymax = Mean_Chl_a+SE_Chla), width = 0.5) + 
-  facet_grid(Year~Sample) +
   scale_color_manual(values=c("#FDAE61", "#ABD9E9", "#D53E4F"),
-                    guide = "none") +
-  theme(legend.position="none") +
-  coord_flip() +
+                     guide = "none") +
+  facet_grid(Sample~Year) +
+  theme(text = element_text(family = "Georgia"),
+          legend.position = "top") +
   theme_classic()
 
 Plot.MeanChlA
@@ -341,7 +346,7 @@ Plot.MeanChlA
 ## made long on purpose!
 ggsave(filename = "fig_output/Plot_ChlA.png", width = 5.10, height = 5.77, dpi = 300)
 
-#### ** PPT: Prop >-16C Plot =============
+#### ** PPT: Chl a Plot by Site =============
 
 #### officeR directly exports the plot to your desired file into a powerpoint slide-shaped image ===== 
 library(officer)
@@ -372,3 +377,54 @@ mkppt <- PPT.AddBlankSlide(mkppt)
 mkppt <- PPT.AddGraphicstoSlide(mkppt, file = TEMP_FILE)
 
 unlink(TEMP_FILE)
+
+#################################################################################################
+
+Plot.SamplingChlA <- ggplot(MeanChlA, aes(x = Sampling_Period, y = Mean_Chl_a, color = Site)) +
+  geom_point(stat ="identity", size = 4, pch = 21, color = "black", aes(fill = Site)) + 
+  scale_shape_manual(values=c(17, 15)) +
+  scale_fill_manual(values=c("#FDAE61", "#ABD9E9", "#D53E4F"),
+                    guide = "none") +
+  geom_errorbar(aes(ymin = Mean_Chl_a-SE_Chla, ymax = Mean_Chl_a+SE_Chla), width = 0.5) + 
+  scale_color_manual(values=c("#FDAE61", "#ABD9E9", "#D53E4F"),
+                     guide = "none") +
+  facet_grid(Sample~Year) +
+  theme(text = element_text(family = "Georgia"),
+        legend.position = "top") +
+  theme_classic()
+
+Plot.SamplingChlA
+
+#### ** PPT: Chl a Plot by Sampling =============
+
+#### officeR directly exports the plot to your desired file into a powerpoint slide-shaped image ===== 
+library(officer)
+## initialize R object representing .pptx file. 
+Plot.SamplingChlA_fig <- read_pptx()
+Plot.SamplingChlA_fig <- add_slide(Plot.SamplingChlA_fig , layout = "Title and Content", master = "Office Theme")
+Plot.SamplingChlA_fig <-  ph_with(x = Plot.SamplingChlA_fig, value = Plot.SamplingChlA, location = ph_location_fullsize() )
+Plot.SamplingChlA_fig  <- ph_with(x = Plot.SamplingChlA_fig, "Plot", location = ph_location_type(type = "title") )
+print(Plot.SamplingChlA_fig, target = "presentations/plot.pptx")
+
+#### R2PPT / RDCOMClient =====
+
+#install.packages("devtools", dependencies = TRUE)
+
+library(RDCOMClient)
+library(R2PPT)
+
+## Step 1: Save as a temporary file
+TEMP_FILE <- paste(tempfile(), ".wmf", sep="")
+ggsave(TEMP_FILE, plot = Plot.SamplingChlA) # Saving the plot to the temporary file
+
+
+## Step 2: Open a blank PPT slide
+mkppt <- PPT.Init (method = "RDCOMClient")
+mkppt <- PPT.AddBlankSlide(mkppt)
+
+## Step 3: Export graph to PPT slide
+mkppt <- PPT.AddGraphicstoSlide(mkppt, file = TEMP_FILE)
+
+unlink(TEMP_FILE)
+
+#################################################################################################
