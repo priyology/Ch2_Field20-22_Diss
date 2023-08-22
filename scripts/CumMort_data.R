@@ -29,7 +29,8 @@ PropMort2020_perSite <- TotalMort2020_perBag %>%
 
 View(PropMort2020_perSite)
 
-Plot.Mort2020 <-  ggplot(data = PropMort2020_perSite, aes(x = (factor(site, c("TBOC", "HIOC"))), y = MeanMort, fill = site)) +
+Plot.Mort2020 <-  ggplot(data = PropMort2020_perSite, aes(x = time_pt, y = MeanMort, fill = site)) +
+  facet_wrap(~ site) + 
   geom_bar(stat="identity") +
   geom_errorbar(aes(ymin = MeanMort-SE_Mort, ymax = MeanMort+SE_Mort), width=.1, position=position_dodge(.9)) +
   coord_flip() +
@@ -780,6 +781,25 @@ unlink(TEMP_FILE)
 
 ######################################################
 
+######### Instantaneous Mortality: 2021 ============
+
+Morts2021 <- read_csv("data/Mortality/2021/Mortality2021.csv")
+glimpse(Morts2021)
+summary(Morts2021)
+tail(Morts2021)
+View(Morts2021)
+
+
+
+PropMort2020_perSite <- TotalMort2020_perBag %>% 
+  group_by(site, time_pt) %>% 
+  summarize(MeanMort = mean(PropMort),
+            SD_Mort = sd(PropMort),
+            SE_Mort = SD_Mort/sqrt(n()),
+            min_Mort = min(PropMort),
+            max_Mort = max(PropMort))
+
+View(PropMort2020_perSite)
 
 
 #### Proportional Mortality 2021 + 2022 =====
