@@ -12,7 +12,7 @@ tail(Morts2020)
 View(Morts2020)
 
 TotalMort2020_perBag <- Morts2020 %>% 
-  group_by(site, bag_numb) %>% 
+  group_by(site, bag_numb, time_pt) %>% 
   summarize(TotalMort = sum(mort_numb),
             PropMort = (sum(mort_numb)/250))
 
@@ -20,14 +20,14 @@ TotalMort2020_perBag
 
 
 PropMort2020_perSite <- TotalMort2020_perBag %>% 
-  group_by(site) %>% 
+  group_by(site, time_pt) %>% 
   summarize(MeanMort = mean(PropMort),
             SD_Mort = sd(PropMort),
             SE_Mort = SD_Mort/sqrt(n()),
             min_Mort = min(PropMort),
             max_Mort = max(PropMort))
 
-PropMort2020_perSite
+View(PropMort2020_perSite)
 
 Plot.Mort2020 <-  ggplot(data = PropMort2020_perSite, aes(x = (factor(site, c("TBOC", "HIOC"))), y = MeanMort, fill = site)) +
   geom_bar(stat="identity") +
