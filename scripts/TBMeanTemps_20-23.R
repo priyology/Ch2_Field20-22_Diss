@@ -218,4 +218,158 @@ mkppt <- PPT.AddGraphicstoSlide(mkppt, file = TEMP_FILE)
 
 unlink(TEMP_FILE)
 
+########################
 
+#### TB Temps 2020 =====
+### load data sheet
+TBTemps2020 <- read_csv("data/Temperature/2020/Summer2020Temps_Hourly.csv")
+glimpse(TBTemps2020)
+summary(TBTemps2020)
+tail(TBTemps2020)
+View(TBTemps2020)
+
+TBTemps2020$Time_Pt <- as.character(TBTemps2020$Time_Pt) ## make Time_Pt character
+is.character(TBTemps2020$Time_Pt) ## TRUE
+
+TBTemps2020_summary <- TBTemps2020 %>% 
+  group_by(Site, Time_Pt) %>% 
+  reframe(mean = mean(WaterTemp_C),
+          SD = sd(WaterTemp_C),
+          SE = SD/sqrt(n()))
+
+TBTemps2020_summary
+
+#### Plots =======
+
+library("RColorBrewer")
+brewer.pal(11, "Spectral")
+#[1] "#9E0142" "#D53E4F" "#F46D43" "#FDAE61" "#FEE08B" "#FFFFBF" "#E6F598" "#ABDDA4" "#66C2A5"
+#[10] "#3288BD" "#5E4FA2"
+
+### Plot
+library(extrafont)
+font_import()
+loadfonts(device = "win")
+
+TBTemps2020.plot <- ggplot(TBTemps2020_summary, aes(x = Time_Pt, y = mean, color = Site, group = Site)) +
+  geom_point(stat ="identity", size = 4) + 
+  geom_errorbar(aes(ymin = mean-SE, ymax = mean+SE), width = 0.2) + 
+  #facet_wrap(~factor(Year, level=c('2020', '2021', '2022'))) +
+  scale_y_continuous(
+    limits = c(15,22),
+    breaks = c(15, 16, 17, 18, 19, 20, 21, 22)) + 
+  theme_classic() +
+  scale_color_manual(values=c("#ABD9E9", "#D53E4F"), #"#FDAE61"
+                     guide = "none") +
+  theme(text = element_text(family = "Georgia")) +
+  labs(title = expression(paste("Mean Temperature in Tomales Bay: 2020")), 
+       #subtitle = "Gamma distribution: link = 'identity'",
+       x= "Sampling Time", 
+       y = "Temperature (°C)")
+
+TBTemps2020.plot
+
+#### TB Temps 2021 =====
+### load data sheet
+TBTemps2021 <- read_csv("data/Temperature/2021/Temps_2021_TimePt.csv")
+glimpse(TBTemps2021)
+summary(TBTemps2021)
+tail(TBTemps2021)
+View(TBTemps2021)
+
+TBTemps2021$time_pt <- as.character(TBTemps2021$time_pt) ## make time_pt character
+is.character(TBTemps2021$time_pt) ## TRUE
+
+TBTemps2021_summary <- TBTemps2021 %>%
+  filter(Sensor == "Water") %>% 
+  group_by(Site, time_pt) %>% 
+  reframe(mean = mean(Temp_C),
+          SD = sd(Temp_C),
+          SE = SD/sqrt(n()))
+
+TBTemps2021_summary
+
+#### Plots =======
+
+library("RColorBrewer")
+brewer.pal(11, "Spectral")
+#[1] "#9E0142" "#D53E4F" "#F46D43" "#FDAE61" "#FEE08B" "#FFFFBF" "#E6F598" "#ABDDA4" "#66C2A5"
+#[10] "#3288BD" "#5E4FA2"
+
+### Plot
+library(extrafont)
+font_import()
+loadfonts(device = "win")
+
+TBTemps2021.plot <- ggplot(TBTemps2021_summary, aes(x = time_pt, y = mean, color = Site, group = Site)) +
+  geom_point(stat ="identity", size = 4) + 
+  geom_errorbar(aes(ymin = mean-SE, ymax = mean+SE), width = 0.2) + 
+  #facet_wrap(~factor(Year, level=c('2020', '2021', '2022'))) +
+  scale_y_continuous(
+    limits = c(15,22),
+    breaks = c(15, 16, 17, 18, 19, 20, 21, 22)) + 
+  theme_classic() +
+  scale_color_manual(values=c("#FDAE61", "#ABD9E9", "#D53E4F"), 
+                     guide = "none") +
+  theme(text = element_text(family = "Georgia")) +
+  labs(title = expression(paste("Mean Temperature in Tomales Bay: 2021")), 
+       #subtitle = "Gamma distribution: link = 'identity'",
+       x= "Sampling Time", 
+       y = "Temperature (°C)")
+
+TBTemps2021.plot
+
+
+#### TB Temps 2022 =====
+### load data sheet
+TBTemps2022 <- read_csv("data/Temperature/2022/Temps_2022_TimePt.csv")
+glimpse(TBTemps2022)
+summary(TBTemps2022)
+tail(TBTemps2022)
+View(TBTemps2022)
+
+TBTemps2022$time_pt <- as.character(TBTemps2022$time_pt) ## make time_pt character
+is.character(TBTemps2022$time_pt) ## TRUE
+
+TBTemps2022_summary <- TBTemps2022 %>%
+  filter(Sensor == "Water") %>% 
+  group_by(Site, time_pt) %>% 
+  reframe(mean = mean(Temp_C),
+          SD = sd(Temp_C),
+          SE = SD/sqrt(n()))
+
+TBTemps2022_summary
+
+#### Plots =======
+
+library("RColorBrewer")
+brewer.pal(11, "Spectral")
+#[1] "#9E0142" "#D53E4F" "#F46D43" "#FDAE61" "#FEE08B" "#FFFFBF" "#E6F598" "#ABDDA4" "#66C2A5"
+#[10] "#3288BD" "#5E4FA2"
+
+### Plot
+library(extrafont)
+font_import()
+loadfonts(device = "win")
+
+TBTemps2022.plot <- ggplot(TBTemps2022_summary, aes(x = time_pt, y = mean, color = Site, group = Site)) +
+  geom_point(stat ="identity", size = 4) + 
+  geom_errorbar(aes(ymin = mean-SE, ymax = mean+SE), width = 0.2) + 
+  #facet_wrap(~factor(Year, level=c('2020', '2021', '2022'))) +
+  scale_y_continuous(
+    limits = c(15,22),
+    breaks = c(15, 16, 17, 18, 19, 20, 21, 22)) + 
+  theme_classic() +
+  scale_color_manual(values=c("#FDAE61", "#ABD9E9", "#D53E4F"), 
+                     guide = "none") +
+  theme(text = element_text(family = "Georgia")) +
+  labs(title = expression(paste("Mean Temperature in Tomales Bay: 2022")), 
+       #subtitle = "Gamma distribution: link = 'identity'",
+       x= "Sampling Time", 
+       y = "Temperature (°C)")
+
+TBTemps2022.plot
+
+
+library(cowplot)
+plot_grid(TBTemps2020.plot, TBTemps2021.plot, TBTemps2022.plot, labels = c('A', 'B', 'C'), label_size = 12)

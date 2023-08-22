@@ -637,6 +637,22 @@ View(Morts2022)
 Morts2022$Temp_Hardening <- as.character(Morts2022$Temp_Hardening)
 is.character(Morts2022$Temp_Hardening)
 
+PropMorts2022 <- read_csv("data/Mortality/2022/Mortality2022.csv")
+glimpse(PropMorts2022)
+summary(PropMorts2022)
+tail(PropMorts2022)
+View(PropMorts2022)
+
+PropMort2022 <- PropMorts2022 %>% 
+  group_by(Site, Sampling_Interval, Temp_Hardening, Tide_Hardening) %>% 
+  summarize(MeanMort = mean(PropDead),
+            SD_Mort = sd(PropDead),
+            SE_Mort = SD_Mort/sqrt(n()),
+            min_Mort = min(PropDead),
+            max_Mort = max(PropDead))
+
+View(PropMort2022)
+
 TotalMort2022_perBag <- Morts2022 %>% 
   group_by(Site, Temp_Hardening, Tide_Hardening, Bag_Numb) %>% 
   summarize(TotalMort = sum(Mortality_Total))
@@ -679,6 +695,9 @@ SH_gigasMorts2022.plot <- Morts2022 %>%
   dark_theme_classic()
 
 SH_gigasMorts2022.plot
+
+
+
 
 
 
@@ -783,23 +802,21 @@ unlink(TEMP_FILE)
 
 ######### Instantaneous Mortality: 2021 ============
 
-Morts2021 <- read_csv("data/Mortality/2021/Mortality2021.csv")
-glimpse(Morts2021)
-summary(Morts2021)
-tail(Morts2021)
-View(Morts2021)
+PropMorts2021 <- read_csv("data/Mortality/2021/Mortality2021.csv")
+glimpse(PropMorts2021)
+summary(PropMorts2021)
+tail(PropMorts2021)
+View(PropMorts2021)
 
-
-
-PropMort2020_perSite <- TotalMort2020_perBag %>% 
-  group_by(site, time_pt) %>% 
-  summarize(MeanMort = mean(PropMort),
-            SD_Mort = sd(PropMort),
+PropMort2021 <- PropMorts2021 %>% 
+  group_by(Species, Site, Sampling_Interval, Temp_Hardening, Tide_Hardening) %>% 
+  summarize(MeanMort = mean(Prop_Dead),
+            SD_Mort = sd(Prop_Dead),
             SE_Mort = SD_Mort/sqrt(n()),
-            min_Mort = min(PropMort),
-            max_Mort = max(PropMort))
+            min_Mort = min(Prop_Dead),
+            max_Mort = max(Prop_Dead))
 
-View(PropMort2020_perSite)
+View(PropMort2021)
 
 
 #### Proportional Mortality 2021 + 2022 =====

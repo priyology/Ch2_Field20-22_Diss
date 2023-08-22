@@ -48,6 +48,27 @@ Temps_North %>%
 1400.167 / 24 # 58.3 days / 98 days that temps were above the threshold for OsHV-1
 58.3/98 # 59.5% of deployment
 
+# Time spent above 18 deg C
+Temps_North %>% 
+  filter(date < "2022-08-26", #August 26, 2022
+         WaterTemp_C > 17.9) %>% 
+  summarize(count = n())
+
+5291/6 # divide 10 minute intervals into hours: 881.83 hours
+881.83 / 24 # 36.74 days / 97 days that temps were above the threshold for OsHV-1
+36.74/97 # 37.9% of deployment
+
+# Time spent above 21 deg C
+Temps_North %>% 
+  filter(date < "2022-08-26", #August 26, 2022
+         WaterTemp_C > 20.9) %>% 
+  summarize(count = n())
+
+2076/6 # divide 10 minute intervals into hours: 346 hours
+346 / 24 # 14.4 days / 97 days that temps were above the threshold for OsHV-1
+14.4/97 # 14.8% of deployment
+
+
 ### code for "if/else" statement with deplyr: case_when
 Temps_North %>% 
 mutate(WaterTemp_corrected = case_when(Air_Temp_C >= Water_Temp_C ~ "High Tide", 
@@ -108,9 +129,29 @@ Temps_Middle %>%
          WaterTemp_C > 15.9) %>% 
   summarize(count = n())
 
-10984/6 # divide 10 minute intervals into hours: 1400.167 hours
-1830.667 / 24 # 76.3 days / 97 days that temps were above the threshold for OsHV-1
-76.3/97 # 78.6% of deployment
+11048/6 # divide 10 minute intervals into hours: 1841.333 hours
+1841.333 / 24 # 76.3 days / 97 days that temps were above the threshold for OsHV-1
+76.7/97 # 79.1% of deployment
+
+# Time spent above 18 deg C
+Temps_Middle %>% 
+  filter(date < "2022-08-26", #August 26, 2022
+         WaterTemp_C > 17.9) %>% 
+  summarize(count = n())
+
+7289/6 # divide 10 minute intervals into hours: 1214.833 hours
+1214.833 / 24 # 50.6 days / 97 days that temps were above the threshold for OsHV-1
+50.6/97 # 52.2% of deployment
+
+# Time spent above 21 deg C
+Temps_Middle %>% 
+  filter(date < "2022-08-26", #August 26, 2022
+         WaterTemp_C > 20.9) %>% 
+  summarize(count = n())
+
+1749/6 # divide 10 minute intervals into hours: 291.5 hours
+291.5 / 24 # 12.15 days / 97 days that temps were above the threshold for OsHV-1
+12.15/97 # 12.5% of deployment
 
 
 #### South: Tomasini Point (TBOC) ====
@@ -154,8 +195,28 @@ Temps_South %>%
          WaterTemp_C > 15.9) %>% 
   summarize(count = n())
 
-12373/6 # divide 10 minute intervals into hours: 1400.167 hours
-2062.167 / 24 # 85.9 days / 96 days that temps were above the threshold for OsHV-1
-85.9/96 # 89% of deployment
+11728/6 # divide 10 minute intervals into hours: 1954.667 hours
+1954.667 / 24 # 81.45 days / 96 days that temps were above the threshold for OsHV-1
+81.45/96 # 89% of deployment
 
+
+# Time spent above 18 deg C
+Temps_South %>% 
+  filter(date < "2022-08-26", #August 26, 2022
+         WaterTemp_C > 17.9) %>% 
+  summarize(count = n())
+
+10900/6 # divide 10 minute intervals into hours: 1816.667 hours
+1816.667 / 24 # 75.69 days / 97 days that temps were above the threshold for OsHV-1
+75.69/96 # 78.8% of deployment
+
+# Time spent above 21 deg C
+Temps_South %>% 
+  filter(date < "2022-08-26", #August 26, 2022
+         WaterTemp_C > 20.9) %>% 
+  summarize(count = n())
+
+5873/6 # divide 10 minute intervals into hours: 978.83 hours
+978.83 / 24 # 40.78 days / 97 days that temps were above the threshold for OsHV-1
+40.78/97 # 42.0% of deployment
 

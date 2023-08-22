@@ -35,31 +35,75 @@ Temps2020 %>%
             minWater = min(WaterTemp_C))
 
 #### HIOC Temps Above 16 deg C
-
 Temps2020 %>% 
-  filter(Site == "HIOC",
+  filter(Site == "North",
     date < "2020-10-16", #October 16, 2020
          WaterTemp_C > 15.9) %>% 
   summarize(count = n())
 
-#1704/6 # divide 10 minute intervals into hours: 1239.5 hours
+1704/6 # divide 10 minute intervals into hours: 1239.5 hours
 1704 / 24 # 71 days / 100 days that temps were above the threshold for OsHV-1
 71/100 # 71% of deployment
 
 ### TBOC Temps Above 16 deg C
-
 Temps2020 %>% 
-  filter(Site == "TBOC",
+  filter(Site == "South",
          date < "2020-10-17", #October 17, 2020
          WaterTemp_C > 15.9) %>% 
   summarize(count = n())
 
-#2366/6 # divide 10 minute intervals into hours: 1239.5 hours
-2366 / 24 # 98 days / 101 days that temps were above the threshold for OsHV-1
+2366/6 # divide 10 minute intervals into hours: 1239.5 hours
+2366 / 24 # 98.58 days / 101 days that temps were above the threshold for OsHV-1
 98.58/101 #97.6% of deployment
 
 
-### code for "if/else" statement with deplyr: case_when
+#### HIOC Temps Above 18 deg C
+Temps2020 %>% 
+  filter(Site == "North",
+         date < "2020-10-16", #October 16, 2020
+         WaterTemp_C > 17.9) %>% 
+  summarize(count = n())
+
+784/6 # divide 10 minute intervals into hours: 130.67 hours
+130.67 / 24 # 5.44 days / 100 days that temps were above the threshold for OsHV-1
+5.44/100 # 71% of deployment
+
+### TBOC Temps Above 18 deg C
+Temps2020 %>% 
+  filter(Site == "South",
+         date < "2020-10-17", #October 17, 2020
+         WaterTemp_C > 17.9) %>% 
+  summarize(count = n())
+
+2291/6 # divide 10 minute intervals into hours: 381.83 hours
+381.83 / 24 # 15.91 days / 101 days that temps were above the threshold for OsHV-1
+15.91/101 #15.8% of deployment
+
+
+#### HIOC Temps Above 21 deg C
+Temps2020 %>% 
+  filter(Site == "North",
+         date < "2020-10-16", #October 16, 2020
+         WaterTemp_C > 20.9) %>% 
+  summarize(count = n())
+
+211/6 # divide 10 minute intervals into hours: 35.167 hours
+35.167 / 24 # 1.465 days / 100 days that temps were above the threshold for OsHV-1
+1.465/100 # 1.465% of deployment
+
+### TBOC Temps Above 21 deg C
+Temps2020 %>% 
+  filter(Site == "South",
+         date < "2020-10-17", #October 17, 2020
+         WaterTemp_C > 20.9) %>% 
+  summarize(count = n())
+
+1144/6 # divide 10 minute intervals into hours: 190.67 hours
+190.67 / 24 # 7.945 days / 101 days that temps were above the threshold for OsHV-1
+7.945/101 #7.87% of deployment
+
+
+### code for "if/else" statement with dplyr: case_when
 Temps2020 %>% 
   mutate(WaterTemp_corrected = case_when(Air_Temp_C >= Water_Temp_C ~ "High Tide", 
                                          Air_Temp_C < Water_Temp_C ~ "Low Tide"))
