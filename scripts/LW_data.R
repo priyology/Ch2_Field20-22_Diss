@@ -58,7 +58,8 @@ ggplot(LW2020, aes(x = Sampling_Time, y = L)) +
 #### By Site====
 
 SiteStats.LW2020 <- LW2020 %>%
-  group_by(Site, Sampling_Time) %>% 
+  filter(Sampling_Time == "5") %>% 
+  group_by(Site) %>% 
   summarize(
     Mean_Length = mean(L),
     SD_Length = sd(L),
@@ -68,13 +69,12 @@ SiteStats.LW2020
 
 ## plot
 Plot.2020.L <- SiteStats.LW2020 %>% 
-  ggplot(aes(x = factor(Site, c("South", "North")), y = Mean_Length, group = factor(Sampling_Time, c("5", "1")), fill = Sampling_Time)) +
+  ggplot(aes(x = factor(Site, c("North", "South")), y = Mean_Length, fill = Site)) +
   geom_bar(stat="identity", position=position_dodge()) +
   geom_errorbar(aes(ymin = Mean_Length - SE_Length, ymax = Mean_Length + SE_Length), width=.1, position=position_dodge(.9), color = "black") +
-  scale_fill_manual(values=c("#FDAE61", "#ABD9E9", "#D53E4F")) + #,
+  scale_fill_manual(values=c("#ABD9E9", "#D53E4F")) + #,
   # guide = "none") +
   ylim(0,6) +
-  coord_flip() +
   theme_classic()
 
 Plot.2020.L
@@ -193,7 +193,7 @@ glimpse(LW2021.gigas.na)
 
 SHTemp_Stats.2021gigas <- LW2021.gigas.na %>%
   filter(Sampling_Time == "4") %>% 
-  group_by(Site) %>% 
+  group_by(Site, SH_Temp) %>% 
   summarize(
     Mean_Length = mean(L),
     SD_Length = sd(L),
@@ -204,13 +204,12 @@ SHTemp_Stats.2021gigas
 ## plot
 
 Plot.L.gigas21 <- SHTemp_Stats.2021gigas %>% 
-  ggplot(aes(x = factor(Site, c("South", "Middle", "North")), y = Mean_Length, fill = Site)) +
+  ggplot(aes(x = factor(Site, c("North", "Middle", "South")), y = Mean_Length, group = SH_Temp, fill = SH_Temp)) +
   geom_bar(stat="identity", position=position_dodge()) +
   geom_errorbar(aes(ymin = Mean_Length - SE_Length, ymax = Mean_Length + SE_Length), width=.1, position=position_dodge(.9), color = "black") +
-  scale_fill_manual(values=c("#FDAE61", "#ABD9E9", "#D53E4F")) + #,
+  scale_fill_manual(values=c("#ABD9E9", "#FDAE61")) + #,
   # guide = "none") +
   ylim(0,6) +
-  coord_flip() +
   theme_classic()
 
 Plot.L.gigas21
@@ -357,7 +356,7 @@ AllStats.2021sikamea
 glimpse(LW2021.sikamea.na)
 
 SHTemp_Stats.2021sikamea <- LW2021.sikamea.na %>%
-  group_by(Sampling_Time, Site) %>% 
+  group_by(Site, SH_Temp, SH_Tide) %>% 
   summarize(
     Mean_Length = mean(L),
     SD_Length = sd(L),
@@ -377,13 +376,13 @@ SampTime_Stats.2021sikamea
 ## plot
 
 Plot.2021.sik <- SHTemp_Stats.2021sikamea %>% 
-  ggplot(aes(x = factor(Site, c("South", "Middle", "North")), y = Mean_Length, group = factor(Sampling_Time, c("4", "1")), fill = Sampling_Time)) +
+  ggplot(aes(x = factor(Site, c("North", "Middle", "South")), y = Mean_Length, group = SH_Temp, fill = SH_Temp)) +
   geom_bar(stat="identity", position=position_dodge()) +
   geom_errorbar(aes(ymin = Mean_Length - SE_Length, ymax = Mean_Length + SE_Length), width=.1, position=position_dodge(.9), color = "black") +
+  facet_wrap(~SH_Tide) +
   scale_fill_manual(values=c("#FDAE61", "#ABD9E9", "#D53E4F")) + #,
   # guide = "none") +
   ylim(0,6) +
-  coord_flip() +
   theme_classic()
 
 Plot.2021.sik
@@ -626,7 +625,7 @@ ggplot(LW2022, aes(x = SH_Temp, y = L, fill = SH_Temp)) +
 #### By SH_Temp + Sampling_Time ====
 
 SHTempSampling_Stats.LW2022 <- LW2022 %>%
-  group_by(SH_Temp, Sampling_Time) %>% 
+  group_by(SH_Temp, SH_Tide, Site) %>% 
   summarize(
     Mean_Length = mean(L),
     SD_Length = sd(L),
@@ -662,14 +661,14 @@ unique(LW2022$Sampling_Time)
 
 ## plot
 
-Plot.2022.gigas <- SHTideSamplingSite_Stats.LW2022 %>% 
-  ggplot(aes(x = factor(Site, c("South", "Middle", "North")), y = Mean_Length, fill = Site)) +
+Plot.2022.gigas <- SHTempSampling_Stats.LW2022 %>% 
+  ggplot(aes(x = factor(Site, c("North", "Middle", "South")), y = Mean_Length, group = SH_Temp, fill = SH_Temp)) +
+  facet_wrap(~SH_Tide) +
   geom_bar(stat="identity", position=position_dodge()) +
   geom_errorbar(aes(ymin = Mean_Length - SE_Length, ymax = Mean_Length + SE_Length), width=.1, position=position_dodge(.9), color = "black") +
-  scale_fill_manual(values=c("#FDAE61", "#ABD9E9", "#D53E4F")) + #,
+  scale_fill_manual(values=c("#ABD9E9", "#FDAE61")) + #,
   # guide = "none") +
   ylim(0,6) +
-  coord_flip() +
   theme_classic()
 
 Plot.2022.gigas

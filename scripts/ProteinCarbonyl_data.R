@@ -76,7 +76,7 @@ Plot.SamplingStats
 #### By Site ====
 
 Site.Stats <- PC2 %>%
-  group_by(Site) %>% 
+  group_by(Site, SH_Temp, SH_Tide) %>% 
   summarize(
     MeanPC = mean(CarbPerProtein),
     SD_PC = sd(CarbPerProtein),
@@ -98,14 +98,14 @@ Plot.Site
 
 #### Plot of PC by Site ====
 
-BarPlot.PC <- ggplot(Site.Stats, aes(x = factor(Site, c("TBOC - South", "BBOC - Middle", "HIOC - North")), y = MeanPC, fill = Site, )) + #, fill = SH_Temp, group = SH_Temp)) +
-  geom_bar(stat = "identity", position = position_dodge()) +
-  geom_errorbar(aes(ymin = MeanPC - SE_PC, ymax = MeanPC + SE_PC), width=.2, position=position_dodge(.9)) +
-  #facet_grid(SH_Temp ~ factor(Sampling, c("June", "August"))) +
-  scale_fill_manual(values=c("#FDAE61", "#ABD9E9", "#D53E4F"),
-                    guide = "none") +
-  theme_classic() + 
-  coord_flip()
+BarPlot.PC <- ggplot(Site.Stats, aes(x = factor(Site, c("HIOC - North", "BBOC - Middle", "TBOC - South")), y = MeanPC, group = SH_Temp, fill =  SH_Temp)) + #, fill = SH_Temp, group = SH_Temp)) +
+  geom_bar(stat = "identity", position = position_dodge(), color = "black") +
+  geom_errorbar(aes(ymin = MeanPC - SE_PC, ymax = MeanPC + SE_PC), width=.2, position=position_dodge(.9),  color = "black") +
+  facet_grid(~SH_Tide) +
+  ylim(0, 9.5) +
+  scale_fill_manual(values=c("#ABD9E9", "#FDAE61")) + #,
+                    #guide = "none") +
+  theme_classic()
 
 
 #scale_fill_manual(values=c("#4575B4", "#FDAE61")) +

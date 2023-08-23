@@ -427,27 +427,19 @@ library(ggdark)
 
 GlyMean <- read_csv("data/Glycogen/2022/Gly_SumStats.csv")
 glimpse(GlyMean)
+GlyMean
 
 GlyMean$SH_Temp <- as.character(GlyMean$SH_Temp)
 GlyMean$Sampling <- as.character(GlyMean$Sampling)
 
-GlyMean_SampSites  <-  Gly2 %>% 
-  group_by(Sampling, Site) %>% 
-  summarize(MeanGly = mean(Glycogen),
-            SDGly = sd(Glycogen),
-            SEGly = SDGly/sqrt(n()))
+### Glycogen: Plot ======
 
-GlyMean_SampSites
-
-GlyMean_SampSites$Sampling <- as.character(GlyMean_SampSites$Sampling)
-
-BarPlot.Gly <- ggplot(GlyMean_SampSites, aes(x = factor(Site, c("TBOC - South", "BBOC - Middle", "HIOC - North")), y = MeanGly, fill = Sampling, group = factor(Sampling, c("5", "2")))) + #, fill = SH_Temp, group = SH_Temp)) +
+BarPlot.Gly <- ggplot(GlyMean, aes(x = factor(Site, c("HIOC - North", "BBOC - Middle", "TBOC - South")), y = MeanGly, fill = SH_Temp, group = SH_Temp)) + #, fill = SH_Temp, group = SH_Temp)) +
+  facet_grid(factor(Sampling, c("June", "August")) ~ SH_Tide) +
   geom_bar(stat = "identity", position = position_dodge()) +
-  geom_errorbar(aes(ymin = MeanGly-SEGly, ymax = MeanGly + SEGly), width=.2, position=position_dodge(.9)) +
-  #facet_grid(SH_Temp ~ factor(Sampling, c("June", "August"))) +
-  theme_classic() + 
-  coord_flip()
-  
+  geom_errorbar(aes(ymin = MeanGly-SE_Gly, ymax = MeanGly + SE_Gly), width=.2, position=position_dodge(.9), color = "black") +
+  ylim(0,22)+
+  theme_classic() 
                
   #scale_fill_manual(values=c("#4575B4", "#FDAE61")) +
   #labs(title=expression(paste("Glycogen Content ", italic("M. gigas"))), 
@@ -455,6 +447,8 @@ BarPlot.Gly <- ggplot(GlyMean_SampSites, aes(x = factor(Site, c("TBOC - South", 
   #     y = "Glycogen (umol glycosyl units/g protein)")
 
 BarPlot.Gly
+
+
 
 #### ** PPT: Glycogen 2022 ==============
 
@@ -489,6 +483,8 @@ mkppt <- PPT.AddGraphicstoSlide(mkppt, file = TEMP_FILE)
 unlink(TEMP_FILE)
 
 ############################################
+
+
 
 ## Plot
 Morts2022 %>% 
