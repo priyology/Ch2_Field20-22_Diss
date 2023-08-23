@@ -12,7 +12,7 @@ tail(Morts2020)
 View(Morts2020)
 
 TotalMort2020_perBag <- Morts2020 %>% 
-  group_by(site, bag_numb, time_pt) %>% 
+  group_by(site, bag_numb) %>% 
   summarize(TotalMort = sum(mort_numb),
             PropMort = (sum(mort_numb)/250))
 
@@ -20,7 +20,7 @@ TotalMort2020_perBag
 
 
 PropMort2020_perSite <- TotalMort2020_perBag %>% 
-  group_by(site, time_pt) %>% 
+  group_by(site) %>% 
   summarize(MeanMort = mean(PropMort),
             SD_Mort = sd(PropMort),
             SE_Mort = SD_Mort/sqrt(n()),
@@ -29,17 +29,16 @@ PropMort2020_perSite <- TotalMort2020_perBag %>%
 
 View(PropMort2020_perSite)
 
-Plot.Mort2020 <-  ggplot(data = PropMort2020_perSite, aes(x = time_pt, y = MeanMort, fill = site)) +
-  facet_wrap(~ site) + 
+Plot.Mort2020 <-  ggplot(data = PropMort2020_perSite, aes(x = site, y = MeanMort, fill = site)) +
   geom_bar(stat="identity") +
   geom_errorbar(aes(ymin = MeanMort-SE_Mort, ymax = MeanMort+SE_Mort), width=.1, position=position_dodge(.9)) +
-  coord_flip() +
+  scale_fill_manual(values=c("#ABD9E9", "#D53E4F")) + #,
   theme_classic()
 
 Plot.Mort2020
 
 
-#### ** PPT: SH_gigas Morts 2021 ==============
+#### ** PPT: SH_gigas Morts 2020 ==============
 
 #### officeR directly exports the plot to your desired file into a powerpoint slide-shaped image ===== 
 library(officer)
@@ -159,14 +158,13 @@ AllPropMort.Site
 
 ## Plot
 
-Plot.AllPropMort.Site <- AllPropMort %>% 
-  ggplot(aes(x = factor(Site, c("South", "Middle", "North")), y = MeanMort, fill = Site, group = Species)) +
+Plot.AllPropMort.Site <- AllPropMort.Site %>% 
+  ggplot(aes(x = factor(Site, c("North", "Middle", "South")), y = MeanMort, fill = Site, group = Species)) +
   facet_wrap(~Year) +
   geom_bar(stat="identity", position=position_dodge()) +
   geom_errorbar(aes(ymin = MeanMort-SE_Mort, ymax = MeanMort + SE_Mort), width=.1, position=position_dodge(.9), color = "black") +
   scale_fill_manual(values=c("#FDAE61", "#ABD9E9", "#D53E4F")) + #,
   # guide = "none") +
-  coord_flip() +
   theme_classic()
 
 Plot.AllPropMort.Site
@@ -227,13 +225,12 @@ PropMort.Gigas21
 ## Plot
 
 Plot.PropMort.gigas21 <- PropMort.Gigas21 %>% 
-  ggplot(aes(x = factor(Site, c("South", "Middle", "North")), y = MeanMort, fill = SH_Temp, group = SH_Temp)) +
+  ggplot(aes(x = factor(Site, c("North", "Middle", "South")), y = MeanMort, fill = SH_Temp, group = factor(SH_Temp, c("Low", "High")))) +
   #facet_grid(Year~SH_Temp) +
   geom_bar(stat="identity", position=position_dodge()) +
   geom_errorbar(aes(ymin = MeanMort-SE_Mort, ymax = MeanMort + SE_Mort), width=.1, position=position_dodge(.9), color = "black") +
   scale_fill_manual(values=c("#FDAE61", "#ABD9E9", "#D53E4F")) + #,
                    # guide = "none") +
-  coord_flip() +
   theme_classic()
 
 Plot.PropMort.gigas21
@@ -278,7 +275,7 @@ unlink(TEMP_FILE)
 PropMort.Gigas22 <- PropMorts21.22 %>% 
   filter(Species == c("M. gigas"),
          Year == "2022") %>%
-  group_by(Site) %>% 
+  group_by(Site, SH_Temp, SH_Tide) %>% 
   summarize(MeanMort = mean(PropMort),
             SD_Mort = sd(PropMort),
             SE_Mort = SD_Mort/sqrt(n()),
@@ -290,18 +287,19 @@ PropMort.Gigas22
 ## Plot
 
 Plot.PropMort.gigas22 <- PropMort.Gigas22 %>% 
-  ggplot(aes(x = factor(Site, c("South", "Middle", "North")), y = MeanMort, group = SH_Temp, fill = SH_Temp)) +
+  ggplot(aes(x = factor(Site, c("North", "Middle", "South")), y = MeanMort, group = factor(SH_Temp, c("Low", "High")), fill = SH_Temp)) +
   facet_wrap(~SH_Tide) +
   geom_bar(stat="identity", position=position_dodge()) +
   geom_errorbar(aes(ymin = MeanMort-SE_Mort, ymax = MeanMort + SE_Mort), width=.1, position=position_dodge(.9), color = "black") +
   scale_fill_manual(values=c("#FDAE61", "#ABD9E9", "#D53E4F")) + #,
+  ylim(0,0.45) +
   # guide = "none") +
-  coord_flip() +
   theme_classic()
 
 Plot.PropMort.gigas22
 
 #### ** PPT: M. gigas site morts 2022 ==============
+
 
 #### officeR directly exports the plot to your desired file into a powerpoint slide-shaped image ===== 
 library(officer)
@@ -338,7 +336,7 @@ unlink(TEMP_FILE)
 ## C. sikamea 2021
 PropMort.Csik <- PropMorts21.22 %>% 
   filter(Species == "C. sikamea") %>% 
-  group_by(Site) %>% 
+  group_by(Site, SH_Temp, SH_Tide) %>% 
   summarize(MeanMort = mean(PropMort),
             SD_Mort = sd(PropMort),
             SE_Mort = SD_Mort/sqrt(n()),
@@ -350,12 +348,13 @@ PropMort.Csik
 ## Plot
 
 Plot.PropMort.Csik <- PropMort.Csik %>% 
-  ggplot(aes(x = factor(Site, c("South", "Middle", "North")), y = MeanMort, fill = Site)) +
+  ggplot(aes(x = factor(Site, c("North", "Middle", "South")), y = MeanMort, group = factor(SH_Temp, c("Low", "High")), fill = SH_Temp)) +
+  facet_wrap(~SH_Tide) +
   geom_bar(stat="identity", position=position_dodge()) +
   geom_errorbar(aes(ymin = MeanMort-SE_Mort, ymax = MeanMort + SE_Mort), width=.1, position=position_dodge(.9), color = "black") +
   scale_fill_manual(values=c("#FDAE61", "#ABD9E9", "#D53E4F"),
                     guide = "none") +
-  coord_flip() +
+  ylim(0, 0.35) +
   theme_classic()
 
 Plot.PropMort.Csik
@@ -448,15 +447,16 @@ TotalMort2021_perSHtide
 
 ## Plot
 
+Morts2021$Temp_Hardening <- as.character(Morts2021$Temp_Hardening)
+
 SiteMorts2021.sik <- Morts2021 %>% 
   filter(Species == "C_sikamea") %>% 
-  ggplot(aes(x = factor(Site, c("South", "Middle", "North")), y = Mortality_Total, fill = Site)) +
-  #facet_grid(Tide_Hardening ~ Temp_Hardening) +
+  ggplot(aes(x = factor(Site, c("South", "Middle", "North")), y = Mortality_Total, group = Temp_Hardening, fill = Temp_Hardening)) +
+  facet_wrap(~Tide_Hardening) +
   geom_bar(stat="identity", position=position_dodge()) +
   scale_fill_manual(values=c("#FDAE61", "#ABD9E9", "#D53E4F"),
                     guide = "none") +
-  coord_flip() +
-  dark_theme_classic()
+  theme_classic()
 
 SiteMorts2021.sik
 
