@@ -96,6 +96,7 @@ mkppt <- PPT.AddGraphicstoSlide(mkppt, file = TEMP_FILE)
 
 unlink(TEMP_FILE)
 
+####### END ###########
 
 #### Mean, SD, SE, min, max for 2020 Cohort by Year + Site ===== 
 Yr3Stats <- OsHV1 %>%
@@ -110,13 +111,13 @@ Yr3Stats <- OsHV1 %>%
 Yr3Stats
 
 #### 2020-2022 Plot ====
-Yr3Stats.plot <- ggplot(Yr3Stats, aes(x = factor(Site, c("South", "Middle", "North")), y = Mean_Copies)) +
-  facet_wrap(Year~Sampling_Period) +
-  geom_bar(stat = "identity") +
-  geom_errorbar(aes(ymin = Mean_Copies-SE_Copies, ymax = Mean_Copies + SE_Copies), width=.1, position=position_dodge(.9)) +
-  scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x),
+Yr3Stats.plot <- ggplot(Yr3Stats, aes(x = factor(Site, c("North", "South")), y = Mean_Copies), fill = Site) +
+  facet_wrap(Sampling_Period~., ncol = 4) +
+  geom_bar(stat = "identity", color = "black") +
+  geom_errorbar(aes(ymin = Mean_Copies-SE_Copies, ymax = Mean_Copies + SE_Copies), width=.1, position=position_dodge(.9), color = "black") +
+  scale_y_log10(breaks=c(.01,.1,1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000, 10000000000, 10000000000),
+                #breaks = trans_breaks("log10", function(x) 10^x),
                 labels = trans_format("log10", math_format(10^.x))) +
-  coord_flip() +
   theme_classic()
 
 Yr3Stats.plot

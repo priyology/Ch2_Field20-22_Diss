@@ -116,23 +116,23 @@ Csik_Stats7
 #### Mean, SD, SE, min, max for C. sikeamea: Site, Sampling_Period ===== 
 Csik_Stats8 <- OsHV1 %>%
   filter(Species == "C. sikamea") %>% 
-  group_by(Site, Sampling_Period) %>%
+  group_by(Site, Sampling_Period, SH_Temp, SH_Tide) %>%
   summarize(Mean_Copies = mean(Copies_per_mgTissue),
             SD_Copies = sd(Copies_per_mgTissue),
             SE_Copies = SD_Copies/sqrt(n()),
             min_Copies = min(Copies_per_mgTissue),
             max_Copies = max(Copies_per_mgTissue))
 
-Csik_Stats8
+View(Csik_Stats8)
 
 #### C. sikamea Plot - Site & Sampling_Period ====
-Csik.plot <- ggplot(Csik_Stats8, aes(x = factor(Site, c("South", "Middle", "North")), y = Mean_Copies)) +
-  facet_wrap(~Sampling_Period) +
-  geom_bar(stat = "identity") +
-  geom_errorbar(aes(ymin = Mean_Copies-SE_Copies, ymax = Mean_Copies + SE_Copies), width=.1, position=position_dodge(.9)) +
-  scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x),
+Csik.plot <- ggplot(Csik_Stats8, aes(x = factor(Site, c("North", "Middle", "South")), y = Mean_Copies, fill = SH_Temp)) +
+  facet_grid(Sampling_Period~SH_Tide) +
+  geom_bar(stat = "identity", position = position_dodge()) +
+  geom_errorbar(aes(ymin = Mean_Copies-SE_Copies, ymax = Mean_Copies + SE_Copies), width=.1, position=position_dodge(.9), color = "black") +
+  scale_y_log10(breaks=c(.0001, .001, .01,.1,1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000, 10000000000, 10000000000),
+                #breaks = trans_breaks("log10", function(x) 10^x),
                 labels = trans_format("log10", math_format(10^.x))) +
-  coord_flip() +
   theme_classic()
 
 Csik.plot

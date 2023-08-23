@@ -131,7 +131,7 @@ Mgig_Stats8 <- OsHV1 %>%
   filter(Species == "M. gigas",
          SH_TempLev != "None",
          SH_Tide != "None") %>% 
-  group_by(Year, Sampling_Period, Site) %>%
+  group_by(Year, Sampling_Period, Site, SH_Temp, SH_Tide) %>%
   summarize(Mean_Copies = mean(Copies_per_mgTissue),
             SD_Copies = sd(Copies_per_mgTissue),
             SE_Copies = SD_Copies/sqrt(n()),
@@ -142,15 +142,34 @@ Mgig_Stats8
 
 
 #### M. gigas Plot - Site & Year/Sampling_Period ====
-Mgig.plot <- ggplot(Mgig_Stats8, aes(x = factor(Site, c("South", "Middle", "North")), y = Mean_Copies)) +
-  facet_wrap(Year~Sampling_Period) +
-  geom_bar(stat = "identity") +
-  geom_errorbar(aes(ymin = Mean_Copies-SE_Copies, ymax = Mean_Copies + SE_Copies), width=.1, position=position_dodge(.9)) +
+Mgig.plot_2021 <- Mgig_Stats8 %>% 
+  filter(Year == "2021") %>% 
+  ggplot(aes(x = factor(Site, c("North", "Middle", "South")), y = Mean_Copies, group = SH_Temp, fill = SH_Temp)) +
+  facet_grid(Sampling_Period ~ SH_Tide) +
+  geom_bar(stat = "identity", position = position_dodge(), color = "black") +
+  geom_errorbar(aes(ymin = Mean_Copies-SE_Copies, ymax = Mean_Copies + SE_Copies), width=.1, position=position_dodge(.9), color = "black") +
   scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x),
                 labels = trans_format("log10", math_format(10^.x))) +
-  coord_flip() +
   theme_classic()
 
+Mgig.plot_2021
+
+Mgig.plot_2022 <- Mgig_Stats8 %>% 
+  filter(Year == "2022") %>% 
+  ggplot(aes(x = factor(Site, c("North", "Middle", "South")), y = Mean_Copies, group = SH_Temp, fill = SH_Temp)) +
+  facet_grid(Sampling_Period ~ SH_Tide) +
+  geom_bar(stat = "identity", position = position_dodge(), color = "black") +
+  geom_errorbar(aes(ymin = Mean_Copies-SE_Copies, ymax = Mean_Copies + SE_Copies), width=.1, position=position_dodge(.9), color = "black") +
+  scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x),
+                labels = trans_format("log10", math_format(10^.x))) +
+  theme_classic()
+
+
+Mgig.plot_2022
+
+library(cowplot)
+
+Mgig.plot <- plot_grid(Mgig.plot_2021, Mgig.plot_2022)
 Mgig.plot
 
 #### officeR directly exports the plot to your desired file into a powerpoint slide-shaped image ===== 
