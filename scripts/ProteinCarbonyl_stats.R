@@ -447,3 +447,11 @@ qqline(resid(m9))
 
 #### Density Plot of Residuals ===============
 plot(density(resid(m9)))
+
+#### Pairwise Comparisons ===============
+## pairwise comparison for m9
+emm_Lm9a <-  emmeans(m9, specs = ~ Site)
+emm_Lm9a
+
+pairwise_Lm9a <- contrast(emm_Lm9a, interaction = "pairwise")
+pairwise_Lm9a

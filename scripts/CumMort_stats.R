@@ -1046,6 +1046,13 @@ pairwise_Lm19a
 # Results are averaged over the levels of: SH_Temp 
 # Results are given on the log odds ratio (not the response) scale
 
+## pairwise comparison for m19
+emm_Lm19b <-  emmeans(m19, specs = ~ Site|SH_Temp, var = "SH_Tide")
+emm_Lm19b
+
+pairwise_Lm19b <- contrast(emm_Lm19b, interaction = "pairwise")
+pairwise_Lm19b
+
 #### Test Assumptions ===============
 #### Pairwise Plot of Residuals ===============
 plot(fitted(m20), resid(m20))

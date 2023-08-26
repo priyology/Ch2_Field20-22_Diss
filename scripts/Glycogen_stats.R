@@ -290,6 +290,13 @@ qqline(resid(m7))
 #### Density Plot of Residuals ===============
 plot(density(resid(m7)))
 
+#### Pairwise Comparisons ===============
+## pairwise comparison for m5
+emm_Lm7a <-  emmeans(m7, specs = ~ Site|Sampling)
+emm_Lm7a
+
+pairwise_Lm7a <- contrast(emm_Lm7a, interaction = "pairwise")
+pairwise_Lm7a
 
 #### Plot Model ========
 ## using ggeffects
