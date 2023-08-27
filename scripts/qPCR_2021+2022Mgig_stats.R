@@ -193,7 +193,7 @@ summary(m4)
 #Residual deviance: 1681.9  on 392  degrees of freedom
 #AIC: 1706.5
 
-Number of Fisher Scoring iterations: 2
+#Number of Fisher Scoring iterations: 2
 
 #### m5: log_transform ~ SH_Tide + Site =====
 m5 <- glm(log_transform ~ SH_Tide + Site, family = gaussian(link = "identity"), data = Mgigas)
@@ -389,3 +389,11 @@ qqline(resid(m8))
 
 #### Density Plot of Residuals ===============
 plot(density(resid(m8)))
+
+#### Pairwise Comparisons ===============
+## pairwise comparison for m8
+emm_Lm8a <-  emmeans(m8, specs = ~ Site|Sampling_Period)
+emm_Lm8a
+
+pairwise_Lm8a <- contrast(emm_Lm8a, interaction = "pairwise")
+pairwise_Lm8a

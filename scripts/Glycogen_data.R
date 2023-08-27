@@ -27,7 +27,9 @@ is.character(Gly$Sampling) ## True
 Gly$SH_Temp <- as.character(Gly$SH_Temp) ## make Sampling a character
 is.character(Gly$SH_Temp) ## True
 
-
+Gly %>% 
+  group_by(Sampling) %>% 
+  reframe(n = n())
 
 
 #histogram of all glycogen

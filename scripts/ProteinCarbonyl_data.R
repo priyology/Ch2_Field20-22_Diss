@@ -27,6 +27,10 @@ colSums(is.na(PC2)) ## All NAs under PC
 write_csv(PC2, file = "data/Protein_Carbonyl/ProteinCarbonyl_Stats.csv")
 
 #histogram of all PC
+
+PC2 %>% 
+  reframe(n = n())
+
 ggplot(PC2, aes(CarbPerProtein)) +
   geom_histogram() +
   theme_classic() +

@@ -11,6 +11,10 @@ summary(Morts2020)
 tail(Morts2020)
 View(Morts2020)
 
+### Total Morts 2020
+Morts2020 %>% 
+  summarize(TotalMort = sum(mort_numb))
+
 TotalMort2020_perBag <- Morts2020 %>% 
   group_by(site, bag_numb) %>% 
   summarize(TotalMort = sum(mort_numb),
@@ -409,6 +413,10 @@ View(Morts2021)
 Morts2021$Temp_Hardening <- as.character(Morts2021$Temp_Hardening)
 is.character(Morts2021$Temp_Hardening)
 
+Morts2021 %>% 
+  group_by(Species) %>% 
+  summarize(TotalMort = sum(Mortality_Total))
+
 TotalMort2021_perBag <- Morts2021 %>% 
   group_by(Site, Species, Temp_Hardening, Tide_Hardening, Bag_Numb) %>% 
   summarize(TotalMort = sum(Mortality_Total))
@@ -633,6 +641,9 @@ glimpse(Morts2022)
 summary(Morts2022)
 tail(Morts2022)
 View(Morts2022)
+
+Morts2022 %>% 
+  summarize(TotalMort = sum(Mortality_Total))
 
 Morts2022$Temp_Hardening <- as.character(Morts2022$Temp_Hardening)
 is.character(Morts2022$Temp_Hardening)

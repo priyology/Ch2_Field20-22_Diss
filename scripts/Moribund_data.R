@@ -11,6 +11,10 @@ View(Morts2021)
 Morts2021$Temp_Hardening <- as.character(Morts2021$Temp_Hardening)
 is.character(Morts2021$Temp_Hardening)
 
+Morts2021 %>% 
+  group_by(Species) %>% 
+  summarize(TotalMoribund = sum(Moribund_Numb))
+
 TotalMoribund2021_perBag <- Morts2021 %>% 
   group_by(Site, Species, Temp_Hardening, Tide_Hardening, Bag_Numb) %>% 
   summarize(TotalMoribund = sum(Moribund_Numb))
@@ -30,6 +34,9 @@ View(Morts2022)
 
 Morts2022$Temp_Hardening <- as.character(Morts2022$Temp_Hardening)
 is.character(Morts2022$Temp_Hardening)
+
+Morts2022 %>% 
+  summarize(TotalMoribund = sum(Moribund_Numb))
 
 TotalMoribund2022_perBag <- Morts2022 %>% 
   group_by(Site, Species, Temp_Hardening, Tide_Hardening, Bag_Numb) %>% 

@@ -1047,7 +1047,7 @@ pairwise_Lm19a
 # Results are given on the log odds ratio (not the response) scale
 
 ## pairwise comparison for m19
-emm_Lm19b <-  emmeans(m19, specs = ~ Site|SH_Temp, var = "SH_Tide")
+emm_Lm19b <-  emmeans(m19, specs = ~ Site|SH_Temp)
 emm_Lm19b
 
 pairwise_Lm19b <- contrast(emm_Lm19b, interaction = "pairwise")
@@ -1064,7 +1064,6 @@ qqline(resid(m9))
 
 #### Density Plot of Residuals ===============
 plot(density(resid(m9)))
-. 
 
 #### Plot Model ========
 library(RColorBrewer)
@@ -2525,5 +2524,31 @@ summary(m60)
 #AIC: 11735
 #
 #Number of Fisher Scoring iterations: 5
+
+
+#### AIC/BIC Scores ===============
+#AIC(m_null, m21, m22, m23, m24, m25, m26, m27)
+#BIC(m_null, m1, m2, m3, m4, m5, m6, m7)
+
+#### Test Assumptions ===============
+#### Pairwise Plot of Residuals ===============
+plot(fitted(m60), resid(m60))
+abline(0,0)
+
+#### Q-Q plot of Residuals ===============
+qqnorm(resid(m60))
+qqline(resid(m60))
+
+#### Density Plot of Residuals ===============
+plot(density(resid(m60)))
+
+#### Pairwise Comparisons ===============
+## pairwise comparison for m60
+emm_Lm60a <-  emmeans(m60, specs = ~ Site|SH_Temp)
+emm_Lm60a
+
+pairwise_Lm60a <- contrast(emm_Lm60a, interaction = "pairwise")
+pairwise_Lm60a
+
 
 

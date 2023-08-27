@@ -40,6 +40,11 @@ AllStats.LW2020 <- LW2020 %>%
 
 AllStats.LW2020
 
+LW2020 %>% 
+  filter(Sampling_Time == "5") %>% 
+  reframe(n = n())
+
+
 #### By Sampling_Time ====
 
 SamplingStats.LW2020 <- LW2020 %>%
@@ -164,6 +169,10 @@ LW2021 <- LW2021_og.na %>%
 #### *** 2021: M. gigas *** ====
 LW2021.gigas <- LW2021 %>% 
   filter(Species == "M. gigas")
+
+LW2021.gigas %>% 
+  filter(Sampling_Time == "4") %>% 
+  reframe(n = n())
 
 ### filter out NA
 colSums(is.na(LW2021.gigas)) ## Size_cm: 2 NAs in L
@@ -327,6 +336,10 @@ ggplot(LW2021.gigas.na, aes(x = Site, y = L, color = SH_Temp)) +
 #### *** 2021: C. sikamea *** ====
 LW2021.sikamea <- LW2021 %>% 
   filter(Species == "C. sikamea")
+
+LW2021.sikamea %>% 
+  filter(Sampling_Time == "4") %>% 
+  reframe(n = n())
 
 ### filter out NAs
 colSums(is.na(LW2021.sikamea))
@@ -550,6 +563,10 @@ write_csv(LW2022, file = "data/Growth/2022/LW2022.csv")
 
 
 #### Figures, Mean, SD, SE =====
+
+LW2022 %>% 
+  filter(Sampling_Time == "6") %>% 
+  reframe(n = n())
 
 #### No Grouping ====
 
