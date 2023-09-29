@@ -63,6 +63,7 @@ SacLanding_TB.labels <- data.frame(
   site.name = c("Bodega Marine Lab","Sacramento Landing"))
 glimpse(SacLanding_TB.labels)
 
+
 #load a googlemap 
 get_googlemap(center = "Tomales Bay", zoom = 12, markers = sites.df, scale = 2,  maptype = "hybrid") %>% ggmap()
 
@@ -202,6 +203,7 @@ PointBlue_watercolor
 ggsave("fig_output/PointBlue_map.png", dpi = 320, bg='transparent') 
 
 
+
 ##### For SFSU Talk ============
 
 HIOC.label <- data.frame(
@@ -251,7 +253,20 @@ SDSU_TB_inset_map
 
 #run SDSU_watercolor before running ggsave
 ggsave("fig_output/SDSU_TB_inset_map.png", dpi = 320, bg='transparent')
-  
+
+##### For UW Laramie Talk ============
+
+UWtalk.labels <- data.frame(
+  lon = c(-105.585573, -122.894181),# -122.267464),
+  lat = c(41.312478, 38.161813),# 37.814870),
+  site.name = c("UW", "HIOC"))#, "Home"))
+glimpse(UWtalk.labels)
+
+UW_watercolor <- qmap("Baker, NV, USA", zoom = 5, scale = 2, source = "stamen", maptype = "watercolor") + ## California - Artistic
+  geom_point(data = UWtalk.labels, aes(x = lon, y = lat), color = 'black', alpha = 0.5, size = 2) +
+  geom_text(data = UWtalk.labels, aes(x = lon, y = lat, label = site.name), nudge_x = -0.215, nudge_y = -0.035, hjust = 1, size = 4)
+
+UW_watercolor
 
 ######### PUBLICATION-READY MAP ================================
 

@@ -31,6 +31,11 @@ OsHV1$Cohort <- as.character(OsHV1$Cohort)
 is.character(OsHV1$Cohort)
 
 #### Mean, SD, SE, min, max for 2020 Cohort ===== 
+
+OsHV1 %>%
+  group_by(Year, Cohort, Species) %>% 
+  reframe(n = n())
+
 BaselineStats <- OsHV1 %>%
   filter(Year == "2020") %>% 
   group_by(Site, Sampling_Period) %>%
