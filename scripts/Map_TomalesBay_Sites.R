@@ -263,8 +263,8 @@ UWtalk.labels <- data.frame(
 glimpse(UWtalk.labels)
 
 UW_watercolor <- qmap("Baker, NV, USA", zoom = 5, scale = 2, source = "stamen", maptype = "watercolor") + ## California - Artistic
-  geom_point(data = UWtalk.labels, aes(x = lon, y = lat), color = 'black', alpha = 0.5, size = 2) +
-  geom_text(data = UWtalk.labels, aes(x = lon, y = lat, label = site.name), nudge_x = -0.215, nudge_y = -0.035, hjust = 1, size = 4)
+  geom_point(data = UWtalk.labels, aes(x = lon, y = lat), color = 'black', alpha = 0.5, size = 8) +
+  geom_text(data = UWtalk.labels, aes(x = lon, y = lat, label = site.name), nudge_x = -0.425, nudge_y = 0.025, hjust = 1, size = 9, fontface = "bold")
 
 UW_watercolor
 
